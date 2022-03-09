@@ -1,0 +1,68 @@
+.fa-location-dot {
+    font-size: 1.2rem;
+    color: #000;
+}
+.pin-location {
+    background-color: gray;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.modal-header {
+    background-color: #00aea7;
+    color: #fff;
+    border: #00aea7;
+}
+.btn-one {
+    background-color: #ff7d08;
+    color: #fff;
+    border: #ff7d08;
+}
+.btn-two {
+    background-color: #00aea7;
+    color: #fff;
+    border: #00aea7;
+}
+.PhoneInputInput {
+    border: none;
+}
+.search {
+    position: relative;
+}
+.combobox {
+    position: absolute;
+    z-index: 100;
+}
+.merchantInput {
+    color: black;
+}
+.merchantInput span {
+    color: gray;
+}
+.merchantSearch {
+    position: relative;
+    z-index: 9999;
+    background: #fff;
+}
+
+.nav-link-item {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+.nav-link-item a:hover {
+    background-color: #ff7d08;
+}
+
+.nav-link-item a {
+    color: #000;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #ff7d08 !important;
+}
+.bg-orange {
+    background-color: #ff7d08;
+}
+.bg-green {
+    background-color: #00aea7;
+}
