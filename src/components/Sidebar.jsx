@@ -1,10 +1,7 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export const Sidebar = ({ id }) => {
-    const handleClick = () => {
-        document.getElementsByClassName('nav-link-item').addClass('active').siblings().removeClass('active')
-    }
     return (
         <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabIndex="-1" id={id} aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
             <a href="/" className="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">

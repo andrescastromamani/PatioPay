@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import Geocode from 'react-geocode';
+import axios from 'axios';
 import './css/modal.css';
 import Map from './Map';
 
@@ -41,6 +42,7 @@ export const Modal = ({ id }) => {
       document.getElementById('previewImage').src = URL.createObjectURL(file);
     }
   }
+
   return (
     <>
       <div className="modal fade" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="storeModalLabel" aria-hidden="true" id={id}>
@@ -104,8 +106,36 @@ export const Modal = ({ id }) => {
                   }
                   return errors;
                 }}
-                onSubmit={(values) => {
-                  console.log(values);
+                onSubmit={async (values) => {
+                  const { name, email, city, lat, lng, address, pincode, priority, phone, image, category } = values;
+                  const getUrl = async (file) => {
+                    const formData = new FormData();
+                    formData.append('popup', file);
+                    return await axios({
+                      method: 'POST',
+                      url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
+                      data: formData,
+                      headers: {
+                        'Content-Type': 'multipart/form-data',
+                      }
+                    })
+                  }
+                  const url = await getUrl(image).then(res => res.data.link);
+                  const data = {
+                    name,
+                    email,
+                    city,
+                    lat,
+                    lng,
+                    address,
+                    pincode,
+                    priority,
+                    phone,
+                    image: url,
+                    category
+                  }
+
+                  console.log(data);
                 }}
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
@@ -295,9 +325,9 @@ export const Modal = ({ id }) => {
                       </div>
                     </div>
                     <div className="mt-2 row" >
-                      <div className="col-12 col-md-3"></div>
-                      <div className="col-12 col-md-3">
-                        <img src={defaultImage} alt="image preview" id="previewImage" width="100%" />
+                      <div className="col-3"></div>
+                      <div className="col-3">
+                        <img src={defaultImage} id="previewImage" width="100%" alt='img previes'/>
                       </div>
                     </div>
                     <div className="mt-2 form-group row">
