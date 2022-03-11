@@ -1,6 +1,7 @@
 export const data = [
     {
         id: 1,
+        image: 'https://securionpay.com/wp-content/uploads/2016/03/Online-merchant-%E2%80%93-what-is-it.svg',
         name: 'Mike Doe',
         city: 'Ghent',
         phone: '+1-212-555-6545',
@@ -12,6 +13,7 @@ export const data = [
     },
     {
         id: 2,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Jane Posner',
         city: 'London',
         phone: '+1-212-555',
@@ -23,6 +25,7 @@ export const data = [
     },
     {
         id: 3,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Alex Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -34,6 +37,7 @@ export const data = [
     },
     {
         id: 4,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Mario Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -45,6 +49,7 @@ export const data = [
     },
     {
         id: 5,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Juan Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -56,6 +61,7 @@ export const data = [
     },
     {
         id: 6,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Luis Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -67,6 +73,7 @@ export const data = [
     },
     {
         id: 7,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Davi Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -78,6 +85,7 @@ export const data = [
     },
     {
         id: 8,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Davis Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -89,6 +97,7 @@ export const data = [
     },
     {
         id: 9,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Marco Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -100,6 +109,7 @@ export const data = [
     },
     {
         id: 10,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Antonio Doe',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -111,6 +121,7 @@ export const data = [
     },
     {
         id: 11,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Louis Mark',
         city: 'New York',
         phone: '+1-212-555-1234',
@@ -122,6 +133,7 @@ export const data = [
     },
     {
         id: 12,
+        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
         name: 'Jesse Pinkman',
         city: 'Santa Cruz',
         phone: '+1-212-555-1234',

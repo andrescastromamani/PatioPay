@@ -4,6 +4,8 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import Geocode from 'react-geocode';
 import axios from 'axios';
+import Resizer from 'react-image-file-resizer';
+
 import './css/modal.css';
 import Map from './Map';
 
@@ -35,11 +37,37 @@ export const Modal = ({ id }) => {
   const handleClickSubmit = () => {
     document.getElementById('btnsubmit').click();
   }
+  const resizeFile = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'PNG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        }
+      );
+    });
+  }
 
-  const previewImage = () => {
-    const file = document.getElementById('image').files[0];
+  const dataURIToBlob = (dataURI) => {
+    const splitDataURI = dataURI.split(",");
+    const byteString =
+      splitDataURI[0].indexOf("base64") >= 0
+        ? atob(splitDataURI[1])
+        : decodeURI(splitDataURI[1]);
+    const mimeString = splitDataURI[0].split(":")[1].split(";")[0];
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+    return new Blob([ia], { type: mimeString });
+  };
+  const previewImage = async (file) => {
     if (file) {
-      document.getElementById('previewImage').src = URL.createObjectURL(file);
+      const dataUri = await resizeFile(file);
+      document.getElementById('previewImage').src = dataUri;
     }
   }
 
@@ -108,6 +136,12 @@ export const Modal = ({ id }) => {
                 }}
                 onSubmit={async (values) => {
                   const { name, email, city, lat, lng, address, pincode, priority, phone, image, category } = values;
+                  const dataUri = await resizeFile(image);
+                  const newBlob = dataURIToBlob(dataUri);
+                  const newFile = new File([newBlob], `${image.name}`, {
+                    type: "image/png",
+                    lastModified: Date.now()
+                  })
                   const getUrl = async (file) => {
                     const formData = new FormData();
                     formData.append('popup', file);
@@ -120,7 +154,8 @@ export const Modal = ({ id }) => {
                       }
                     })
                   }
-                  const url = await getUrl(image).then(res => res.data.link);
+                  const url = await getUrl(newFile).then(res => res.data.link);
+                  console.log(url);
                   const data = {
                     name,
                     email,
@@ -315,7 +350,7 @@ export const Modal = ({ id }) => {
                           id="image"
                           onChange={
                             (e) => {
-                              previewImage();
+                              previewImage(e.target.files[0]);
                               setFieldValue('image', e.target.files[0]);
                             }
                           }
@@ -327,7 +362,7 @@ export const Modal = ({ id }) => {
                     <div className="mt-2 row" >
                       <div className="col-3"></div>
                       <div className="col-3">
-                        <img src={defaultImage} id="previewImage" width="100%" alt='img previes'/>
+                        <img src={defaultImage} id="previewImage" width="100%" alt='img previes' />
                       </div>
                     </div>
                     <div className="mt-2 form-group row">

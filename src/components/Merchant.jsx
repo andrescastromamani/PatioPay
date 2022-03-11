@@ -10,18 +10,23 @@ const Merchant = () => {
 
   const columns = [
     {
-      name: 'Merchant ID',
+      name: 'ID',
       selector: row => row.id,
       sortable: true,
     },
     {
-      name: 'Merchant Name',
-      selector: row => row.name,
-      sortable: true,
+      name: 'Image',
+      grow: 0,
+      cell: row => <img
+        className="img-thumbnail mt-2 mb-2"
+        alt={row.name}
+        src={row.image}
+        style={{ width: 60, height: 60 }}
+      />,
     },
     {
-      name: 'City',
-      selector: row => row.city,
+      name: 'Merchant Name',
+      selector: row => row.name,
       sortable: true,
     },
     {
@@ -93,7 +98,7 @@ const Merchant = () => {
       <div className="shadow-sm p-3 bg-body rounded">
         <h2 className="text-center">Merchant List</h2>
       </div>
-      <div className="shadow-lg mt-3 p-3">
+      <div className="shadow-lg mt-3 p-3 mb-5">
         <div className="row p-3">
           <div className="col-12 col-md-3 mt-3">
             <button type="button" className="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#newstore">
