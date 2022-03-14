@@ -13,7 +13,7 @@ export const data = [
     },
     {
         id: 2,
-        image:'https://acadianakarate.com/wp-content/uploads/2017/04/default-image.jpg',
+        image:'https://patioserviceonline.com/uploads/ventrega/popup/1647091182-Modas Movano (2).png',
         name: 'Jane Posner',
         city: 'London',
         phone: '+1-212-555',

@@ -19,10 +19,14 @@ const Merchant = () => {
       grow: 0,
       cell: row => <img
         className="img-thumbnail mt-2 mb-2"
+        style={{
+          width: "60px",
+          height: "60px",
+          objectFit: "cover",
+        }}
         alt={row.name}
         src={row.image}
-        style={{ width: 60, height: 60 }}
-      />,
+      />
     },
     {
       name: 'Merchant Name',

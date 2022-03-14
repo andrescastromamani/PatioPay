@@ -38,19 +38,25 @@ export const Modal = ({ id }) => {
     document.getElementById('btnsubmit').click();
   }
   const resizeFile = (file) => {
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      return new Promise((resolve) => {
+        Resizer.imageFileResizer(
+          file,
+          300,
+          300,
+          'JPEG',
+          100,
+          0,
+          (uri) => {
+            resolve(uri);
+          },
+          "base64"
+        );
+      });
+    }
     return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        300,
-        300,
-        'PNG',
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        }
-      );
-    });
+      resolve(file);
+    })
   }
 
   const dataURIToBlob = (dataURI) => {
@@ -132,6 +138,11 @@ export const Modal = ({ id }) => {
                   if (!values.category) {
                     errors.category = 'This field is required';
                   }
+                  if (values.image.type !== 'image/jpeg' && values.image.type !== 'image/png' && values.image.type !== 'image/jpg') {
+                    errors.image = 'Only jpg, jpeg and png files are allowed';
+                  } else if (values.image.size > 2000000) {
+                    errors.image = 'File size is too large (max: 2MB)';
+                  }
                   return errors;
                 }}
                 onSubmit={async (values) => {
@@ -142,6 +153,13 @@ export const Modal = ({ id }) => {
                     type: "image/png",
                     lastModified: Date.now()
                   })
+                  if (newFile.size > 20000) {
+                    alert('File size is too large');
+                    const divError = document.getElementById('errorImage');
+                    divError.appendChild(document.createTextNode('File size is too large (Max: 20kB)'));
+                    divError.style.display = 'block';
+                    return;
+                  }
                   const getUrl = async (file) => {
                     const formData = new FormData();
                     formData.append('popup', file);
@@ -244,7 +262,6 @@ export const Modal = ({ id }) => {
                         <button type='button' className='pin-location' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal">
                           <i className="fa-solid fa-location-dot"></i>
                         </button>
-                        select a location
                         {
                           errors.lat && touched.lat && <div className="text-danger">{errors.lat}</div>
                         }
@@ -348,6 +365,7 @@ export const Modal = ({ id }) => {
                           type="file"
                           name="image"
                           id="image"
+                          accept="image/*"
                           onChange={
                             (e) => {
                               previewImage(e.target.files[0]);
@@ -356,6 +374,7 @@ export const Modal = ({ id }) => {
                           }
                           onBlur={handleBlur}
                         />
+                        <div className="text-danger" id="errorImage"></div>
                         {errors.image && touched.image && <div className="text-danger">{errors.image}</div>}
                       </div>
                     </div>
