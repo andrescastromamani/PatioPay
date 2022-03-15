@@ -5,17 +5,16 @@ import PhoneInput from 'react-phone-number-input';
 import Geocode from 'react-geocode';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
-
+import Swal from 'sweetalert2'
 import './css/modal.css';
 import Map from './Map';
-
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
 export const Modal = ({ id }) => {
-  const defaultImage = 'https://www.leadershipmartialartsct.com/wp-content/uploads/2017/04/default-image-620x600.jpg';
+  const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
   const [addressFormated, setAddressFormated] = useState('');
   const [marker, setMarker] = useState({
     lat: -17.8145819,
@@ -58,7 +57,6 @@ export const Modal = ({ id }) => {
       resolve(file);
     })
   }
-
   const dataURIToBlob = (dataURI) => {
     const splitDataURI = dataURI.split(",");
     const byteString =
@@ -74,6 +72,8 @@ export const Modal = ({ id }) => {
     if (file) {
       const dataUri = await resizeFile(file);
       document.getElementById('previewImage').src = dataUri;
+    } else {
+      document.getElementById('previewImage').src = defaultImage;
     }
   }
 
@@ -138,42 +138,47 @@ export const Modal = ({ id }) => {
                   if (!values.category) {
                     errors.category = 'This field is required';
                   }
-                  if (values.image.type !== 'image/jpeg' && values.image.type !== 'image/png' && values.image.type !== 'image/jpg') {
-                    errors.image = 'Only jpg, jpeg and png files are allowed';
-                  } else if (values.image.size > 2000000) {
-                    errors.image = 'File size is too large (max: 2MB)';
-                  }
                   return errors;
                 }}
                 onSubmit={async (values) => {
                   const { name, email, city, lat, lng, address, pincode, priority, phone, image, category } = values;
-                  const dataUri = await resizeFile(image);
-                  const newBlob = dataURIToBlob(dataUri);
-                  const newFile = new File([newBlob], `${image.name}`, {
-                    type: "image/png",
-                    lastModified: Date.now()
-                  })
-                  if (newFile.size > 20000) {
-                    alert('File size is too large');
-                    const divError = document.getElementById('errorImage');
-                    divError.appendChild(document.createTextNode('File size is too large (Max: 20kB)'));
-                    divError.style.display = 'block';
-                    return;
-                  }
-                  const getUrl = async (file) => {
-                    const formData = new FormData();
-                    formData.append('popup', file);
-                    return await axios({
-                      method: 'POST',
-                      url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
-                      data: formData,
-                      headers: {
-                        'Content-Type': 'multipart/form-data',
-                      }
+                  let urlImage = '';
+                  if (typeof image === 'string') {
+                    urlImage = image;
+                  } else {
+                    const dataUri = await resizeFile(image);
+                    const newBlob = dataURIToBlob(dataUri);
+                    const newFile = new File([newBlob], `${image.name}`, {
+                      type: "image/png",
+                      lastModified: Date.now()
                     })
+                    if (newFile.size > 20000) {
+                      const divError = document.getElementById('errorImage');
+                      divError.appendChild(document.createTextNode('File size is too large (Max: 20kB)'));
+                      divError.style.display = 'block';
+                      return;
+                    }
+                    const getUrl = async (file) => {
+                      const formData = new FormData();
+                      formData.append('popup', file);
+                      return await axios({
+                        method: 'POST',
+                        url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
+                        data: formData,
+                        headers: {
+                          'Content-Type': 'multipart/form-data',
+                        }
+                      })
+                    }
+                    urlImage = await getUrl(newFile).then(res => res.data.link);
+                    if (urlImage.includes('error')) {
+                      const divError = document.getElementById('errorImage');
+                      divError.appendChild(document.createTextNode('Error uploading file'));
+                      divError.style.display = 'block';
+                      return;
+                    }
                   }
-                  const url = await getUrl(newFile).then(res => res.data.link);
-                  console.log(url);
+                  console.log(urlImage);
                   const data = {
                     name,
                     email,
@@ -184,10 +189,9 @@ export const Modal = ({ id }) => {
                     pincode,
                     priority,
                     phone,
-                    image: url,
+                    image: urlImage,
                     category
                   }
-
                   console.log(data);
                 }}
               >
@@ -369,7 +373,7 @@ export const Modal = ({ id }) => {
                           onChange={
                             (e) => {
                               previewImage(e.target.files[0]);
-                              setFieldValue('image', e.target.files[0]);
+                              setFieldValue('image', e.target.files[0] ? e.target.files[0] : defaultImage);
                             }
                           }
                           onBlur={handleBlur}
@@ -381,7 +385,7 @@ export const Modal = ({ id }) => {
                     <div className="mt-2 row" >
                       <div className="col-3"></div>
                       <div className="col-3">
-                        <img src={defaultImage} id="previewImage" width="100%" alt='img previes' />
+                        <img src={defaultImage} id="previewImage" width="100%" alt='img preview' />
                       </div>
                     </div>
                     <div className="mt-2 form-group row">

@@ -110,7 +110,6 @@ export const MerchantDetails = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </>
