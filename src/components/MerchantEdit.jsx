@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { MerchantContext } from '../contexts/MerchantContext';
 
-export const MerchantEdit = ({ merchant, setMerchant, mapCreateEdit, setMapCreateEdit }) => {
-    const { updateMerchant, merchants } = useContext(MerchantContext);
+export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, addressFormated }) => {
+    const { updateMerchant } = useContext(MerchantContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(merchant);
@@ -99,20 +99,26 @@ export const MerchantEdit = ({ merchant, setMerchant, mapCreateEdit, setMapCreat
                                 </div>
                                 <input
                                     type="hidden"
-                                    id="lat"
+                                    id="latEdit"
                                     name="lat"
                                     value={merchant.lat}
                                     onChange={(e) => {
                                         setMerchant({ ...merchant, lat: e.target.value });
                                     }}
+                                    onClick={(e) => {
+                                        setMerchant({ ...merchant, lat: marker.lat });
+                                    }}
                                 />
                                 <input
                                     type="hidden"
-                                    id="lng"
+                                    id="lngEdit"
                                     name="lng"
                                     value={merchant.lng}
                                     onChange={(e) => {
                                         setMerchant({ ...merchant, lng: e.target.value });
+                                    }}
+                                    onClick={(e) => {
+                                        setMerchant({ ...merchant, lng: marker.lng });
                                     }}
                                 />
                                 <div className="mt-2 form-group row">
@@ -122,13 +128,15 @@ export const MerchantEdit = ({ merchant, setMerchant, mapCreateEdit, setMapCreat
                                             type="text"
                                             autoComplete="off"
                                             className={`form-control`}
-                                            id="address"
+                                            id="addressEdit"
                                             name="address"
                                             value={merchant.address}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, address: e.target.value });
                                             }}
-
+                                            onClick={(e) => {
+                                                setMerchant({ ...merchant, address: addressFormated });
+                                            }}
                                         />
                                     </div>
                                 </div>

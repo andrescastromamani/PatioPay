@@ -1,41 +1,19 @@
 import { useContext, useState } from 'react';
 import { Formik } from 'formik';
-import Geocode from 'react-geocode';
 import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 import './css/modal.css';
-import Map from './Map';
 import { MerchantContext } from '../contexts/MerchantContext';
 import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile'
 
-Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-Geocode.setLanguage("en");
-Geocode.setRegion("es");
-
-export const MerchantCreate = ({ mapCreateEdit, setMapCreateEdit }) => {
+export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) => {
   const { merchants, addMerchant } = useContext(MerchantContext);
-
   const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
-  const [addressFormated, setAddressFormated] = useState('');
-  const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
   const { lat, lng } = marker;
   const [check, setCheck] = useState(false)
-  Geocode.fromLatLng(lat, lng)
-    .then(
-      response => {
-        const address = response.results[0].formatted_address;
-        setAddressFormated(address);
-      }
-    )
-  const handleChangeCheck = (e) => {
-    const { checked } = e.target
-    setCheck(checked)
-  }
-  const handleClickSubmit = () => {
-    document.getElementById('btnsubmit').click();
-  }
+
   return (
     <>
       <div className="modal fade" tabIndex="-1" data-bs-keyboard="false" aria-labelledby="storeModalLabel" aria-hidden="true" id="merchantCreate">
@@ -246,7 +224,6 @@ export const MerchantCreate = ({ mapCreateEdit, setMapCreateEdit }) => {
                       <div className="col-9">
                         <input
                           type="text"
-                          autoComplete="off"
                           className={`form-control ${errors.address && touched.address && 'is-invalid'}`}
                           id="address"
                           name="address"
@@ -362,7 +339,12 @@ export const MerchantCreate = ({ mapCreateEdit, setMapCreateEdit }) => {
                       <label htmlFor="locales" className="form-label col-3 text-end">Locales:</label>
                       <div className="col-9">
                         <div className="form-check form-switch">
-                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={check} onChange={handleChangeCheck} />
+                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={check} onChange={
+                            (e) => {
+                              const { checked } = e.target
+                              setCheck(checked)
+                            }
+                          } />
                         </div>
                       </div>
                     </div>
@@ -399,13 +381,18 @@ export const MerchantCreate = ({ mapCreateEdit, setMapCreateEdit }) => {
               </Formik>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-one" onClick={handleClickSubmit}>Submit</button>
+              <button
+                type="button"
+                className="btn btn-one"
+                onClick={() => {
+                  document.getElementById('btnsubmit').click();
+                }}
+              >Submit</button>
               <button type="button" className="btn btn-two" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div >
-      <Map marker={marker} setMarker={setMarker} mapCreateEdit={mapCreateEdit} />
     </>
   )
 }

@@ -1,12 +1,19 @@
 import { useState, useContext } from "react";
 import DataTable from "react-data-table-component";
+import Geocode from 'react-geocode';
 
 import { MerchantEdit } from "./MerchantEdit";
 import { MerchantCreate } from "./MerchantCreate";
 import { MerchantContext } from "../contexts/MerchantContext";
+import Map from './Map';
+
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setLanguage("en");
+Geocode.setRegion("es");
 
 const MerchantList = () => {
   const { merchants } = useContext(MerchantContext);
+  const [addressFormated, setAddressFormated] = useState('');
   const [merchant, setMerchant] = useState({
     name: '',
     email: '',
@@ -23,6 +30,15 @@ const MerchantList = () => {
   const [category, setCategory] = useState('');
   const [mapCreateEdit, setMapCreateEdit] = useState('');
   const [search, setSearch] = useState('');
+  const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
+  const { lat, lng } = marker;
+  Geocode.fromLatLng(lat, lng)
+    .then(
+      response => {
+        const address = response.results[0].formatted_address;
+        setAddressFormated(address);
+      }
+    )
   const filterSearch = (data) => {
     return data.filter(item => {
       return item.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -45,10 +61,12 @@ const MerchantList = () => {
       name: 'ID',
       selector: row => row.id,
       sortable: true,
+      width: '5%',
     },
     {
       name: 'Image',
       grow: 0,
+      with: '5%',
       cell: row => <img
         className="img-thumbnail mt-2 mb-2"
         style={{
@@ -78,11 +96,6 @@ const MerchantList = () => {
     {
       name: 'Merchant Address',
       selector: row => row.address,
-      sortable: true,
-    },
-    {
-      name: 'Status',
-      selector: row => row.status,
       sortable: true,
     },
     {
@@ -123,7 +136,13 @@ const MerchantList = () => {
             <button type="button" className="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#merchantCreate">
               <i className="fa-solid fa-circle-plus"></i> Add New Merchant
             </button>
-            <MerchantCreate mapCreateEdit={mapCreateEdit} setMapCreateEdit={setMapCreateEdit} />
+            <MerchantCreate
+              mapCreateEdit={mapCreateEdit}
+              setMapCreateEdit={setMapCreateEdit}
+              marker={marker}
+              setMarker={setMarker}
+              addressFormated={addressFormated}
+            />
           </div>
           <div className="col-12 col-md-3 mt-3">
             <select
@@ -184,9 +203,13 @@ const MerchantList = () => {
             setMerchant={setMerchant}
             mapCreateEdit={mapCreateEdit}
             setMapCreateEdit={setMapCreateEdit}
+            marker={marker}
+            setMarker={setMarker}
+            addressFormated={addressFormated}
           />
         </div>
       </div>
+      <Map marker={marker} setMarker={setMarker} mapCreateEdit={mapCreateEdit} />
     </>
   )
 }

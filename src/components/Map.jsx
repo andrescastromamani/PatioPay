@@ -13,10 +13,13 @@ const Map = ({ marker, setMarker, mapCreateEdit }) => {
         console.log(lat, lng);
         setMarker({ lat, lng });
     }
-    const handleClickDone = (e) => {
-        document.querySelector('#address').click();
-        document.querySelector('#lat').click();
-        document.querySelector('#lng').click();
+    const handleClickDone = async () => {
+        await document.querySelector('#address').click();
+        await document.querySelector('#addressEdit').click();
+        await document.querySelector('#latEdit').click();
+        await document.querySelector('#lngEdit').click();
+        await document.querySelector('#lat').click();
+        await document.querySelector('#lng').click();
     }
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
@@ -40,7 +43,7 @@ const Map = ({ marker, setMarker, mapCreateEdit }) => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Edit Address</h5>
-                            <button type="button" className="btn-close" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button" aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} aria-label="Close"></button>
                         </div>
                         <div className='modal-body'>
                             <div className="row">
@@ -58,18 +61,24 @@ const Map = ({ marker, setMarker, mapCreateEdit }) => {
                                 onLoad={onMapLoad}
                             >
                                 <Marker
-                                    position={
-                                        marker
-                                    }
+                                    position={marker}
                                     draggable={true}
                                     onDragEnd={onPinDragEnd}
                                 />
                             </GoogleMap>
                         </div>
                         <div className="modal-footer">
-                            <button type="submit" className="btn btn-one" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button" onClick={handleClickDone} >Done</button>
-                            <button type="button" className="btn btn-two"
-                                data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button"
+                            <button
+                                type="submit"
+                                className="btn btn-one"
+                                data-bs-toggle="modal"
+                                href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'}
+                                onClick={handleClickDone}
+                            >Done</button>
+                            <button
+                                type="button"
+                                className="btn btn-two"
+                                data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'}
                             >Cancel</button>
                         </div>
                     </div>
