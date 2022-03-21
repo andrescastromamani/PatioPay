@@ -1,6 +1,8 @@
 
 export const Home = () => {
     return (
-        <div>home</div>
+        <div className="text-center">
+            <h1>Home Page</h1>
+        </div>
     )
 }

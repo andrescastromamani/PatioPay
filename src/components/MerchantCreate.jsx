@@ -1,25 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Formik } from 'formik';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
 import Geocode from 'react-geocode';
 import axios from 'axios';
-import Resizer from 'react-image-file-resizer';
-import Swal from 'sweetalert2'
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+
 import './css/modal.css';
 import Map from './Map';
+import { MerchantContext } from '../contexts/MerchantContext';
+import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
-export const Modal = ({ id }) => {
+export const MerchantCreate = ({ mapCreateEdit, setMapCreateEdit }) => {
+  const { merchants, addMerchant } = useContext(MerchantContext);
+
   const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
   const [addressFormated, setAddressFormated] = useState('');
-  const [marker, setMarker] = useState({
-    lat: -17.8145819,
-    lng: -63.1560853
-  });
+  const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
   const { lat, lng } = marker;
   const [check, setCheck] = useState(false)
   Geocode.fromLatLng(lat, lng)
@@ -36,50 +36,9 @@ export const Modal = ({ id }) => {
   const handleClickSubmit = () => {
     document.getElementById('btnsubmit').click();
   }
-  const resizeFile = (file) => {
-    if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      return new Promise((resolve) => {
-        Resizer.imageFileResizer(
-          file,
-          300,
-          300,
-          'JPEG',
-          100,
-          0,
-          (uri) => {
-            resolve(uri);
-          },
-          "base64"
-        );
-      });
-    }
-    return new Promise((resolve) => {
-      resolve(file);
-    })
-  }
-  const dataURIToBlob = (dataURI) => {
-    const splitDataURI = dataURI.split(",");
-    const byteString =
-      splitDataURI[0].indexOf("base64") >= 0
-        ? atob(splitDataURI[1])
-        : decodeURI(splitDataURI[1]);
-    const mimeString = splitDataURI[0].split(":")[1].split(";")[0];
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
-    return new Blob([ia], { type: mimeString });
-  };
-  const previewImage = async (file) => {
-    if (file) {
-      const dataUri = await resizeFile(file);
-      document.getElementById('previewImage').src = dataUri;
-    } else {
-      document.getElementById('previewImage').src = defaultImage;
-    }
-  }
-
   return (
     <>
-      <div className="modal fade" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="storeModalLabel" aria-hidden="true" id={id}>
+      <div className="modal fade" tabIndex="-1" data-bs-keyboard="false" aria-labelledby="storeModalLabel" aria-hidden="true" id="merchantCreate">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -152,7 +111,7 @@ export const Modal = ({ id }) => {
                       type: "image/png",
                       lastModified: Date.now()
                     })
-                    if (newFile.size > 20000) {
+                    if (newFile.size > 200000) {
                       const divError = document.getElementById('errorImage');
                       divError.appendChild(document.createTextNode('File size is too large (Max: 20kB)'));
                       divError.style.display = 'block';
@@ -178,21 +137,8 @@ export const Modal = ({ id }) => {
                       return;
                     }
                   }
-                  console.log(urlImage);
-                  const data = {
-                    name,
-                    email,
-                    city,
-                    lat,
-                    lng,
-                    address,
-                    pincode,
-                    priority,
-                    phone,
-                    image: urlImage,
-                    category
-                  }
-                  console.log(data);
+                  const data = { id: merchants.length + 1, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
+                  addMerchant(data);
                 }}
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
@@ -205,9 +151,9 @@ export const Modal = ({ id }) => {
                           placeholder="Nombre"
                           name="name"
                           type="text"
+                          value={values.name}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.name}
                           autoComplete="off"
                         />
                         {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
@@ -263,7 +209,11 @@ export const Modal = ({ id }) => {
                     <div className="mt-2 form-group row">
                       <label htmlFor="location" className="form-label col-3 text-end">Address:</label>
                       <div className="col-9">
-                        <button type='button' className='pin-location' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal">
+                        <button type='button' className='pin-location' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
+                          () => {
+                            setMapCreateEdit('create');
+                          }
+                        }>
                           <i className="fa-solid fa-location-dot"></i>
                         </button>
                         {
@@ -401,9 +351,9 @@ export const Modal = ({ id }) => {
                           onBlur={handleBlur}
                         >
                           <option value="">Select a Category</option>
-                          <option value="1">One</option>
-                          <option value="2">two</option>
-                          <option value="3">three</option>
+                          <option value="category1">Category One</option>
+                          <option value="category2">Category two</option>
+                          <option value="category3">Category three</option>
                         </select>
                         {errors.category && touched.category && <div className="text-danger">{errors.category}</div>}
                       </div>
@@ -455,7 +405,7 @@ export const Modal = ({ id }) => {
           </div>
         </div>
       </div >
-      <Map id="googlemaps" marker={marker} setMarker={setMarker} />
+      <Map marker={marker} setMarker={setMarker} mapCreateEdit={mapCreateEdit} />
     </>
   )
 }

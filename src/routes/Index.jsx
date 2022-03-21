@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import Merchant from '../components/Merchant';
-import { MerchantDetails } from '../components/MerchantDetails';
 import { Home } from '../pages/Home';
+import { Merchant } from '../pages/Merchant';
+import { MerchantDetails } from '../components/MerchantDetails';
 
 export const Index = () => {
   return (

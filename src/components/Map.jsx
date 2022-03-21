@@ -6,7 +6,7 @@ const containerStyle = {
 };
 const libraries = ["places"];
 
-const Map = ({ id, marker, setMarker }) => {
+const Map = ({ marker, setMarker, mapCreateEdit }) => {
     const onPinDragEnd = (e) => {
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
@@ -35,12 +35,12 @@ const Map = ({ id, marker, setMarker }) => {
 
     return (
         <>
-            <div className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id={id}>
+            <div className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="googlemaps">
                 <div className="modal-dialog modal-xl modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Edit Address</h5>
-                            <button type="button" className="btn-close" data-bs-toggle="modal" href="#newstore" role="button" aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button" aria-label="Close"></button>
                         </div>
                         <div className='modal-body'>
                             <div className="row">
@@ -67,9 +67,9 @@ const Map = ({ id, marker, setMarker }) => {
                             </GoogleMap>
                         </div>
                         <div className="modal-footer">
-                            <button type="submit" className="btn btn-one" data-bs-toggle="modal" href="#newstore" role="button" onClick={handleClickDone} >Done</button>
+                            <button type="submit" className="btn btn-one" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button" onClick={handleClickDone} >Done</button>
                             <button type="button" className="btn btn-two"
-                                data-bs-toggle="modal" href="#newstore" role="button"
+                                data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} role="button"
                             >Cancel</button>
                         </div>
                     </div>
