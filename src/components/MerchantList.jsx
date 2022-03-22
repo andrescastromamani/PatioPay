@@ -80,34 +80,41 @@ const MerchantList = () => {
       name: 'Merchant Name',
       selector: row => row.name,
       sortable: true,
+      width: '10%',
     },
     {
       name: 'Phone Number',
       selector: row => row.phone,
       sortable: true,
+      width: '10%',
     },
     {
       name: 'Email',
       selector: row => row.email,
       sortable: true,
+      width: '15%',
     },
     {
       name: 'Merchant Address',
       selector: row => row.address,
       sortable: true,
+      width: '20%',
     },
     {
       name: 'Payment Method',
       selector: row => row.payment_method,
       sortable: true,
+      width: '10%',
     },
     {
       name: 'Category',
       selector: row => row.category,
       sortable: true,
+      width: '10%',
     },
     {
       name: 'Actions',
+      width: '10%',
       cell: row => (
         <div>
           <button

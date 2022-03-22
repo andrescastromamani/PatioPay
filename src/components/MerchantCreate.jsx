@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Formik } from 'formik';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
@@ -117,6 +118,13 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                   }
                   const data = { id: merchants.length + 1, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
                   addMerchant(data);
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
                 }}
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (

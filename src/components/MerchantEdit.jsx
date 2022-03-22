@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import Swal from 'sweetalert2';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
@@ -50,6 +51,13 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
         const data = { id: merchant.id, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
         console.log(data);
         updateMerchant(merchant.id, data);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Updated successfully',
+            showConfirmButton: false,
+            timer: 1500
+        })
     };
     return (
         <>
