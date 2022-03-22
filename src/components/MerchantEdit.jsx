@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
@@ -9,8 +9,45 @@ import { resizeFile, dataURIToBlob, previewImageEdit } from '../helpers/helperFi
 
 export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, addressFormated }) => {
     const { updateMerchant } = useContext(MerchantContext);
+    const [errors, setErrors] = useState({});
+    const validate = (values) => {
+        if (!values.name) {
+            setErrors({ ...errors, name: 'This field is required' });
+        } else if (!/^[a-zA-Z0-9 ]+$/.test(values.name)) {
+            setErrors({ ...errors, name: 'Name can only contain letters and numbers' });
+        }
+        if (!values.email) {
+            setErrors({ ...errors, email: 'This field is required' });
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            setErrors({ ...errors, email: 'Invalid email address' });
+        }
+        if (!values.city) {
+            setErrors({ ...errors, city: 'This field is required' });
+        }
+        if (!values.address) {
+            setErrors({ ...errors, address: 'This field is required, please move market' });
+        }
+        if (!values.pincode) {
+            setErrors({ ...errors, pincode: 'This field is required' });
+        } else if (!/^[0-9]{6}$/.test(values.pincode)) {
+            setErrors({ ...errors, pincode: 'Only 6 digits is allowed' });
+        }
+        if (!values.priority) {
+            setErrors({ ...errors, priority: 'This field is required' });
+        } else if (!/^[0-9]{1}$/.test(values.priority)) {
+            setErrors({ ...errors, priority: 'Only 1 digit is allowed' });
+        }
+        if (!values.phone) {
+            setErrors({ ...errors, phone: 'This field is required' });
+        }
+        if (!values.category) {
+            setErrors({ ...errors, category: 'This field is required' });
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        validate(merchant);
         const { name, email, city, lat, lng, address, pincode, priority, phone, image, category } = merchant;
         let urlImage = '';
         if (typeof image === 'string') {
@@ -78,15 +115,21 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     <label htmlFor="name" className="col-3 form-control-label text-end">Store Name:</label>
                                     <div className="col-9">
                                         <input
-                                            className={`form-control`}
+                                            className={`form-control ${errors.name && 'is-invalid'}`}
                                             placeholder="Nombre"
                                             name="name"
                                             type="text"
                                             value={merchant.name}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, name: e.target.value });
+                                                setErrors({ ...errors, name: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
+
                                             }}
                                         />
+                                        {errors.name && <div className="text-danger">{errors.name}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
@@ -94,27 +137,36 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     <div className="col-9">
                                         <input
                                             type="email"
-                                            className={`form-control`}
+                                            className={`form-control ${errors.email && 'is-invalid'}`}
                                             id="email"
                                             name="email"
                                             value={merchant.email}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, email: e.target.value });
+                                                setErrors({ ...errors, email: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         />
+                                        {errors.email && <div className="text-danger">{errors.email}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
                                     <label htmlFor="city" className="form-label col-3 text-end">City:</label>
                                     <div className="col-9">
                                         <select
-                                            className={`form-select`}
+                                            className={`form-select ${errors.city && 'is-invalid'}`}
                                             aria-label="Default select example"
                                             id='city'
                                             name='city'
                                             value={merchant.city}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, city: e.target.value });
+                                                setErrors({ ...errors, city: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         >
                                             <option value="">Select a City</option>
@@ -132,6 +184,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             <option value="tarija">Tarija</option>
                                             <option value="villaimperialdepotosi">Villa Imperial de Potosi</option>
                                         </select>
+                                        {errors.city && <div className="text-danger">{errors.city}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
@@ -176,17 +229,22 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         <input
                                             type="text"
                                             autoComplete="off"
-                                            className={`form-control`}
+                                            className={`form-control ${errors.address && 'is-invalid'}`}
                                             id="addressEdit"
                                             name="address"
                                             value={merchant.address}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, address: e.target.value });
+                                                setErrors({ ...errors, address: '' });
                                             }}
-                                            onClick={(e) => {
+                                            onClick={() => {
                                                 setMerchant({ ...merchant, address: addressFormated });
                                             }}
+                                            onBlur={() => {
+                                                validate(merchant);
+                                            }}
                                         />
+                                        {errors.address && <div className="text-danger">{errors.address}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
@@ -194,15 +252,20 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     <div className="col-9">
                                         <input
                                             type="number"
-                                            className={`form-control`}
+                                            className={`form-control ${errors.pincode && 'is-invalid'}`}
                                             id="pincode"
                                             placeholder="Pin code"
                                             name='pincode'
                                             value={merchant.pincode}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, pincode: e.target.value });
+                                                setErrors({ ...errors, pincode: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         />
+                                        {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
@@ -210,27 +273,36 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     <div className="col-9">
                                         <input
                                             type="number"
-                                            className={`form-control `}
+                                            className={`form-control ${errors.priority && 'is-invalid'}`}
                                             id="priority"
                                             placeholder="Enter Priority"
                                             name='priority'
                                             value={merchant.priority}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, priority: e.target.value });
+                                                setErrors({ ...errors, priority: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         />
+                                        {errors.priority && <div className="text-danger">{errors.priority}</div>}
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">
                                     <label htmlFor="phone" className="col-3 form-control-label text-end">Phone:</label>
                                     <div className="col-9">
                                         <PhoneInput
-                                            className={`form-control`}
+                                            className={`form-control ${errors.phone && 'is-invalid'}`}
                                             id='phone'
                                             name='phone'
                                             value={merchant.phone}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, phone: e });
+                                                setErrors({ ...errors, phone: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         />
                                     </div>
@@ -261,19 +333,24 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     <label htmlFor="email" className="form-label col-3 text-end">Merchant Category:</label>
                                     <div className="col-9">
                                         <select
-                                            className={`form-select`}
+                                            className={`form-select ${errors.category && 'is-invalid'}`}
                                             aria-label="Default select example"
                                             name='category'
                                             id='category'
                                             value={merchant.category}
                                             onChange={(e) => {
                                                 setMerchant({ ...merchant, category: e.target.value });
+                                                setErrors({ ...errors, category: '' });
+                                            }}
+                                            onBlur={() => {
+                                                validate(merchant);
                                             }}
                                         >
                                             <option value="">Select a Category</option>
                                             <option value="category1">Category One</option>
                                             <option value="category2">Category two</option>
                                             <option value="category3">Category three</option>
+                                            <option value="category4">Category four</option>
                                         </select>
                                     </div>
                                 </div>
