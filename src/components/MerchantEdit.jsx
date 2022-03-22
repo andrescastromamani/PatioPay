@@ -1,14 +1,55 @@
 import { useContext } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import axios from 'axios';
+
 import { MerchantContext } from '../contexts/MerchantContext';
+import { resizeFile, dataURIToBlob, previewImageEdit } from '../helpers/helperFile'
 
 export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, addressFormated }) => {
     const { updateMerchant } = useContext(MerchantContext);
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(merchant);
-        updateMerchant(merchant.id, merchant);
+        const { name, email, city, lat, lng, address, pincode, priority, phone, image, category } = merchant;
+        let urlImage = '';
+        if (typeof image === 'string') {
+            urlImage = image;
+        } else {
+            const dataUri = await resizeFile(image);
+            const newBlob = dataURIToBlob(dataUri);
+            const newFile = new File([newBlob], `${image.name}`, {
+                type: "image/png",
+                lastModified: Date.now()
+            })
+            if (newFile.size > 200000) {
+                const divError = document.getElementById('errorImage');
+                divError.appendChild(document.createTextNode('File size is too large (Max: 20kB)'));
+                divError.style.display = 'block';
+                return;
+            }
+            const getUrl = async (file) => {
+                const formData = new FormData();
+                formData.append('popup', file);
+                return await axios({
+                    method: 'POST',
+                    url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    }
+                })
+            }
+            urlImage = await getUrl(newFile).then(res => res.data.link);
+            if (urlImage.includes('error')) {
+                const divError = document.getElementById('errorImage');
+                divError.appendChild(document.createTextNode('Error uploading file'));
+                divError.style.display = 'block';
+                return;
+            }
+        }
+        const data = { id: merchant.id, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
+        console.log(data);
+        updateMerchant(merchant.id, data);
     };
     return (
         <>
@@ -105,7 +146,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     onChange={(e) => {
                                         setMerchant({ ...merchant, lat: e.target.value });
                                     }}
-                                    onClick={(e) => {
+                                    onClick={() => {
                                         setMerchant({ ...merchant, lat: marker.lat });
                                     }}
                                 />
@@ -117,7 +158,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     onChange={(e) => {
                                         setMerchant({ ...merchant, lng: e.target.value });
                                     }}
-                                    onClick={(e) => {
+                                    onClick={() => {
                                         setMerchant({ ...merchant, lng: marker.lng });
                                     }}
                                 />
@@ -196,6 +237,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             id="image"
                                             accept="image/*"
                                             onChange={(e) => {
+                                                previewImageEdit(e.target.files[0]);
                                                 setMerchant({ ...merchant, image: e.target.files[0] });
                                             }}
                                         />
@@ -204,7 +246,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                 <div className="mt-2 row" >
                                     <div className="col-3"></div>
                                     <div className="col-3">
-                                        <img src={merchant.image} id="previewImage" width="100%" alt='img preview' />
+                                        <img src={merchant.image} id="previewImageEdit" width="100%" alt='img preview' />
                                     </div>
                                 </div>
                                 <div className="mt-2 form-group row">

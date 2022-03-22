@@ -42,3 +42,11 @@ export const previewImage = async (file) => {
         document.getElementById('previewImage').src = defaultImage;
     }
 }
+export const previewImageEdit = async (file) => {
+    if (file) {
+        const dataUri = await resizeFile(file);
+        document.getElementById('previewImageEdit').src = dataUri;
+    } else {
+        document.getElementById('previewImage').src = defaultImage;
+    }
+}
