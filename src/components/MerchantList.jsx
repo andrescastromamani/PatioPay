@@ -27,9 +27,9 @@ const MerchantList = () => {
     image: '',
     category: '',
   });
+  const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
   const [mapCreateEdit, setMapCreateEdit] = useState('');
-  const [search, setSearch] = useState('');
   const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
   const { lat, lng } = marker;
   Geocode.fromLatLng(lat, lng)
@@ -46,8 +46,6 @@ const MerchantList = () => {
         item.phone.toLowerCase().includes(search.toLowerCase()) ||
         item.email.toLowerCase().includes(search.toLowerCase()) ||
         item.address.toLowerCase().includes(search.toLowerCase()) ||
-        item.status.toLowerCase().includes(search.toLowerCase()) ||
-        item.payment_method.toLowerCase().includes(search.toLowerCase()) ||
         item.category.toLowerCase().includes(search.toLowerCase());
     })
   }
