@@ -66,3 +66,17 @@
 .bg-green {
     background-color: #00aea7;
 }
+.bg-green-two {
+    background-color: #029da2;
+}
+
+/*Authtentication*/
+.auth-input {
+    border: none;
+    border-bottom: 3px solid #00aea7;
+    outline: none;
+    padding: 0.5rem;
+}
+.auth-input:focus {
+    border-bottom: 3px solid #ff7d08;
+}

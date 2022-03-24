@@ -5,7 +5,6 @@ import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
-import './css/modal.css';
 import { MerchantContext } from '../contexts/MerchantContext';
 import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile'
 
