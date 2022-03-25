@@ -1,9 +1,8 @@
-import { useContext } from "react"
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export const ProtectedRoutes = ({ children }) => {
-    const { token } = useContext(AuthContext);
+    const { token } = useAuth();
     if (token) {
         return children;
     } else {

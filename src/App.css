@@ -17,10 +17,18 @@
     color: #fff;
     border: #ff7d08;
 }
+.btn-one:hover {
+    background-color: #e66b00;
+    color: white;
+}
 .btn-two {
     background-color: #00aea7;
     color: #fff;
     border: #00aea7;
+}
+.btn-two:hover {
+    background-color: #009994;
+    color: white;
 }
 .PhoneInputInput {
     border: none;
@@ -76,7 +84,14 @@
     border-bottom: 3px solid #00aea7;
     outline: none;
     padding: 0.5rem;
+    background-color: #eeeeee;
 }
 .auth-input:focus {
     border-bottom: 3px solid #ff7d08;
+}
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }

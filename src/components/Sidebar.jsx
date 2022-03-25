@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext';
 
-export const Sidebar = ({ id }) => {
+export const Sidebar = () => {
     const { token, user, handleLogout } = useContext(AuthContext);
     return (
-        <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" tabIndex="-1" id={id} aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
+        <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" tabIndex="-1" id="sidebar" aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
             <a href="/" className="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">
                 <span className="fs-4 text-center">
                     <img src="https://patiodelivery.com/wp-content/uploads/2021/02/logo_patio_1.png" alt="logo Patio" width="50%" />

@@ -120,7 +120,7 @@ const MerchantList = () => {
           <button
             data-bs-toggle="modal"
             data-bs-target="#merchantEdit"
-            className="btn btn-sm btn-dark"
+            className="btn btn-sm btn-two"
             onClick={() => setMerchant(row)}
           >
             Edit
