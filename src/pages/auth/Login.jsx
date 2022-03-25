@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
@@ -43,7 +43,7 @@ export const Login = () => {
                                     onChange={(e) => setUser({ ...user, email: e.target.value })}
                                 />
                             </div>
-                            <div className="form-group mt-5">
+                            <div className="form-group mt-4">
                                 <input
                                     type="password"
                                     name="password"
@@ -53,37 +53,11 @@ export const Login = () => {
                                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                                 />
                             </div>
-                            <div className="form-group mt-5">
+                            <div className="form-group mt-4">
                                 <button type="submit" className="btn w-100 btn-one text-white mb-3">Login</button>
                             </div>
                         </form>
                         <a href="/register" className="text-dark text-decoration-none">Create Account?</a>
-
-                    </div>
-                    <div className="p-5">
-                        <div className="row">
-                            <div className="col text-center">
-                                <a href="https://www.facebook.com/" target="_blank" className="text-dark">
-                                    <i className="fa-brands fa-facebook"></i>
-                                </a>
-                            </div>
-                            <div className="col text-center">
-                                <a href="https://www.instagram.com/" target="_blank" className="text-dark">
-                                    <i className="fa-brands fa-instagram"></i>
-
-                                </a>
-                            </div>
-                            <div className="col text-center">
-                                <a href="https://twitter.com/" target="_blank" className="text-dark">
-                                    <i className="fa-brands fa-twitter"></i>
-                                </a>
-                            </div>
-                            <div className="col text-center">
-                                <a href="https://twitter.com/" target="_blank" className="text-dark">
-                                    <i className="fa-brands fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

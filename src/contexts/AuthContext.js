@@ -19,10 +19,7 @@ export const AuthProvider = ({ children }) => {
     const [users, setUsers] = useState(usersDB);
     const navigate = useNavigate();
     const [token, setToken] = useState(null);
-    const [user, setUser] = useState({
-        email: '',
-        password: ''
-    });
+    const [user, setUser] = useState({});
     useEffect(() => {
         setUsers(JSON.parse(localStorage.getItem('users')) || usersDB);
     }, []);
@@ -41,21 +38,18 @@ export const AuthProvider = ({ children }) => {
     }
     const handleLogout = () => {
         setToken(null);
-        setUser({
-            email: '',
-            password: ''
-        });
         navigate("/login");
     }
     return (
         <AuthContext.Provider value={{
             token,
+            setToken,
             user,
             setUser,
             users,
             setUsers,
             handleLogin,
-            handleLogout
+            handleLogout,
         }}>
             {children}
         </AuthContext.Provider>

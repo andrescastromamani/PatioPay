@@ -8,12 +8,12 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   return (
     <div className='container mt-3'>
-      <MerchantContextProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <MerchantContextProvider>
           <Sidebar id="sidebar" />
           <Index />
-        </AuthProvider>
-      </MerchantContextProvider>
+        </MerchantContextProvider>
+      </AuthProvider>
     </div>
   );
 }

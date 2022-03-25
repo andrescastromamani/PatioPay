@@ -116,7 +116,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                     }
                   }
                   const data = { id: merchants.length + 1, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
-                  addMerchant(data);
+                  await addMerchant(data);
                   Swal.fire({
                     position: 'top-end',
                     icon: 'success',

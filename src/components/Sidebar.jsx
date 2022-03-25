@@ -61,7 +61,7 @@ export const Sidebar = ({ id }) => {
                     <li><a className="dropdown-item" href="#">Profile</a></li>
                     <li className="dropdown-divider"></li>
                     {
-                        token && <li><a className="dropdown-item" onClick={handleLogout}>Logout</a></li>
+                        token && <li><a className="dropdown-item" onClick={handleLogout} data-bs-dismiss="offcanvas" aria-label="Close">Logout</a></li>
                     }
                 </ul>
             </div>

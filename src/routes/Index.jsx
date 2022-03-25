@@ -7,12 +7,8 @@ import { MerchantDetails } from '../components/MerchantDetails';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { PublicRoutes } from './PublicRoutes';
 import { NotFound } from '../pages/NotFound';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
 
 export const Index = () => {
-  const { token } = useContext(AuthContext);
-  console.log(token);
   return (
     <Routes>
       <Route path="/login" element={
