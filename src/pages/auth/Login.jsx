@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
-    const { user, setUser, users, handleLogin } = useContext(AuthContext);
+    const { user, setUser, handleLogin } = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault()
         if (user.email === '' || user.password === '') {
             alert('Please fill all fields')
         } else {
-            if (users.find(u => u.email === user.email && u.password === user.password)) {
-                handleLogin()
+            if (user.email === 'admin@admin.com' && user.password === 'admin123') {
+                handleLogin(user)
             } else {
                 alert('Invalid credentials')
             }
@@ -17,13 +17,13 @@ export const Login = () => {
     }
     return (
         <div className="content-center">
-            <div className="row rounded border shadow-lg">
-                <div className="col-12 col-md-8 rounded-start bg-green-two m-0 p-0">
-                    <div className=''>
+            <div className="row border-radius border shadow-lg">
+                <div className="col-12 col-md-8 border-radius-start  bg-green-two m-0 p-0">
+                    <div className="d-flex justify-content-center">
                         <img src="https://scontent.fvvi1-1.fna.fbcdn.net/v/t39.30808-6/276131696_2989285371383891_9039273915655545356_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=WPr5MsRQLGwAX-8Bh-B&tn=zWX-mDAOBWl5WnNC&_nc_ht=scontent.fvvi1-1.fna&oh=00_AT_bOiKewcnEZ01Y8OwkHe1w_-z63Kn6VgCz4t-aWyzoYQ&oe=623F93C8" width="70%" style={{ objectFit: 'cover' }} alt="parner" />
                     </div>
                 </div>
-                <div className="col-12 col-md-4 rounded-end">
+                <div className="col-12 col-md-4">
                     <div className="d-flex justify-content-center align-items-center h-100">
                         <div>
                             <div className="d-flex justify-content-center mb-3">

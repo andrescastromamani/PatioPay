@@ -1,18 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const usersDB = [
-    {
-        'name': 'Admin',
-        'email': 'admin@admin.com',
-        'password': 'admin123'
-    },
-    {
-        'name': 'Master',
-        'email': 'master@master.com',
-        'password': 'master123'
-    }
-];
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -24,16 +12,9 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [users, setUsers] = useState(usersDB);
     const navigate = useNavigate();
-    const [token, setToken] = useState(null);
     const [user, setUser] = useState({});
-    useEffect(() => {
-        setUsers(JSON.parse(localStorage.getItem('users')) || usersDB);
-    }, []);
-    useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(users));
-    })
+    const [token, setToken] = useState(null);
     const fakeAuth = () => {
         return new Promise((resolve) => {
             setTimeout(() => resolve('2342f2f1d131rf12'), 250);
@@ -41,21 +22,20 @@ export const AuthProvider = ({ children }) => {
     };
     const handleLogin = async () => {
         const token = await fakeAuth();
+        localStorage.setItem('token', token);
         setToken(token);
         navigate('/');
     }
     const handleLogout = () => {
+        localStorage.removeItem('token');
         setToken(null);
         navigate("/login");
     }
     return (
         <AuthContext.Provider value={{
             token,
-            setToken,
             user,
             setUser,
-            users,
-            setUsers,
             handleLogin,
             handleLogout,
         }}>

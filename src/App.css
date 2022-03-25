@@ -95,3 +95,10 @@
     align-items: center;
     height: 100vh;
 }
+.border-radius {
+    border-radius: 12px;
+}
+.border-radius-start {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
