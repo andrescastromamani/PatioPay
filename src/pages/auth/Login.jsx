@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
+    const { user, setUser, users, handleLogin } = useContext(AuthContext);
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (user.email === '' || user.password === '') {
+            alert('Please fill all fields')
+        } else {
+            if (users.find(u => u.email === user.email && u.password === user.password)) {
+                handleLogin()
+            } else {
+                alert('Invalid credentials')
+            }
+        }
+    }
     return (
         <div className="" >
             <div className="row rounded border shadow-lg mt-5">
@@ -18,15 +32,15 @@ export const Login = () => {
                     <div className="p-5">
                         <h2 className="text-center">Welcome!</h2>
                         <p className="text-center">Sign in to your account</p>
-                        <form id="form-login" className="login-form">
+                        <form id="form-login" className="login-form" onSubmit={handleSubmit}>
                             <div className="form-group mt-5">
                                 <input
+                                    placeholder="Enter email"
                                     type="email"
                                     name="email"
-                                    autoComplete="off"
                                     className="auth-input w-100"
                                     id="email"
-                                    placeholder="Enter email"
+                                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                                 />
                             </div>
                             <div className="form-group mt-5">
@@ -36,13 +50,14 @@ export const Login = () => {
                                     className="auth-input w-100"
                                     id="password"
                                     placeholder="Password"
+                                    onChange={(e) => setUser({ ...user, password: e.target.value })}
                                 />
                             </div>
                             <div className="form-group mt-5">
-                                <button className="btn w-100 btn-one text-white mb-3">Login</button>
+                                <button type="submit" className="btn w-100 btn-one text-white mb-3">Login</button>
                             </div>
                         </form>
-                        <a href="www.google.com" className="text-dark text-decoration-none">Forgot password?</a>
+                        <a href="/register" className="text-dark text-decoration-none">Create Account?</a>
 
                     </div>
                     <div className="p-5">

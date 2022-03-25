@@ -4,15 +4,41 @@ import { Merchant } from '../pages/Merchant';
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
 import { MerchantDetails } from '../components/MerchantDetails';
+import { ProtectedRoutes } from './ProtectedRoutes';
+import { PublicRoutes } from './PublicRoutes';
+import { NotFound } from '../pages/NotFound';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export const Index = () => {
+  const { token } = useContext(AuthContext);
+  console.log(token);
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="merchants" element={<Merchant />} />
-      <Route path="merchant/:merchantId" element={<MerchantDetails />} />
+      <Route path="/login" element={
+        <PublicRoutes>
+          <Login />
+        </PublicRoutes>} />
+      <Route path="/register" element={
+        <PublicRoutes>
+          <Register />
+        </PublicRoutes>} />
+      <Route path="/" element={
+        <ProtectedRoutes>
+          <Home />
+        </ProtectedRoutes>
+      } />
+      <Route path="/merchants" element={
+        <ProtectedRoutes>
+          <Merchant />
+        </ProtectedRoutes>
+      } />
+      <Route path="merchant/:merchantId" element={
+        <ProtectedRoutes>
+          <MerchantDetails />
+        </ProtectedRoutes>
+      } />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

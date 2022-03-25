@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../contexts/AuthContext';
 
 export const Sidebar = ({ id }) => {
+    const { token, user, handleLogout } = useContext(AuthContext);
     return (
-        <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabIndex="-1" id={id} aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
+        <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" tabIndex="-1" id={id} aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
             <a href="/" className="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">
                 <span className="fs-4 text-center">
                     <img src="https://patiodelivery.com/wp-content/uploads/2021/02/logo_patio_1.png" alt="logo Patio" width="50%" />
@@ -47,6 +49,22 @@ export const Sidebar = ({ id }) => {
                     </NavLink>
                 </li>
             </ul>
+            <hr />
+            <div className="dropdown">
+                <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2" />
+                    <strong className="text-white">{user.email}</strong>
+                </a>
+                <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a className="dropdown-item" href="#">New project...</a></li>
+                    <li><a className="dropdown-item" href="#">Settings</a></li>
+                    <li><a className="dropdown-item" href="#">Profile</a></li>
+                    <li className="dropdown-divider"></li>
+                    {
+                        token && <li><a className="dropdown-item" onClick={handleLogout}>Logout</a></li>
+                    }
+                </ul>
+            </div>
         </div>
     )
 }
