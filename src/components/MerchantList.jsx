@@ -6,6 +6,7 @@ import { MerchantEdit } from "./MerchantEdit";
 import { MerchantCreate } from "./MerchantCreate";
 import { MerchantContext } from "../contexts/MerchantContext";
 import Map from './Map';
+import { ExpandableRows } from "./ExpandableRows";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
@@ -53,6 +54,11 @@ const MerchantList = () => {
     return data.filter(item => {
       return item.category.toLowerCase().includes(category.toLowerCase());
     })
+  }
+  const ExpandedComponent = ({ data }) => {
+    return (
+      <ExpandableRows data={data} />
+    )
   }
   const columns = [
     {
@@ -197,11 +203,14 @@ const MerchantList = () => {
         </div >
         <div className="row p-3">
           <DataTable
+            title="Merchants"
             pagination={true}
             columns={columns}
             data={
               category === '' ? filterSearch(merchants) : filterCategory(merchants)
             }
+            expandableRows
+            expandableRowsComponent={ExpandedComponent}
           />
           <MerchantEdit
             merchant={merchant}

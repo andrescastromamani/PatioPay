@@ -4,7 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    <div className='container'>
+    <div className='container-fluid'>
       <AuthProvider>
         <MerchantContextProvider>
           <Index />
