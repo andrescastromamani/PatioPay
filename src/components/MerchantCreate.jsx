@@ -128,83 +128,75 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
                   <form onSubmit={handleSubmit}>
-                    <div className="form-group row">
-                      <label htmlFor="name" className="col-3 form-control-label text-end">Store Name:</label>
-                      <div className="col-9">
-                        <input
-                          className={`form-control ${errors.name && touched.name && 'is-invalid'}`}
-                          placeholder="Nombre"
-                          name="name"
-                          type="text"
-                          value={values.name}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          autoComplete="off"
-                        />
-                        {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
-                      </div>
+                    <div className="">
+                      <label htmlFor="name" className="form-label">Store Name:</label>
+                      <input
+                        className="auth-input w-100 rounded-top"
+                        placeholder="Nombre"
+                        name="name"
+                        type="text"
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        autoComplete="off"
+                      />
+                      {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="email" className="form-label col-3 text-end">Email:</label>
-                      <div className="col-9">
-                        <input
-                          type="email"
-                          className={`form-control ${errors.email && touched.email && 'is-invalid'}`}
-                          id="email"
-                          name="email"
-                          placeholder="Enter Email"
-                          value={values.email}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          autoComplete="off"
-                        />
-                        {errors.email && touched.email && <div className="text-danger">{errors.email}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="email" className="form-label">Email:</label>
+                      <input
+                        type="email"
+                        className="auth-input w-100 rounded-top"
+                        id="email"
+                        name="email"
+                        placeholder="Enter Email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        autoComplete="off"
+                      />
+                      {errors.email && touched.email && <div className="text-danger">{errors.email}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="city" className="form-label col-3 text-end">City:</label>
-                      <div className="col-9">
-                        <select
-                          className={`form-select ${errors.city && touched.city && 'is-invalid'}`}
-                          aria-label="Default select example"
-                          id='city'
-                          name='city'
-                          value={values.city}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        >
-                          <option value="">Select a City</option>
-                          <option value="arequipa">Arequipa</option>
-                          <option value="chandigarh">Chandigarh</option>
-                          <option value="cochabamba">Cochabamba</option>
-                          <option value="elalto">El Alto</option>
-                          <option value="juliaca">Juliaca</option>
-                          <option value="lapaz">La Paz</option>
-                          <option value="montevideo">Montevideo</option>
-                          <option value="newyorkcity">New York City</option>
-                          <option value="sanjosedemayo">San Jose de Mayo</option>
-                          <option value="santacruzdelasierra">Santa Cruz de la Sierra</option>
-                          <option value="sucre">Sucre</option>
-                          <option value="tarija">Tarija</option>
-                          <option value="villaimperialdepotosi">Villa Imperial de Potosi</option>
-                        </select>
-                        {errors.city && touched.city && <div className="text-danger">{errors.city}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="city" className="form-label">City:</label>
+                      <select
+                        className="auth-input w-100 rounded-top"
+                        aria-label="Default select example"
+                        id='city'
+                        name='city'
+                        value={values.city}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <option value="">Select a City</option>
+                        <option value="arequipa">Arequipa</option>
+                        <option value="chandigarh">Chandigarh</option>
+                        <option value="cochabamba">Cochabamba</option>
+                        <option value="elalto">El Alto</option>
+                        <option value="juliaca">Juliaca</option>
+                        <option value="lapaz">La Paz</option>
+                        <option value="montevideo">Montevideo</option>
+                        <option value="newyorkcity">New York City</option>
+                        <option value="sanjosedemayo">San Jose de Mayo</option>
+                        <option value="santacruzdelasierra">Santa Cruz de la Sierra</option>
+                        <option value="sucre">Sucre</option>
+                        <option value="tarija">Tarija</option>
+                        <option value="villaimperialdepotosi">Villa Imperial de Potosi</option>
+                      </select>
+                      {errors.city && touched.city && <div className="text-danger">{errors.city}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="location" className="form-label col-3 text-end">Address:</label>
-                      <div className="col-9">
-                        <button type='button' className='pin-location' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
-                          () => {
-                            setMapCreateEdit('create');
-                          }
-                        }>
-                          <i className="fa-solid fa-location-dot"></i>
-                        </button>
-                        {
-                          errors.lat && touched.lat && <div className="text-danger">{errors.lat}</div>
+                    <div className="mt-2">
+                      <label htmlFor="location" className="form-label">Address:</label>
+                      <button type='button' className='pin-location ms-3' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
+                        () => {
+                          setMapCreateEdit('create');
                         }
-                      </div>
+                      }>
+                        <i className="fa-solid fa-location-dot"></i>
+                      </button>
+                      {
+                        errors.lat && touched.lat && <div className="text-danger">{errors.lat}</div>
+                      }
                     </div>
                     <input
                       type="hidden"
@@ -226,124 +218,112 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       }}
                       onChange={handleChange}
                     />
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="address" className="form-label col-3 text-end">Display Address:</label>
-                      <div className="col-9">
-                        <input
-                          type="text"
-                          className={`form-control ${errors.address && touched.address && 'is-invalid'}`}
-                          id="address"
-                          name="address"
-                          value={values.address}
-                          onChange={handleChange}
-                          onClick={() => {
-                            setFieldValue('address', addressFormated);
-                          }}
-                          onBlur={handleBlur}
-                        />
-                        {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="address" className="form-label">Display Address:</label>
+                      <input
+                        type="text"
+                        className="auth-input w-100 rounded-top"
+                        id="address"
+                        name="address"
+                        value={values.address}
+                        onChange={handleChange}
+                        onClick={() => {
+                          setFieldValue('address', addressFormated);
+                        }}
+                        onBlur={handleBlur}
+                      />
+                      {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="pincode" className="form-label col-3 text-end">Pin Code:</label>
-                      <div className="col-9">
-                        <input
-                          type="number"
-                          className={`form-control ${errors.pincode && touched.pincode && 'is-invalid'}`}
-                          id="pincode"
-                          placeholder="Pin code"
-                          name='pincode'
-                          value={values.pincode}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
-                        {errors.pincode && touched.pincode && <div className="text-danger">{errors.pincode}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="pincode" className="form-label">Pin Code:</label>
+                      <input
+                        type="number"
+                        className="auth-input w-100 rounded-top"
+                        id="pincode"
+                        placeholder="Pin code"
+                        name='pincode'
+                        value={values.pincode}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.pincode && touched.pincode && <div className="text-danger">{errors.pincode}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="priority" className="form-label col-3 text-end">Priority:</label>
-                      <div className="col-9">
-                        <input
-                          type="number"
-                          className={`form-control ${errors.priority && touched.priority && 'is-invalid'}`}
-                          id="priority"
-                          placeholder="Enter Priority"
-                          name='priority'
-                          value={values.priority}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
-                        {errors.priority && touched.priority && <div className="text-danger">{errors.priority}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="priority" className="form-label">Priority:</label>
+                      <input
+                        type="number"
+                        className="auth-input w-100 rounded-top"
+                        id="priority"
+                        placeholder="Enter Priority"
+                        name='priority'
+                        value={values.priority}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.priority && touched.priority && <div className="text-danger">{errors.priority}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="phone" className="col-3 form-control-label text-end">Phone:</label>
-                      <div className="col-9">
-                        <PhoneInput
-                          className={`form-control ${errors.phone && touched.phone && 'is-invalid'}`}
-                          id='phone'
-                          name='phone'
-                          placeholder="+591 9999999"
-                          value={values.phone}
-                          onChange={
-                            (phone) => {
-                              setFieldValue('phone', phone);
-                            }
+                    <div className="mt-2">
+                      <label htmlFor="phone" className="form-label">Phone:</label>
+                      <PhoneInput
+                        className="auth-input w-100 rounded-top"
+                        id='phone'
+                        name='phone'
+                        placeholder="+591 9999999"
+                        value={values.phone}
+                        onChange={
+                          (phone) => {
+                            setFieldValue('phone', phone);
                           }
-                          onBlur={handleBlur}
-                        />
-                        {errors.phone && touched.phone && <div className="text-danger">{errors.phone}</div>}
-                      </div>
+                        }
+                        onBlur={handleBlur}
+                      />
+                      {errors.phone && touched.phone && <div className="text-danger">{errors.phone}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="image" className="col-3 form-control-label text-end">Image:</label>
-                      <div className="col-9">
-                        <input
-                          className="form-control"
-                          type="file"
-                          name="image"
-                          id="image"
-                          accept="image/*"
-                          onChange={
-                            (e) => {
-                              previewImage(e.target.files[0]);
-                              setFieldValue('image', e.target.files[0] ? e.target.files[0] : defaultImage);
-                            }
+                    <div className="mt-2">
+                      <label htmlFor="image" className="form-label">Image:</label>
+                      <input
+                        className="auth-input w-100 rounded-top"
+                        type="file"
+                        name="image"
+                        id="image"
+                        accept="image/*"
+                        onChange={
+                          (e) => {
+                            previewImage(e.target.files[0]);
+                            setFieldValue('image', e.target.files[0] ? e.target.files[0] : defaultImage);
                           }
-                          onBlur={handleBlur}
-                        />
-                        <div className="text-danger" id="errorImage"></div>
-                        {errors.image && touched.image && <div className="text-danger">{errors.image}</div>}
-                      </div>
+                        }
+                        onBlur={handleBlur}
+                      />
+                      <div className="text-danger" id="errorImage"></div>
+                      {errors.image && touched.image && <div className="text-danger">{errors.image}</div>}
                     </div>
-                    <div className="mt-2 row" >
+                    <div className="mt-2" >
                       <div className="col-3"></div>
                       <div className="col-3">
                         <img src={defaultImage} id="previewImage" width="100%" alt='img preview' />
                       </div>
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="email" className="form-label col-3 text-end">Merchant Category:</label>
-                      <div className="col-9">
-                        <select
-                          className={`form-select ${errors.category && touched.category && 'is-invalid'}`}
-                          aria-label="Default select example"
-                          name='category'
-                          id='category'
-                          value={values.category}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        >
-                          <option value="">Select a Category</option>
-                          <option value="category1">Category One</option>
-                          <option value="category2">Category two</option>
-                          <option value="category3">Category three</option>
-                        </select>
-                        {errors.category && touched.category && <div className="text-danger">{errors.category}</div>}
-                      </div>
+                    <div className="mt-2">
+                      <label htmlFor="email" className="form-label">Merchant Category:</label>
+                      <select
+                        className="auth-input w-100 rounded-top"
+                        aria-label="Default select example"
+                        name='category'
+                        id='category'
+                        value={values.category}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <option value="">Select a Category</option>
+                        <option value="category1">Category One</option>
+                        <option value="category2">Category two</option>
+                        <option value="category3">Category three</option>
+                      </select>
+                      {errors.category && touched.category && <div className="text-danger">{errors.category}</div>}
                     </div>
-                    <div className="mt-2 form-group row">
-                      <label htmlFor="locales" className="form-label col-3 text-end">Locales:</label>
+                    <div className="mt-2">
+                      <label htmlFor="locales" className="form-label">Locales:</label>
                       <div className="col-9">
                         <div className="form-check form-switch">
                           <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={check} onChange={
