@@ -68,7 +68,7 @@ const MerchantList = () => {
       width: '5%',
     },
     {
-      name: 'Image',
+      name: 'Imagen',
       grow: 0,
       with: '5%',
       cell: row => <img
@@ -83,43 +83,43 @@ const MerchantList = () => {
       />
     },
     {
-      name: 'Merchant Name',
+      name: 'Nombre ',
       selector: row => row.name,
       sortable: true,
       width: '10%',
     },
     {
-      name: 'Phone Number',
+      name: 'Numero de Telefono',
       selector: row => row.phone,
       sortable: true,
       width: '10%',
     },
     {
-      name: 'Email',
+      name: 'Correo Electronico',
       selector: row => row.email,
       sortable: true,
       width: '15%',
     },
     {
-      name: 'Merchant Address',
+      name: 'Direccion',
       selector: row => row.address,
       sortable: true,
       width: '20%',
     },
     {
-      name: 'Payment Method',
+      name: 'Metodo de Pago',
       selector: row => row.payment_method,
       sortable: true,
       width: '10%',
     },
     {
-      name: 'Category',
+      name: 'Categoria',
       selector: row => row.category,
       sortable: true,
       width: '10%',
     },
     {
-      name: 'Actions',
+      name: 'Acciones',
       width: '10%',
       cell: row => (
         <div>
@@ -129,7 +129,7 @@ const MerchantList = () => {
             className="btn btn-sm btn-two"
             onClick={() => setMerchant(row)}
           >
-            Edit
+            Editar
           </button>
         </div>
       ),
@@ -145,7 +145,7 @@ const MerchantList = () => {
         <div className="row p-3">
           <div className="col-12 col-md-3 mt-3">
             <button type="button" className="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#merchantCreate">
-              <i className="fa-solid fa-circle-plus"></i> Add New Merchant
+              <i className="fa-solid fa-circle-plus"></i> Agregar Comerciante
             </button>
             <MerchantCreate
               mapCreateEdit={mapCreateEdit}
@@ -165,11 +165,11 @@ const MerchantList = () => {
                 setCategory(e.target.value);
               }}
             >
-              <option value="">Select Category</option>
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
-              <option value="category4">Category 4</option>
+              <option value="">Seleccionar Categoria</option>
+              <option value="category1">Categoria 1</option>
+              <option value="category2">Categoria 2</option>
+              <option value="category3">Categoria 3</option>
+              <option value="category4">Categoria 4</option>
             </select>
           </div>
           <div className="col-12 col-md-3 mt-3">
@@ -179,7 +179,7 @@ const MerchantList = () => {
                   id="search"
                   name="search"
                   autoComplete="off"
-                  placeholder="Search"
+                  placeholder="Buscar"
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -198,12 +198,12 @@ const MerchantList = () => {
                   setCategory('');
                 }
               }
-            >Reset</button>
+            >Resetear</button>
           </div>
         </div >
         <div className="row p-3">
           <DataTable
-            title="Merchants"
+            title="Comerciantes"
             pagination={true}
             columns={columns}
             data={

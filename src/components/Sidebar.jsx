@@ -16,37 +16,37 @@ export const Sidebar = () => {
             <ul className="nav nav-pills flex-column mb-auto" >
                 <li>
                     <NavLink to="/" className="text-white nav-link">
-                        <i className="fa-solid fa-house me-2"></i>Home
+                        <i className="fa-solid fa-house me-2"></i>Inicio
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/merchants" className="text-white nav-link">
-                        <i className="fa-solid fa-table-columns me-2"></i>Merchants
+                        <i className="fa-solid fa-table-columns me-2"></i>Comerciantes
                     </NavLink>
                 </li>
                 <li>
                     <div className="nav-link" role="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse">
-                        <i className="fa-solid fa-gauge me-2"></i>Dashboard<i className="fa-solid fa-sort-down ms-2 float-end"></i>
+                        <i className="fa-solid fa-gauge me-2"></i>Tablero<i className="fa-solid fa-sort-down ms-2 float-end"></i>
                     </div>
                     <div className="collapse" id="dashboard-collapse">
                         <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3">
                             <NavLink to="/dashboard1" className="text-white nav-link" >
-                                <i className="fa-solid fa-table-columns"></i> Dashboard 1
+                                <i className="fa-solid fa-table-columns"></i> Tablero 1
                             </NavLink>
                             <NavLink to="/dashboard2" className="text-white nav-link" >
-                                <i className="fa-solid fa-table-columns"></i> Dashboard 2
+                                <i className="fa-solid fa-table-columns"></i> Tablero 2
                             </NavLink>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <NavLink to="/orders" className="text-white nav-link" >
-                        <i className="fa-solid fa-bag-shopping me-2"></i>Orders
+                        <i className="fa-solid fa-bag-shopping me-2"></i>Ordenes
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/products" className="text-white nav-link">
-                        <i className="fa-solid fa-award me-2"></i>Products
+                        <i className="fa-solid fa-award me-2"></i>Productos
                     </NavLink>
                 </li>
             </ul>
@@ -57,12 +57,11 @@ export const Sidebar = () => {
                     <strong className="text-white">{user.email}</strong>
                 </a>
                 <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a className="dropdown-item" href="#">New project...</a></li>
-                    <li><a className="dropdown-item" href="#">Settings</a></li>
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
+                    <li><a className="dropdown-item" href="#">Configuraciones</a></li>
+                    <li><a className="dropdown-item" href="#">Perfil</a></li>
                     <li className="dropdown-divider"></li>
                     {
-                        token && <li><a className="dropdown-item" onClick={handleLogout} data-bs-dismiss="offcanvas" aria-label="Close">Logout</a></li>
+                        token && <li><a className="dropdown-item" onClick={handleLogout} data-bs-dismiss="offcanvas" aria-label="Close">Cerrar Sesion</a></li>
                     }
                 </ul>
             </div>

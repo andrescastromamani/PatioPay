@@ -53,7 +53,7 @@ const Search = ({ panTo, marker, setMarker }) => {
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     disabled={!ready}
-                    placeholder="Enter a location"
+                    placeholder="Ingresar Ubicación"
                 />
                 <ComboboxPopover >
                     <ComboboxList className="merchantSearch">

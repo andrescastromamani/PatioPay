@@ -29,11 +29,11 @@ export const Login = () => {
                             <div className="d-flex justify-content-center mb-3">
                                 <img src="https://patiodelivery.com/wp-content/uploads/2021/02/logo_patio_1.png" className="text-center" width="50%" alt="log" />
                             </div>
-                            <p className="text-center m-0">Sign in to your account</p>
+                            <p className="text-center m-0">Iniciar sesion con tu cuenta</p>
                             <form id="form-login" className="login-form" onSubmit={handleSubmit}>
                                 <div className="form-group mt-4">
                                     <input
-                                        placeholder="Enter email"
+                                        placeholder="Ingresa tu correo"
                                         type="email"
                                         name="email"
                                         className="auth-input w-100 rounded-top"
@@ -47,15 +47,16 @@ export const Login = () => {
                                         name="password"
                                         className="auth-input w-100 rounded-top"
                                         id="password"
-                                        placeholder="Password"
+                                        placeholder="Contraseña"
                                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                                     />
                                 </div>
                                 <div className="form-group mt-4">
-                                    <button type="submit" className="btn w-100 btn-one text-white mb-3">Login</button>
+                                    <button type="submit" className="btn w-100 btn-one text-white mb-3">
+                                        Iniciar sesion
+                                    </button>
                                 </div>
                             </form>
-                            <a href="/register" className="text-dark text-decoration-none">Create Account?</a>
                         </div>
                     </div>
                 </div>

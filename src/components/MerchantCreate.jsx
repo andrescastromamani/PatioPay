@@ -20,7 +20,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="storeModalLabel">Add New Store</h5>
+              <h5 className="modal-title" id="storeModalLabel">Crear</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
@@ -129,7 +129,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
                   <form onSubmit={handleSubmit}>
                     <div className="">
-                      <label htmlFor="name" className="form-label">Store Name:</label>
+                      <label htmlFor="name" className="form-label">Nombre:</label>
                       <input
                         className="auth-input w-100 rounded-top"
                         placeholder="Nombre"
@@ -143,7 +143,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="email" className="form-label">Email:</label>
+                      <label htmlFor="email" className="form-label">Correo Electronico:</label>
                       <input
                         type="email"
                         className="auth-input w-100 rounded-top"
@@ -186,7 +186,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.city && touched.city && <div className="text-danger">{errors.city}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="location" className="form-label">Address:</label>
+                      <label htmlFor="location" className="form-label">Direccion:</label>
                       <button type='button' className='pin-location ms-3' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
                         () => {
                           setMapCreateEdit('create');
@@ -219,7 +219,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       onChange={handleChange}
                     />
                     <div className="mt-2">
-                      <label htmlFor="address" className="form-label">Display Address:</label>
+                      <label htmlFor="address" className="form-label">Mostrar Direccion:</label>
                       <input
                         type="text"
                         className="auth-input w-100 rounded-top"
@@ -235,7 +235,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="pincode" className="form-label">Pin Code:</label>
+                      <label htmlFor="pincode" className="form-label">Codigo Pin:</label>
                       <input
                         type="number"
                         className="auth-input w-100 rounded-top"
@@ -249,7 +249,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.pincode && touched.pincode && <div className="text-danger">{errors.pincode}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="priority" className="form-label">Priority:</label>
+                      <label htmlFor="priority" className="form-label">Prioridad:</label>
                       <input
                         type="number"
                         className="auth-input w-100 rounded-top"
@@ -263,7 +263,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.priority && touched.priority && <div className="text-danger">{errors.priority}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="phone" className="form-label">Phone:</label>
+                      <label htmlFor="phone" className="form-label">Telefono:</label>
                       <PhoneInput
                         className="auth-input w-100 rounded-top"
                         id='phone'
@@ -280,7 +280,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.phone && touched.phone && <div className="text-danger">{errors.phone}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="image" className="form-label">Image:</label>
+                      <label htmlFor="image" className="form-label">Imagen:</label>
                       <input
                         className="auth-input w-100 rounded-top"
                         type="file"
@@ -305,7 +305,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       </div>
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="email" className="form-label">Merchant Category:</label>
+                      <label htmlFor="email" className="form-label">Categoria:</label>
                       <select
                         className="auth-input w-100 rounded-top"
                         aria-label="Default select example"
@@ -315,10 +315,10 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                         onChange={handleChange}
                         onBlur={handleBlur}
                       >
-                        <option value="">Select a Category</option>
-                        <option value="category1">Category One</option>
-                        <option value="category2">Category two</option>
-                        <option value="category3">Category three</option>
+                        <option value="">Seleccionar categoria</option>
+                        <option value="category1">Categoria 1</option>
+                        <option value="category2">Categoria 2</option>
+                        <option value="category3">Categoria 3</option>
                       </select>
                       {errors.category && touched.category && <div className="text-danger">{errors.category}</div>}
                     </div>
@@ -374,8 +374,8 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                 onClick={() => {
                   document.getElementById('btnsubmit').click();
                 }}
-              >Submit</button>
-              <button type="button" className="btn btn-two" data-bs-dismiss="modal">Close</button>
+              >Guardar</button>
+              <button type="button" className="btn btn-two" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>

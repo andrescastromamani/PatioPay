@@ -102,7 +102,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="storeModalLabel">Edit Merchant</h5>
+                            <h5 className="modal-title" id="storeModalLabel">Editar</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -112,7 +112,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                 }
                             }>
                                 <div className="">
-                                    <label htmlFor="name" className="form-label">Store Name:</label>
+                                    <label htmlFor="name" className="form-label">Nombre:</label>
                                     <input
                                         className="auth-input w-100 rounded-top"
                                         placeholder="Nombre"
@@ -131,7 +131,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.name && <div className="text-danger">{errors.name}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="email" className="form-label">Email:</label>
+                                    <label htmlFor="email" className="form-label">Correo Electronico:</label>
                                     <input
                                         type="email"
                                         className="auth-input w-100 rounded-top"
@@ -149,7 +149,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.email && <div className="text-danger">{errors.email}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="city" className="form-label">City:</label>
+                                    <label htmlFor="city" className="form-label">Ciudad:</label>
                                     <select
                                         className="auth-input w-100 rounded-top"
                                         aria-label="Default select example"
@@ -164,7 +164,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             validate(merchant);
                                         }}
                                     >
-                                        <option value="">Select a City</option>
+                                        <option value="">Seleccionar Ciudad</option>
                                         <option value="arequipa">Arequipa</option>
                                         <option value="chandigarh">Chandigarh</option>
                                         <option value="cochabamba">Cochabamba</option>
@@ -182,7 +182,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.city && <div className="text-danger">{errors.city}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="location" className="form-label">Address:</label>
+                                    <label htmlFor="location" className="form-label">Direccion:</label>
                                     <button type='button' className='pin-location ms-3' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
                                         () => {
                                             setMapCreateEdit('edit');
@@ -216,7 +216,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     }}
                                 />
                                 <div className="mt-2">
-                                    <label htmlFor="address" className="form-label">Display Address:</label>
+                                    <label htmlFor="address" className="form-label">Mostrar Direccion:</label>
                                     <input
                                         type="text"
                                         autoComplete="off"
@@ -238,7 +238,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.address && <div className="text-danger">{errors.address}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="pincode" className="form-label">Pin Code:</label>
+                                    <label htmlFor="pincode" className="form-label">Codigo Pin:</label>
                                     <input
                                         type="number"
                                         className="auth-input w-100 rounded-top"
@@ -257,7 +257,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="priority" className="form-label">Priority:</label>
+                                    <label htmlFor="priority" className="form-label">Prioridad:</label>
                                     <input
                                         type="number"
                                         className="auth-input w-100 rounded-top"
@@ -276,7 +276,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     {errors.priority && <div className="text-danger">{errors.priority}</div>}
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="phone" className="form-label">Phone:</label>
+                                    <label htmlFor="phone" className="form-label">Telefono:</label>
                                     <PhoneInput
                                         className="auth-input w-100 rounded-top"
                                         id='phone'
@@ -292,7 +292,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     />
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="image" className="form-label">Image:</label>
+                                    <label htmlFor="image" className="form-label">Imagen:</label>
                                     <input
                                         className="auth-input w-100 rounded-top"
                                         type="file"
@@ -312,7 +312,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     </div>
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="email" className="form-label">Merchant Category:</label>
+                                    <label htmlFor="email" className="form-label">Categoria:</label>
                                     <select
                                         className="auth-input w-100 rounded-top"
                                         aria-label="Default select example"
@@ -327,11 +327,11 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             validate(merchant);
                                         }}
                                     >
-                                        <option value="">Select a Category</option>
-                                        <option value="category1">Category One</option>
-                                        <option value="category2">Category two</option>
-                                        <option value="category3">Category three</option>
-                                        <option value="category4">Category four</option>
+                                        <option value="">Seleccionar Categoria</option>
+                                        <option value="category1">Categoria 1</option>
+                                        <option value="category2">Categoria 2</option>
+                                        <option value="category3">Categoria 3</option>
+                                        <option value="category4">Categoria 4</option>
                                     </select>
                                 </div>
                                 <button type='submit' hidden className='btn btn-info' id='btnUpdate'>Save</button>
@@ -340,8 +340,8 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                         <div className="modal-footer">
                             <button type="button" className="btn btn-one" onClick={() => {
                                 document.getElementById('btnUpdate').click();
-                            }}>Update</button>
-                            <button type="button" className="btn btn-two" data-bs-dismiss="modal">Close</button>
+                            }}>Actualizar</button>
+                            <button type="button" className="btn btn-two" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>

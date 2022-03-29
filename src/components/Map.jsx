@@ -42,13 +42,13 @@ const Map = ({ marker, setMarker, mapCreateEdit }) => {
                 <div className="modal-dialog modal-xl modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Edit Address</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Cambiar Direccion</h5>
                             <button type="button" className="btn-close" data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'} aria-label="Close"></button>
                         </div>
                         <div className='modal-body'>
                             <div className="row">
                                 <div className="col-12 col-md-2">
-                                    <p>Search Location</p>
+                                    <p>Buscar Ubicacion</p>
                                 </div>
                                 <div className="col-12 col-md-10">
                                     <Search panTo={panTo} marker={marker} setMarker={setMarker} />
@@ -74,12 +74,12 @@ const Map = ({ marker, setMarker, mapCreateEdit }) => {
                                 data-bs-toggle="modal"
                                 href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'}
                                 onClick={handleClickDone}
-                            >Done</button>
+                            >Guardar</button>
                             <button
                                 type="button"
                                 className="btn btn-two"
                                 data-bs-toggle="modal" href={mapCreateEdit === 'create' ? '#merchantCreate' : '#merchantEdit'}
-                            >Cancel</button>
+                            >Cancelar</button>
                         </div>
                     </div>
                 </div>
