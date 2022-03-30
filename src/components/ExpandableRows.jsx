@@ -9,8 +9,8 @@ export const ExpandableRows = ({ data }) => {
                         <img
                             className="img-thumbnail"
                             style={{
-                                width: "180px",
-                                height: "180px",
+                                width: "150px",
+                                height: "150px",
                                 objectFit: "cover",
                             }}
                             alt={data.name}

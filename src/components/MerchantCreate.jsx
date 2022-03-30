@@ -23,7 +23,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
               <h5 className="modal-title" id="storeModalLabel">Crear</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body pt-0 ps-5 pe-5">
               <Formik
                 initialValues={{
                   name: '',
@@ -128,45 +128,46 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
                   <form onSubmit={handleSubmit}>
-                    <div className="">
-                      <label htmlFor="name" className="form-label">Nombre:</label>
+                    <div className="div-input mt-4">
                       <input
-                        className="auth-input w-100 rounded-top"
-                        placeholder="Nombre"
                         name="name"
                         type="text"
                         value={values.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         autoComplete="off"
+                        required
                       />
-                      {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
+                      <span></span>
+                      <label htmlFor="name">Nombre</label>
                     </div>
-                    <div className="mt-2">
-                      <label htmlFor="email" className="form-label">Correo Electronico:</label>
+                    {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
+                    <div className="div-input mt-4">
                       <input
                         type="email"
-                        className="auth-input w-100 rounded-top"
                         id="email"
                         name="email"
-                        placeholder="Enter Email"
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         autoComplete="off"
+                        required
                       />
-                      {errors.email && touched.email && <div className="text-danger">{errors.email}</div>}
+                      <span></span>
+                      <label htmlFor="email" >Correo Electronico</label>
                     </div>
+                    {errors.email && touched.email && <div className="text-danger">{errors.email}</div>}
                     <div className="mt-2">
-                      <label htmlFor="city" className="form-label">City:</label>
+                      <label htmlFor="city" className="text-muted">City:</label>
                       <select
-                        className="auth-input w-100 rounded-top"
                         aria-label="Default select example"
+                        className="custom-input"
                         id='city'
                         name='city'
                         value={values.city}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        required
                       >
                         <option value="">Select a City</option>
                         <option value="arequipa">Arequipa</option>
@@ -186,7 +187,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       {errors.city && touched.city && <div className="text-danger">{errors.city}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="location" className="form-label">Direccion:</label>
+                      <label htmlFor="location" className="text-muted">Direccion:</label>
                       <button type='button' className='pin-location ms-3' data-bs-target="#googlemaps" data-bs-toggle="modal" data-bs-dismiss="modal" onClick={
                         () => {
                           setMapCreateEdit('create');
@@ -218,11 +219,9 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       }}
                       onChange={handleChange}
                     />
-                    <div className="mt-2">
-                      <label htmlFor="address" className="form-label">Mostrar Direccion:</label>
+                    <div className="div-input mt-4">
                       <input
                         type="text"
-                        className="auth-input w-100 rounded-top"
                         id="address"
                         name="address"
                         value={values.address}
@@ -231,44 +230,47 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                           setFieldValue('address', addressFormated);
                         }}
                         onBlur={handleBlur}
+                        required
                       />
-                      {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
+                      <span></span>
+                      <label htmlFor="address">Mostrar Direccion:</label>
                     </div>
-                    <div className="mt-2">
-                      <label htmlFor="pincode" className="form-label">Codigo Pin:</label>
+                    {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
+                    <div className="div-input mt-4">
                       <input
                         type="number"
-                        className="auth-input w-100 rounded-top"
                         id="pincode"
-                        placeholder="Pin code"
                         name='pincode'
                         value={values.pincode}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        required
                       />
-                      {errors.pincode && touched.pincode && <div className="text-danger">{errors.pincode}</div>}
+                      <span></span>
+                      <label htmlFor="pincode" >Codigo Pin:</label>
                     </div>
-                    <div className="mt-2">
-                      <label htmlFor="priority" className="form-label">Prioridad:</label>
+                    {errors.pincode && touched.pincode && <div className="text-danger">{errors.pincode}</div>}
+                    <div className="div-input mt-4">
                       <input
                         type="number"
                         className="auth-input w-100 rounded-top"
                         id="priority"
-                        placeholder="Enter Priority"
                         name='priority'
                         value={values.priority}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        required
                       />
-                      {errors.priority && touched.priority && <div className="text-danger">{errors.priority}</div>}
+                      <span></span>
+                      <label htmlFor="priority">Prioridad:</label>
                     </div>
+                    {errors.priority && touched.priority && <div className="text-danger">{errors.priority}</div>}
                     <div className="mt-2">
-                      <label htmlFor="phone" className="form-label">Telefono:</label>
+                      <label htmlFor="phone" className="text-muted">Telefono:</label>
                       <PhoneInput
-                        className="auth-input w-100 rounded-top"
+                        className="custom-input-tel"
                         id='phone'
                         name='phone'
-                        placeholder="+591 9999999"
                         value={values.phone}
                         onChange={
                           (phone) => {
@@ -276,13 +278,14 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                           }
                         }
                         onBlur={handleBlur}
+                        autoComplete="off"
                       />
                       {errors.phone && touched.phone && <div className="text-danger">{errors.phone}</div>}
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="image" className="form-label">Imagen:</label>
+                      <label htmlFor="image" className="text-muted">Imagen:</label>
                       <input
-                        className="auth-input w-100 rounded-top"
+                        className="custom-input input-image"
                         type="file"
                         name="image"
                         id="image"
@@ -305,10 +308,9 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       </div>
                     </div>
                     <div className="mt-2">
-                      <label htmlFor="email" className="form-label">Categoria:</label>
+                      <label htmlFor="email" className="text-muted">Categoria:</label>
                       <select
-                        className="auth-input w-100 rounded-top"
-                        aria-label="Default select example"
+                        className="custom-input"
                         name='category'
                         id='category'
                         value={values.category}

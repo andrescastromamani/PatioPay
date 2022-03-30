@@ -81,26 +81,80 @@
     background-color: #e0e0e0;
 }
 /*Authtentication*/
-.auth-input {
+.div-input {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+}
+.div-input input {
     border: none;
-    border-bottom: 1px solid #00aea7;
     outline: none;
-    padding: 0.5rem;
-    background-color: #eeeeee;
+    background: none;
+    width: 100%;
+    height: 30px;
+    color: #000;
 }
-.auth-input:focus {
-    border-bottom: 1px solid #ff7d08;
+.custom-input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    border-bottom: 2px solid #adadad;
 }
+.custom-input-tel input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    border-bottom: 2px solid #adadad;
+}
+.custom-input-tel input:focus {
+    border-bottom: 2px solid #00aea7;
+}
+.custom-input:focus {
+    border-bottom: 2px solid #00aea7;
+}
+.div-input label {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    color: #adadad;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.5s;
+}
+.div-input span::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: #00aea7;
+    transition: 0.5s;
+}
+.div-input input:focus ~ label,
+.div-input input:valid ~ label {
+    top: -5px;
+    color: #adadad;
+}
+
+.div-input input:focus ~ span::before {
+    width: 100%;
+}
+
+.input-image[type="file"]::-webkit-file-upload-button {
+    background-color: #00aea7;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+.input-image[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #009994;
+}
+
 .content-center {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-.border-radius {
-    border-radius: 12px;
-}
-.border-radius-start {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
 }
