@@ -6,6 +6,8 @@
     background-color: gray;
     padding: 5px 10px;
     border-radius: 5px;
+    border: none;
+    outline: none;
 }
 .modal-header {
     background-color: #00aea7;

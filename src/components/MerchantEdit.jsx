@@ -105,17 +105,14 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                             <h5 className="modal-title" id="storeModalLabel">Editar</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body ps-5 pe-5">
                             <form onSubmit={
                                 (e) => {
                                     handleSubmit(e);
                                 }
                             }>
-                                <div className="">
-                                    <label htmlFor="name" className="form-label">Nombre:</label>
+                                <div className="mt-2 div-input">
                                     <input
-                                        className="auth-input w-100 rounded-top"
-                                        placeholder="Nombre"
                                         name="name"
                                         type="text"
                                         value={merchant.name}
@@ -127,14 +124,15 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             validate(merchant);
 
                                         }}
+                                        required
                                     />
-                                    {errors.name && <div className="text-danger">{errors.name}</div>}
+                                    <span></span>
+                                    <label htmlFor="name">Nombre:</label>
                                 </div>
-                                <div className="mt-2">
-                                    <label htmlFor="email" className="form-label">Correo Electronico:</label>
+                                {errors.name && <div className="text-danger">{errors.name}</div>}
+                                <div className="mt-4 div-input">
                                     <input
                                         type="email"
-                                        className="auth-input w-100 rounded-top"
                                         id="email"
                                         name="email"
                                         value={merchant.email}
@@ -146,13 +144,14 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             validate(merchant);
                                         }}
                                     />
-                                    {errors.email && <div className="text-danger">{errors.email}</div>}
+                                    <span></span>
+                                    <label htmlFor="email" className="form-label">Correo Electronico:</label>
                                 </div>
+                                {errors.email && <div className="text-danger">{errors.email}</div>}
                                 <div className="mt-2">
                                     <label htmlFor="city" className="form-label">Ciudad:</label>
                                     <select
-                                        className="auth-input w-100 rounded-top"
-                                        aria-label="Default select example"
+                                        className="custom-input"
                                         id='city'
                                         name='city'
                                         value={merchant.city}
@@ -215,12 +214,10 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         setMerchant({ ...merchant, lng: marker.lng });
                                     }}
                                 />
-                                <div className="mt-2">
-                                    <label htmlFor="address" className="form-label">Mostrar Direccion:</label>
+                                <div className="mt-4 div-input">
                                     <input
                                         type="text"
                                         autoComplete="off"
-                                        className="auth-input w-100 rounded-top"
                                         id="addressEdit"
                                         name="address"
                                         value={merchant.address}
@@ -234,16 +231,16 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         onBlur={() => {
                                             validate(merchant);
                                         }}
+                                        required
                                     />
-                                    {errors.address && <div className="text-danger">{errors.address}</div>}
+                                    <span></span>
+                                    <label htmlFor="address" >Mostrar Direccion:</label>
                                 </div>
-                                <div className="mt-2">
-                                    <label htmlFor="pincode" className="form-label">Codigo Pin:</label>
+                                {errors.address && <div className="text-danger">{errors.address}</div>}
+                                <div className="mt-4 div-input">
                                     <input
                                         type="number"
-                                        className="auth-input w-100 rounded-top"
                                         id="pincode"
-                                        placeholder="Pin code"
                                         name='pincode'
                                         value={merchant.pincode}
                                         onChange={(e) => {
@@ -253,16 +250,16 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         onBlur={() => {
                                             validate(merchant);
                                         }}
+                                        required
                                     />
-                                    {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
+                                    <span></span>
+                                    <label htmlFor="pincode" >Codigo Pin:</label>
                                 </div>
-                                <div className="mt-2">
-                                    <label htmlFor="priority" className="form-label">Prioridad:</label>
+                                {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
+                                <div className="mt-4 div-input">
                                     <input
                                         type="number"
-                                        className="auth-input w-100 rounded-top"
                                         id="priority"
-                                        placeholder="Enter Priority"
                                         name='priority'
                                         value={merchant.priority}
                                         onChange={(e) => {
@@ -272,13 +269,16 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         onBlur={() => {
                                             validate(merchant);
                                         }}
+                                        required
                                     />
-                                    {errors.priority && <div className="text-danger">{errors.priority}</div>}
+                                    <span></span>
+                                    <label htmlFor="priority">Prioridad:</label>
                                 </div>
+                                {errors.priority && <div className="text-danger">{errors.priority}</div>}
                                 <div className="mt-2">
                                     <label htmlFor="phone" className="form-label">Telefono:</label>
                                     <PhoneInput
-                                        className="auth-input w-100 rounded-top"
+                                        className="custom-input-tel"
                                         id='phone'
                                         name='phone'
                                         value={merchant.phone}
@@ -290,11 +290,12 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                             validate(merchant);
                                         }}
                                     />
+                                    {errors.phone && <div className="text-danger">{errors.phone}</div>}
                                 </div>
                                 <div className="mt-2">
                                     <label htmlFor="image" className="form-label">Imagen:</label>
                                     <input
-                                        className="auth-input w-100 rounded-top"
+                                        className="custom-input input-image"
                                         type="file"
                                         name="image"
                                         id="image"
@@ -312,10 +313,9 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                     </div>
                                 </div>
                                 <div className="mt-2">
-                                    <label htmlFor="email" className="form-label">Categoria:</label>
+                                    <label htmlFor="category" className="form-label">Categoria:</label>
                                     <select
-                                        className="auth-input w-100 rounded-top"
-                                        aria-label="Default select example"
+                                        className="custom-input"
                                         name='category'
                                         id='category'
                                         value={merchant.category}
@@ -333,6 +333,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         <option value="category3">Categoria 3</option>
                                         <option value="category4">Categoria 4</option>
                                     </select>
+                                    {errors.category && <div className="text-danger">{errors.category}</div>}
                                 </div>
                                 <button type='submit' hidden className='btn btn-info' id='btnUpdate'>Save</button>
                             </form>
