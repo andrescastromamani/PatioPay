@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         const token = await fakeAuth();
         localStorage.setItem('token', token);
         setToken(token);
-        navigate('/');
+        navigate('/merchants');
     }
     const handleLogout = () => {
         localStorage.removeItem('token');
