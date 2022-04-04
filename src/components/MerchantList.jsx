@@ -1,19 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import Geocode from 'react-geocode';
+import { useDispatch, useSelector } from "react-redux";
 
 import { MerchantEdit } from "./MerchantEdit";
 import { MerchantCreate } from "./MerchantCreate";
-import { MerchantContext } from "../contexts/MerchantContext";
 import Map from './Map';
 import { ExpandableRows } from "./ExpandableRows";
+import { getMerchantsAction } from "../redux/actions/merhantActions";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
 const MerchantList = () => {
-  const { merchants } = useContext(MerchantContext);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMerchantsAction());
+  }, [dispatch])
+  const merchants = useSelector(state => state.merchants.merchants);
   const [addressFormated, setAddressFormated] = useState('');
   const [merchant, setMerchant] = useState({
     name: '',

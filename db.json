@@ -1,0 +1,46 @@
+{
+  "merchants": [
+    {
+      "address": "Tte. Mamerto Cuéllar 320, Santa Cruz de la Sierra, Bolivia",
+      "category": "category2",
+      "city": "cochabamba",
+      "email": "mastic@gmail.com",
+      "id": 1,
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647911733-1647026439-1200px-DOM-model.jpg",
+      "lat": -17.794478817907734,
+      "lng": -63.170247363598634,
+      "name": "Mastic",
+      "phone": "+5511962105174",
+      "pincode": 126114,
+      "priority": 2
+    },
+    {
+      "address": "Av. Humboldt, Cochabamba, Bolivia",
+      "category": "category3",
+      "city": "cochabamba",
+      "email": "panchita@gmail.com",
+      "id": 2,
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1648299491-panchita.png",
+      "lat": -17.381542573770947,
+      "lng": -66.16154584970701,
+      "name": "Panchita",
+      "phone": "+59167425949",
+      "pincode": 123456,
+      "priority": 1
+    },
+    {
+      "name": "Merchant Redux",
+      "email": "merhanc@gmiail.com",
+      "city": "cochabamba",
+      "lat": -17.808289715431744,
+      "lng": -63.15642862275391,
+      "address": "5RRV+HFV, Santa Cruz de la Sierra, Bolivia",
+      "pincode": 123456,
+      "priority": 1,
+      "phone": "+59167425949",
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg",
+      "category": "category2",
+      "id": 3
+    }
+  ]
+}

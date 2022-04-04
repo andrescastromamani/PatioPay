@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import Swal from 'sweetalert2';
 import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
-import { MerchantContext } from '../contexts/MerchantContext';
-import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile'
+import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile';
+import { addMerchantAction } from '../redux/actions/merhantActions';
 
 export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) => {
-  const { merchants, addMerchant } = useContext(MerchantContext);
+  const dispatch = useDispatch();
+  const addMerchat = (merchant) => dispatch(addMerchantAction(merchant));
   const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
   const { lat, lng } = marker;
   const [check, setCheck] = useState(false)
@@ -115,15 +116,8 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       return;
                     }
                   }
-                  const data = { id: merchants.length + 1, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
-                  await addMerchant(data);
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your work has been saved',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+                  const data = { name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
+                  await addMerchat(data);
                 }}
               >
                 {({ values, errors, handleSubmit, handleChange, handleBlur, touched, setFieldValue }) => (
