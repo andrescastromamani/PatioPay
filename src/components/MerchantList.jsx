@@ -7,7 +7,7 @@ import { MerchantEdit } from "./MerchantEdit";
 import { MerchantCreate } from "./MerchantCreate";
 import Map from './Map';
 import { ExpandableRows } from "./ExpandableRows";
-import { getMerchantsAction } from "../redux/actions/merhantActions";
+import { getMerchantsAction, getMerchantAction } from "../redux/actions/merhantActions";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
@@ -132,11 +132,15 @@ const MerchantList = () => {
             data-bs-toggle="modal"
             data-bs-target="#merchantEdit"
             className="btn btn-sm btn-two"
-            onClick={() => setMerchant(row)}
+            onClick={
+              () => {
+                dispatch(getMerchantAction(row));
+              }
+            }
           >
             Editar
           </button>
-        </div>
+        </div >
       ),
       ignoreRowClick: true,
       allowOverflow: true,

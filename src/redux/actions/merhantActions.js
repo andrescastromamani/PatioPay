@@ -8,8 +8,9 @@ import {
     GET_MERCHANTS_SUCCESS,
     GET_MERCHANTS_FAILURE,
     GET_MERCHANT,
-    GET_MERCHANT_SUCCESS,
-    GET_MERCHANT_FAILURE,
+    EDIT_MERCHANT,
+    EDIT_MERCHANT_SUCCESS,
+    EDIT_MERCHANT_FAILURE,
 } from '../types';
 import axiosClient from '../../config/axios';
 
@@ -29,7 +30,7 @@ export const addMerchantAction = (merchant) => {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Your work has been saved',
+                title: 'Agregado Satisfactoriamente',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -78,18 +79,42 @@ export const getMerchantAction = (merchant) => {
             type: GET_MERCHANT,
             payload: merchant
         });
+    }
+}
+
+export const editMerchantAction = (merchant) => {
+    return async (dispatch) => {
+        dispatch({
+            type: EDIT_MERCHANT,
+        });
         try {
-            const response = await axiosClient.get(`/merchants/${merchant}`);
+            console.log(merchant.id);
+            const response = await axiosClient.put(`/merchants/${merchant.id}`, merchant);
+            console.log(response);
             dispatch({
-                type: GET_MERCHANT_SUCCESS,
+                type: EDIT_MERCHANT_SUCCESS,
                 payload: response.data
             });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Editado Satisfactoriamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
         } catch (error) {
             console.log(error);
             dispatch({
-                type: GET_MERCHANT_FAILURE,
+                type: EDIT_MERCHANT_FAILURE,
                 payload: error
             });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Ocurrio un error al editar',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     }
 }

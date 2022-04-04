@@ -1,14 +1,19 @@
-import { useContext, useState } from 'react';
-import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { MerchantContext } from '../contexts/MerchantContext';
-import { resizeFile, dataURIToBlob, previewImageEdit } from '../helpers/helperFile'
+import { resizeFile, dataURIToBlob, previewImageEdit } from '../helpers/helperFile';
+import { editMerchantAction } from '../redux/actions/merhantActions';
 
 export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, addressFormated }) => {
-    const { updateMerchant } = useContext(MerchantContext);
+    const dispatch = useDispatch();
+    const merchantEdit = useSelector(state => state.merchants.merchantEdit);
+    useEffect(() => {
+        setMerchant(merchantEdit);
+    }, [merchantEdit, setMerchant])
+
     const [errors, setErrors] = useState({});
     const validate = (values) => {
         if (!values.name) {
@@ -44,7 +49,6 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
             setErrors({ ...errors, category: 'This field is required' });
         }
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         validate(merchant);
@@ -87,14 +91,7 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
         }
         const data = { id: merchant.id, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
         console.log(data);
-        updateMerchant(merchant.id, data);
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Updated successfully',
-            showConfirmButton: false,
-            timer: 1500
-        })
+        dispatch(editMerchantAction(data));
     };
     return (
         <>
@@ -117,12 +114,11 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
                                         type="text"
                                         value={merchant.name}
                                         onChange={(e) => {
-                                            setMerchant({ ...merchant, name: e.target.value });
+                                            setMerchant({ ...merchantEdit, name: e.target.value });
                                             setErrors({ ...errors, name: '' });
                                         }}
-                                        onBlur={() => {
+                                        onBlur={(e) => {
                                             validate(merchant);
-
                                         }}
                                         required
                                     />

@@ -1,18 +1,18 @@
 {
   "merchants": [
     {
-      "address": "Tte. Mamerto Cuéllar 320, Santa Cruz de la Sierra, Bolivia",
-      "category": "category2",
-      "city": "cochabamba",
-      "email": "mastic@gmail.com",
       "id": 1,
-      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647911733-1647026439-1200px-DOM-model.jpg",
+      "name": "Dom Editado",
+      "email": "mastic@gmail.com",
+      "city": "cochabamba",
       "lat": -17.794478817907734,
       "lng": -63.170247363598634,
-      "name": "Mastic",
-      "phone": "+5511962105174",
+      "address": "Tte. Mamerto Cuéllar 320, Santa Cruz de la Sierra, Bolivia",
       "pincode": 126114,
-      "priority": 2
+      "priority": 2,
+      "phone": "+5511962105174",
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647911733-1647026439-1200px-DOM-model.jpg",
+      "category": "category2"
     },
     {
       "address": "Av. Humboldt, Cochabamba, Bolivia",
@@ -41,6 +41,34 @@
       "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg",
       "category": "category2",
       "id": 3
+    },
+    {
+      "name": "Modas movano",
+      "email": "modas@gmail.com",
+      "city": "cochabamba",
+      "lat": -17.805838154857458,
+      "lng": -63.165955829174806,
+      "address": "Calle 2 80, Santa Cruz de la Sierra, Bolivia",
+      "pincode": 123456,
+      "priority": 3,
+      "phone": "+59164616263",
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg",
+      "category": "category2",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "Contri",
+      "email": "nuevomerchant@gamil.com",
+      "city": "cochabamba",
+      "lat": -17.80673706431346,
+      "lng": -63.15960435822754,
+      "address": "C. 1 21, Santa Cruz de la Sierra, Bolivia",
+      "pincode": 123456,
+      "priority": 3,
+      "phone": "+59174313536",
+      "image": "https://patioserviceonline.com/uploads/ventrega/popup/1649102170-20220207_140022.jpg",
+      "category": "category3"
     }
   ]
 }
