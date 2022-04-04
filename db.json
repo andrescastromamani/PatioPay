@@ -2,7 +2,7 @@
   "merchants": [
     {
       "id": 1,
-      "name": "Dom Editado",
+      "name": "Dom",
       "email": "mastic@gmail.com",
       "city": "cochabamba",
       "lat": -17.794478817907734,

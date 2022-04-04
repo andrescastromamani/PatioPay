@@ -22,10 +22,16 @@ export const Login = () => {
         <div className="content-center">
             {
                 loading ? <Loading /> :
-                    <div className="row border-radius border shadow-lg">
+                    <div className="row border-radius border shadow-lg" style={
+                        {
+                            width: '70%',
+                            height: '600px',
+                            backgroundColor: '#fff',
+                        }
+                    }>
                         <div className="col-12 col-md-8 border-radius-start  bg-green-two m-0 p-0">
                             <div className="d-flex justify-content-center">
-                                <img src="https://scontent.fvvi1-1.fna.fbcdn.net/v/t39.30808-6/276131696_2989285371383891_9039273915655545356_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=wFNtWTh1-IYAX_hNn1d&tn=zWX-mDAOBWl5WnNC&_nc_ht=scontent.fvvi1-1.fna&oh=00_AT9JdJhSDWfAhlrP2vUSIGW9hgFFBYal7_hFUlW0mcCPBQ&oe=62497708" width="70%" alt='parner' />
+                                <img src="https://scontent.fvvi1-1.fna.fbcdn.net/v/t39.30808-6/276131696_2989285371383891_9039273915655545356_n.jpg?stp=dst-jpg_p843x403&_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=9ZtJoROaSLMAX8SHfZm&tn=zWX-mDAOBWl5WnNC&_nc_ht=scontent.fvvi1-1.fna&oh=00_AT-9QU-a3fGuhg8RZDTredncxrIPV-baP5ZU3sOb74Zwhw&oe=624F65C8" width="70%" alt='parner' />
                             </div>
                         </div>
                         <div className="col-12 col-md-4">
