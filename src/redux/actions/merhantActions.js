@@ -88,7 +88,6 @@ export const editMerchantAction = (merchant) => {
             type: EDIT_MERCHANT,
         });
         try {
-            console.log(merchant.id);
             const response = await axiosClient.put(`/merchants/${merchant.id}`, merchant);
             console.log(response);
             dispatch({

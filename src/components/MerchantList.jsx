@@ -157,6 +157,7 @@ const MerchantList = () => {
               <i className="fa-solid fa-circle-plus"></i> Agregar Comerciante
             </button>
             <MerchantCreate
+              merchants={merchants}
               mapCreateEdit={mapCreateEdit}
               setMapCreateEdit={setMapCreateEdit}
               marker={marker}

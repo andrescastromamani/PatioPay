@@ -8,7 +8,7 @@ import 'react-phone-number-input/style.css';
 import { resizeFile, dataURIToBlob, previewImage } from '../helpers/helperFile';
 import { addMerchantAction } from '../redux/actions/merhantActions';
 
-export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) => {
+export const MerchantCreate = ({ merchants, setMapCreateEdit, marker, addressFormated }) => {
   const dispatch = useDispatch();
   const addMerchat = (merchant) => dispatch(addMerchantAction(merchant));
   const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
@@ -116,7 +116,7 @@ export const MerchantCreate = ({ setMapCreateEdit, marker, addressFormated }) =>
                       return;
                     }
                   }
-                  const data = { name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
+                  const data = { id: merchants.length + 1, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
                   await addMerchat(data);
                 }}
               >

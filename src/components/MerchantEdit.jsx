@@ -90,7 +90,6 @@ export const MerchantEdit = ({ merchant, setMerchant, setMapCreateEdit, marker, 
             }
         }
         const data = { id: merchant.id, name, email, city, lat, lng, address, pincode, priority, phone, image: urlImage, category };
-        console.log(data);
         dispatch(editMerchantAction(data));
     };
     return (
