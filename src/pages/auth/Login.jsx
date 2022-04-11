@@ -1,27 +1,32 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/actions/authActions';
 import { Loading } from '../../components/Loading';
-import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
-    const [loading, setLoading] = useState(false);
-    const { user, setUser, handleLogin } = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        username: '',
+        password: ''
+    });
+    const [load, setLoad] = useState(false);
     const handleSubmit = (e) => {
-        e.preventDefault()
-        if (user.email === '' || user.password === '') {
-            alert('Please fill all fields')
-        } else {
-            if (user.email === 'admin@admin.com' && user.password === 'admin123') {
-                setLoading(true)
-                handleLogin(user)
-            } else {
-                alert('Invalid credentials')
-            }
-        }
+        e.preventDefault();
+        setLoad(true);
+        dispatch(signIn(user.username, user.password))
+            .then(() => {
+                navigate('/');
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
     return (
         <div className="content-center">
             {
-                loading ? <Loading /> :
+                load ? <Loading /> :
                     <div className="row border-radius border shadow-lg" style={
                         {
                             width: '70%',
@@ -31,7 +36,7 @@ export const Login = () => {
                     }>
                         <div className="col-12 col-md-8 border-radius-start  bg-green-two m-0 p-0">
                             <div className="d-flex justify-content-center">
-                                <img src="https://scontent.fvvi1-1.fna.fbcdn.net/v/t39.30808-6/276131696_2989285371383891_9039273915655545356_n.jpg?stp=dst-jpg_p843x403&_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=9ZtJoROaSLMAX8SHfZm&tn=zWX-mDAOBWl5WnNC&_nc_ht=scontent.fvvi1-1.fna&oh=00_AT-9QU-a3fGuhg8RZDTredncxrIPV-baP5ZU3sOb74Zwhw&oe=624F65C8" width="70%" alt='parner' />
+
                             </div>
                         </div>
                         <div className="col-12 col-md-4">
@@ -44,15 +49,22 @@ export const Login = () => {
                                     <form id="form-login" className="login-form" onSubmit={handleSubmit}>
                                         <div className="mt-4 div-input">
                                             <input
-                                                type="email"
-                                                name="email"
-                                                id="email"
+                                                type="text"
+                                                name="username"
+                                                id="username"
                                                 autoComplete='off'
                                                 required
-                                                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                                onChange={
+                                                    (e) => {
+                                                        setUser({
+                                                            ...user,
+                                                            username: e.target.value
+                                                        })
+                                                    }
+                                                }
                                             />
                                             <span></span>
-                                            <label htmlFor="email">Correo Electronico</label>
+                                            <label htmlFor="email">Nombre de Usuario</label>
                                         </div>
                                         <div className="mt-4 div-input">
                                             <input
@@ -60,7 +72,12 @@ export const Login = () => {
                                                 name="password"
                                                 id="password"
                                                 required
-                                                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                                                onChange={
+                                                    (e) => setUser({
+                                                        ...user,
+                                                        password: e.target.value
+                                                    })
+                                                }
                                             />
                                             <span></span>
                                             <label htmlFor="password">Contraseña</label>
