@@ -11,7 +11,6 @@ export const Sidebar = () => {
         navigate('/login');
     }
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     return (
         <div className="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" tabIndex="-1" id="sidebar" aria-labelledby="offcanvasWithBackdropLabel" style={{ width: 280 }}>
             <a href="/" className="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">
@@ -23,7 +22,12 @@ export const Sidebar = () => {
             <ul className="nav nav-pills flex-column mb-auto" >
                 <li>
                     <NavLink to="/" className="text-white nav-link">
-                        <i className="fa-solid fa-house me-2"></i>Inicio
+                        <i className="fa-solid fa-house me-2"></i>Dashboard
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/cobros" className="text-white nav-link">
+                        <i className="fa-solid fa-shopping-cart me-2"></i>Pagos
                     </NavLink>
                 </li>
             </ul>

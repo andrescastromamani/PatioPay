@@ -1,10 +1,12 @@
+import { Sidebar } from './components/Sidebar';
 import { Index } from './routes/Index';
 
 function App() {
   return (
-    <div className='container-fluid'>
+    <>
+      <Sidebar />
       <Index />
-    </div>
+    </>
   );
 }
 
