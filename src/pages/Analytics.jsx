@@ -1,11 +1,13 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
 
-export const Charges = () => {
+export const Analytics = () => {
     return (
         <>
             <Navbar />
-            <h1 className="text-center">Cobros</h1>
+            <div className="container">
+                Analiticas
+            </div>
         </>
     )
 }

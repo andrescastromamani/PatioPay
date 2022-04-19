@@ -4,7 +4,9 @@ import { Login } from '../pages/auth/Login';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { PublicRoutes } from './PublicRoutes';
 import { NotFound } from '../pages/NotFound';
-import { Charges } from '../pages/Charges';
+import { Charges } from '../pages/charges/Charges';
+import { ChargesCreate } from '../pages/charges/ChargesCreate';
+import { Analytics } from '../pages/Analytics';
 
 export const Index = () => {
   return (
@@ -20,6 +22,15 @@ export const Index = () => {
       <Route path='/cobros' element={
         <ProtectedRoutes>
           <Charges />
+        </ProtectedRoutes>} />
+      <Route path='/cobros/crear' element={
+        <ProtectedRoutes>
+          <ChargesCreate />
+        </ProtectedRoutes>
+      } />
+      <Route path='/analiticas' element={
+        <ProtectedRoutes>
+          <Analytics />
         </ProtectedRoutes>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
