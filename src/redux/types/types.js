@@ -2,6 +2,8 @@ export const types = {
     login: '[Auth] Login',
     logout: '[Auth] Logout',
     getUser: '[Auth] Get User',
-    getUserSuccess: '[Auth] Get User Success',
-    getUserFailure: '[Auth] Get User Failure',
+
+    getCharges: '[Charges] Get Charges',
+    getChargesSuccess: '[Charges] Get Charges Success',
+    getChargesFailure: '[Charges] Get Charges Failure',
 }

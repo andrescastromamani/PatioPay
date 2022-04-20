@@ -25,6 +25,7 @@
     "redux-thunk": "^2.4.1",
     "sweetalert2": "^11.4.4",
     "use-places-autocomplete": "^1.11.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
