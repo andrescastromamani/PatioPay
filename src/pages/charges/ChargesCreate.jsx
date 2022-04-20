@@ -1,18 +1,41 @@
 import axios from 'axios';
+import Geocode from "react-geocode";
 import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useEffect } from 'react';
+
 import { Navbar } from '../../components/Navbar';
+import { Map } from '../../components/Map';
+
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setLanguage("en");
+Geocode.setRegion("es");
 
 export const ChargesCreate = () => {
     const [countries, setCountries] = useState();
     const [departaments, setDepartaments] = useState();
-
+    const [addressFormated, setAddressFormated] = useState('');
+    console.log(addressFormated);
+    const [marker, setMarker] = useState(
+        {
+            lat: -17.8145819,
+            lng: -63.1560853
+        }
+    );
+    const { lat, lng } = marker;
+    Geocode.fromLatLng(lat, lng)
+        .then(
+            response => {
+                const address = response.results[0].formatted_address;
+                setAddressFormated(address);
+            }
+        )
     const getDepartaments = async (id) => {
         console.log(id);
         const formData = new FormData();
-        formData.append('countryid', id);
-        await axios.post('http://localhost:8080/PatioService/pais.php', formData)
+        formData.append('countryId', id);
+        await axios.post('https://labs.patio.com.bo/pais/', formData)
             .then(response => {
+                console.log(response.data);
                 setDepartaments(response.data);
             })
             .catch(error => {
@@ -20,7 +43,7 @@ export const ChargesCreate = () => {
             })
     }
     const getCountries = async () => {
-        await axios.get('http://localhost:8080/PatioService/pais.php')
+        await axios.get('https://labs.patio.com.bo/pais/')
             .then(response => {
                 setCountries(response.data)
             }).catch(error => {
@@ -53,7 +76,7 @@ export const ChargesCreate = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(details);
+        console.log('submit');
     }
     return (
         <>
@@ -76,7 +99,9 @@ export const ChargesCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-2">
-                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                    <button className='btn btn-dark'>
+                                        <i className="fa-solid fa-magnifying-glass"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div className="row">
@@ -143,7 +168,10 @@ export const ChargesCreate = () => {
                                 </div>
                                 <div className="col-12">
                                     <div className="bg-secondary mt-3 p-4 rounded">
-                                        map content
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#map">
+                                            Map
+                                        </button>
+                                        <Map marker={marker} setMarker={setMarker} />
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">

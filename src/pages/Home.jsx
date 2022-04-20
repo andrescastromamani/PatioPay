@@ -5,6 +5,7 @@ import { Table } from '../components/Table';
 import { data } from '../data/data';
 export const Home = () => {
     console.log(data.mensajes);
+
     return (
         <>
             <Navbar />
