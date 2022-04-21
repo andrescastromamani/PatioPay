@@ -32,15 +32,15 @@ export const Map = ({ marker, setMarker }) => {
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Map</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                         <div className="row">
-                            <div className="col-12 col-md-2">
+                            <div className="col-12 col-md-3">
                                 <p>Buscar Ubicacion</p>
                             </div>
-                            <div className="col-12 col-md-10">
+                            <div className="col-12 col-md-9">
                                 <Search panTo={panTo} marker={marker} setMarker={setMarker} />
                             </div>
                         </div>

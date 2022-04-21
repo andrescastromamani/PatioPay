@@ -34,7 +34,7 @@ export const Login = () => {
                             backgroundColor: '#fff',
                         }
                     }>
-                        <div className="col-12 col-md-8 border-radius-start  bg-green-two m-0 p-0">
+                        <div className="col-12 col-md-8 border-radius-start bg-purple m-0 p-0">
                             <div className="d-flex justify-content-center">
 
                             </div>
@@ -47,7 +47,7 @@ export const Login = () => {
                                     </div>
                                     <p className="text-center">Iniciar sesion con tu cuenta</p>
                                     <form id="form-login" className="login-form" onSubmit={handleSubmit}>
-                                        <div className="mt-4 div-input">
+                                        <div className="mt-5 div-input">
                                             <input
                                                 type="text"
                                                 name="username"

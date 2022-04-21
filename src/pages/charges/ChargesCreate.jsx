@@ -13,14 +13,31 @@ Geocode.setRegion("es");
 export const ChargesCreate = () => {
     const [countries, setCountries] = useState();
     const [departaments, setDepartaments] = useState();
+    const [details, setDetails] = useState([{
+        id: uuidv4(),
+        detail: '',
+        quantity: '',
+        unitprice: '',
+        amount: '',
+    },]);
+    const [charge, setCharge] = useState({
+        name: '',
+        lastname: '',
+        country: '',
+        departament: '',
+        city: '',
+        address: '',
+        lat: '',
+        lng: '',
+        phone: '',
+        email: '',
+        document: '',
+        ci: '',
+        businessname: '',
+        nit: '',
+    })
     const [addressFormated, setAddressFormated] = useState('');
-    console.log(addressFormated);
-    const [marker, setMarker] = useState(
-        {
-            lat: -17.8145819,
-            lng: -63.1560853
-        }
-    );
+    const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { lat, lng } = marker;
     Geocode.fromLatLng(lat, lng)
         .then(
@@ -53,15 +70,6 @@ export const ChargesCreate = () => {
     useEffect(() => {
         getCountries()
     }, [])
-    const [details, setDetails] = useState([
-        {
-            id: uuidv4(),
-            detail: '',
-            quantity: '',
-            unitprice: '',
-            amount: '',
-        },
-    ]);
     const handleChange = (e, index) => {
         const detailInput = details.map((i) => {
             if (i.id === index) {
@@ -76,7 +84,7 @@ export const ChargesCreate = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submit');
+        console.log(charge);
     }
     return (
         <>
@@ -109,18 +117,21 @@ export const ChargesCreate = () => {
                                     <input
                                         type="text"
                                         name='name'
+                                        value={charge.name}
+                                        onChange={(e) => setCharge({ ...charge, name: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Nombre"
                                     />
                                     <select
                                         name='country'
+                                        value={charge.country}
                                         onChange={
                                             (e) => {
+                                                setCharge({ ...charge, country: e.target.value })
                                                 getDepartaments(e.target.value);
                                             }
                                         }
                                         className="form-select mt-3"
-                                        aria-label="Default select example"
                                     >
                                         <option value="">Pais</option>
                                         {
@@ -134,6 +145,8 @@ export const ChargesCreate = () => {
                                     <input
                                         type="text"
                                         name='city'
+                                        value={charge.city}
+                                        onChange={(e) => setCharge({ ...charge, city: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Ciudad"
                                     />
@@ -142,13 +155,16 @@ export const ChargesCreate = () => {
                                     <input
                                         type="text"
                                         name='lastname'
+                                        value={charge.lastname}
+                                        onChange={(e) => setCharge({ ...charge, lastname: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Apellido"
                                     />
                                     <select
                                         name='departament'
+                                        value={charge.departament}
+                                        onChange={(e) => setCharge({ ...charge, departament: e.target.value })}
                                         className="form-select mt-3"
-                                        aria-label="Default select example"
                                     >
                                         <option value="">Departamento/Estado</option>
                                         {
@@ -162,6 +178,8 @@ export const ChargesCreate = () => {
                                     <input
                                         type="text"
                                         name='address'
+                                        value={charge.address}
+                                        onChange={(e) => setCharge({ ...charge, address: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Direccion"
                                     />
@@ -175,25 +193,32 @@ export const ChargesCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
+                                    <input type="hidden" className='form-control' />
+                                    <input type="hidden" className='form-control' />
                                     <input
                                         type="text"
                                         name='phone'
+                                        value={charge.phone}
+                                        onChange={(e) => setCharge({ ...charge, phone: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Telefono"
                                     />
                                     <select
                                         name='document'
+                                        value={charge.document}
+                                        onChange={(e) => setCharge({ ...charge, document: e.target.value })}
                                         className="form-select mt-3"
                                         aria-label="Default select example"
                                     >
                                         <option value="">Documento</option>
-                                        <option value="1">CI</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="ci">CI</option>
+                                        <option value="dni">DNI</option>
                                     </select>
                                     <input
                                         type="text"
                                         name='businessname'
+                                        value={charge.businessname}
+                                        onChange={(e) => setCharge({ ...charge, businessname: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Razon Social"
                                     />
@@ -202,18 +227,24 @@ export const ChargesCreate = () => {
                                     <input
                                         type="text"
                                         name='email'
+                                        value={charge.email}
+                                        onChange={(e) => setCharge({ ...charge, email: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="Email"
                                     />
                                     <input
                                         type="text"
                                         name='ci'
+                                        value={charge.ci}
+                                        onChange={(e) => setCharge({ ...charge, ci: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="CI"
                                     />
                                     <input
                                         type="text"
                                         name='nit'
+                                        value={charge.nit}
+                                        onChange={(e) => setCharge({ ...charge, nit: e.target.value })}
                                         className="form-control mt-3"
                                         placeholder="NIT"
                                     />
@@ -310,7 +341,7 @@ export const ChargesCreate = () => {
                             })
                         }
                         <div className="col-12 mt-3 d-flex justify-content-end">
-                            <button className="btn btn-dark" onClick={addDetail}>Agregar Detalle</button>
+                            <button className="btn btn-dark" type="button" onClick={addDetail}>Agregar Detalle</button>
                         </div>
                     </div>
                     <hr />
