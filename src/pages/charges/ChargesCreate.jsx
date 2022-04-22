@@ -107,7 +107,7 @@ export const ChargesCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-2">
-                                    <button className='btn btn-dark'>
+                                    <button className='btn btn-dark' type='button'>
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>

@@ -13,17 +13,17 @@ export const Sidebar = () => {
             <ul className="nav nav-pills flex-column mb-auto" >
                 <li>
                     <NavLink to="/" className="text-white nav-link">
-                        <i className="fa-solid fa-house me-2"></i>DASHBOARD
+                        <i className="fa-solid fa-house me-2"></i> DASHBOARD
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/cobros" className="text-white nav-link">
-                        <i className="fa-solid fa-shopping-cart me-2"></i>COBROS
+                        <i className="fa-solid fa-file-invoice-dollar me-2"></i> COBROS
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/analiticas" className="text-white nav-link">
-                        <i className="fa-solid fa-shopping-cart me-2"></i>ANALITICAS
+                        <i className="fa-solid fa-chart-line me-2"></i> ANALITICAS
                     </NavLink>
                 </li>
             </ul>

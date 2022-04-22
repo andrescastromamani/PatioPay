@@ -14,6 +14,30 @@
 			"estado": "pendiente",
 			"fecha_cobro": "2022-04-11 11:00",
 			"metodo_pago": ""
+		},
+		{
+			"id_cobro": "235",
+			"monto": "57",
+			"nombre": "cliente",
+			"direccion": "calle dario pérez 1144, segundo piso of 12",
+			"telefono": "59171045100",
+			"latitud": "-17.3223432",
+			"longitud": "-64.5656747",
+			"estado": "pendiente",
+			"fecha_cobro": "2022-04-11 11:00",
+			"metodo_pago": ""
+		},
+		{
+			"id_cobro": "236",
+			"monto": "57",
+			"nombre": "cliente",
+			"direccion": "calle dario pérez 1144, segundo piso of 12",
+			"telefono": "59171045100",
+			"latitud": "-17.3223432",
+			"longitud": "-64.5656747",
+			"estado": "pendiente",
+			"fecha_cobro": "2022-04-11 11:00",
+			"metodo_pago": ""
 		}
 	],
 	"historial_acciones": [

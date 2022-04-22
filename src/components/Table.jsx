@@ -32,7 +32,7 @@ const columns = [
         selector: row => {
             return (
                 <div className="">
-                    <button className="btn btn-dark d-flex justify-content-end">Detalles</button>
+                    <button className="btn btn-one d-flex justify-content-end">Detalles</button>
                 </div>
             );
         }

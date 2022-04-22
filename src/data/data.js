@@ -14,7 +14,43 @@ export const data = {
             "estado": "pendiente",
             "fecha_cobro": "2022-04-11 11:00",
             "metodo_pago": ""
-        }
+        },
+        {
+            "id_cobro": "234",
+            "monto": "57",
+            "nombre": "cliente",
+            "direccion": "calle dario pérez 1144, segundo piso of 12",
+            "telefono": "59171045100",
+            "latitud": "-17.3223432",
+            "longitud": "-64.5656747",
+            "estado": "pendiente",
+            "fecha_cobro": "2022-04-11 11:00",
+            "metodo_pago": ""
+        },
+        {
+            "id_cobro": "234",
+            "monto": "57",
+            "nombre": "cliente",
+            "direccion": "calle dario pérez 1144, segundo piso of 12",
+            "telefono": "59171045100",
+            "latitud": "-17.3223432",
+            "longitud": "-64.5656747",
+            "estado": "pendiente",
+            "fecha_cobro": "2022-04-11 11:00",
+            "metodo_pago": ""
+        },
+        {
+            "id_cobro": "234",
+            "monto": "57",
+            "nombre": "cliente",
+            "direccion": "calle dario pérez 1144, segundo piso of 12",
+            "telefono": "59171045100",
+            "latitud": "-17.3223432",
+            "longitud": "-64.5656747",
+            "estado": "pendiente",
+            "fecha_cobro": "2022-04-11 11:00",
+            "metodo_pago": ""
+        },
     ],
     "historial_acciones": [
         {
@@ -34,6 +70,12 @@ export const data = {
             "fecha_mensaje": "2022-04-11 11:00",
             "nombre": "cliente",
             "mensaje": "el monto de la factura esta errado"
+        },
+        {
+            "id_cobro": "235",
+            "fecha_mensaje": "2022-04-11 12:00",
+            "nombre": "Andres",
+            "mensaje": "Existe un error en la factura"
         }
     ]
 }

@@ -12,7 +12,7 @@ export const Charges = () => {
             <div className="container mt-4">
                 <div className='d-flex justify-content-between'>
                     <h3>COBROS</h3>
-                    <Link to='/cobros/crear' className='btn btn-dark'>Crear</Link>
+                    <Link to='/cobros/crear' className='btn btn-dark'>Nuevo</Link>
                 </div>
                 <div className="mt-3 border">
                     <Table
