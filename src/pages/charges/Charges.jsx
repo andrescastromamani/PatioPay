@@ -14,7 +14,7 @@ export const Charges = () => {
                     <h3>COBROS</h3>
                     <Link to='/cobros/crear' className='btn btn-dark'>Nuevo</Link>
                 </div>
-                <div className="mt-3 border">
+                <div className="mt-3 shadow-sm p-3 mb-5 bg-body rounded">
                     <Table
                         data={data.cobros}
                     />

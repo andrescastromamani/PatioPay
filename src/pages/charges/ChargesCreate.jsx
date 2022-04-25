@@ -101,7 +101,7 @@ export const ChargesCreate = () => {
                                         <input
                                             type="text"
                                             name='search'
-                                            className="form-control"
+                                            className="form-control border-0"
                                             placeholder="Buscar Cliente"
                                         />
                                     </div>
@@ -119,7 +119,7 @@ export const ChargesCreate = () => {
                                         name='name'
                                         value={charge.name}
                                         onChange={(e) => setCharge({ ...charge, name: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Nombre"
                                     />
                                     <select
@@ -131,7 +131,7 @@ export const ChargesCreate = () => {
                                                 getDepartaments(e.target.value);
                                             }
                                         }
-                                        className="form-select mt-3"
+                                        className="form-select border-0 mt-3"
                                     >
                                         <option value="">Pais</option>
                                         {
@@ -147,7 +147,7 @@ export const ChargesCreate = () => {
                                         name='city'
                                         value={charge.city}
                                         onChange={(e) => setCharge({ ...charge, city: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Ciudad"
                                     />
                                 </div>
@@ -157,14 +157,14 @@ export const ChargesCreate = () => {
                                         name='lastname'
                                         value={charge.lastname}
                                         onChange={(e) => setCharge({ ...charge, lastname: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Apellido"
                                     />
                                     <select
                                         name='departament'
                                         value={charge.departament}
                                         onChange={(e) => setCharge({ ...charge, departament: e.target.value })}
-                                        className="form-select mt-3"
+                                        className="form-select border-0 mt-3"
                                     >
                                         <option value="">Departamento/Estado</option>
                                         {
@@ -180,7 +180,7 @@ export const ChargesCreate = () => {
                                         name='address'
                                         value={charge.address}
                                         onChange={(e) => setCharge({ ...charge, address: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Direccion"
                                     />
                                 </div>
@@ -200,14 +200,14 @@ export const ChargesCreate = () => {
                                         name='phone'
                                         value={charge.phone}
                                         onChange={(e) => setCharge({ ...charge, phone: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Telefono"
                                     />
                                     <select
                                         name='document'
                                         value={charge.document}
                                         onChange={(e) => setCharge({ ...charge, document: e.target.value })}
-                                        className="form-select mt-3"
+                                        className="form-select border-0 mt-3"
                                         aria-label="Default select example"
                                     >
                                         <option value="">Documento</option>
@@ -219,7 +219,7 @@ export const ChargesCreate = () => {
                                         name='businessname'
                                         value={charge.businessname}
                                         onChange={(e) => setCharge({ ...charge, businessname: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Razon Social"
                                     />
                                 </div>
@@ -229,7 +229,7 @@ export const ChargesCreate = () => {
                                         name='email'
                                         value={charge.email}
                                         onChange={(e) => setCharge({ ...charge, email: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="Email"
                                     />
                                     <input
@@ -237,7 +237,7 @@ export const ChargesCreate = () => {
                                         name='ci'
                                         value={charge.ci}
                                         onChange={(e) => setCharge({ ...charge, ci: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="CI"
                                     />
                                     <input
@@ -245,7 +245,7 @@ export const ChargesCreate = () => {
                                         name='nit'
                                         value={charge.nit}
                                         onChange={(e) => setCharge({ ...charge, nit: e.target.value })}
-                                        className="form-control mt-3"
+                                        className="form-control border-0 mt-3"
                                         placeholder="NIT"
                                     />
                                 </div>
@@ -254,22 +254,22 @@ export const ChargesCreate = () => {
                         <div className="col-12 col-md-4">
                             <h3>Datos</h3>
                             <hr />
-                            <input type="text" className="form-control" placeholder="Monto Total" />
+                            <input type="text" className="form-control border-0" placeholder="Monto Total" />
                             <div className="form-check mt-3">
-                                <input className="form-check-input" type="checkbox" value="" id="comision" />
+                                <input className="form-check-input border-0" type="checkbox" value="" id="comision" />
                                 <label className="form-check-label" htmlFor="comision">Incluir Comision</label>
                             </div>
                             <p>La comision que cobra Patio Pay el del 3.5%, se incluira en el detalle del cobro</p>
                             <div className="form-check mt-2">
-                                <input className="form-check-input" type="checkbox" value="" id="sms" />
+                                <input className="form-check-input border-0" type="checkbox" value="" id="sms" />
                                 <label className="form-check-label" htmlFor="sms">Enviar por SMS (+0.20 ctvs)</label>
                             </div>
                             <div className="form-check mt-2">
-                                <input className="form-check-input" type="checkbox" value="" id="whatsapp" />
+                                <input className="form-check-input border-0" type="checkbox" value="" id="whatsapp" />
                                 <label className="form-check-label" htmlFor="whatsapp">Enviar por Whatsapp</label>
                             </div>
                             <div className="form-check mt-2">
-                                <input className="form-check-input" type="checkbox" value="" id="email" />
+                                <input className="form-check-input border-0" type="checkbox" value="" id="email" />
                                 <label className="form-check-label" htmlFor="email">Enviar por Email</label>
                             </div>
                             <h4 className="mt-3">Factura Recibo (Opcional)</h4>
@@ -279,7 +279,7 @@ export const ChargesCreate = () => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="formFile" className="form-label">Default file input example</label>
-                                <input className="form-control" type="file" id="formFile" />
+                                <input className="form-control " type="file" id="formFile" />
                             </div>
                         </div>
                     </div>
@@ -300,7 +300,7 @@ export const ChargesCreate = () => {
                                                         handleChange(e, detail.id)
                                                     }
                                                 }
-                                                className="form-control"
+                                                className="form-control border-0"
                                                 placeholder="Detalle"
                                             />
                                         </div>
@@ -312,7 +312,7 @@ export const ChargesCreate = () => {
                                                 onChange={(e) => {
                                                     handleChange(e, detail.id)
                                                 }}
-                                                className="form-control me-2"
+                                                className="form-control border-0 me-2"
                                                 placeholder="Cantidad"
                                             />
                                             <input
@@ -322,7 +322,7 @@ export const ChargesCreate = () => {
                                                 onChange={(e) => {
                                                     handleChange(e, detail.id)
                                                 }}
-                                                className="form-control me-2"
+                                                className="form-control border-0 me-2"
                                                 placeholder="Precio Unitario"
                                             />
                                             <input
@@ -332,7 +332,7 @@ export const ChargesCreate = () => {
                                                 onChange={(e) => {
                                                     handleChange(e, detail.id)
                                                 }}
-                                                className="form-control ms-2"
+                                                className="form-control border-0 ms-2"
                                                 placeholder="Monto"
                                             />
                                         </div>
