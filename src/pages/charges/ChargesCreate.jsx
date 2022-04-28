@@ -11,6 +11,9 @@ Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
 export const ChargesCreate = () => {
+    const [search, setSearch] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const [clients, setClients] = useState([]);
     const [countries, setCountries] = useState();
     const [departaments, setDepartaments] = useState();
     const [details, setDetails] = useState([{
@@ -32,10 +35,16 @@ export const ChargesCreate = () => {
         phone: '',
         email: '',
         document: '',
-        ci: '',
-        businessname: '',
+        document_number: '',
+        business_name: '',
         nit: '',
+        commission: false,
+        sms: false,
+        whatsapp: false,
+        sendemail: false,
+        invoice: '',
     })
+    const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
     const [addressFormated, setAddressFormated] = useState('');
     const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { lat, lng } = marker;
@@ -46,13 +55,15 @@ export const ChargesCreate = () => {
                 setAddressFormated(address);
             }
         )
+    const getClients = async () => {
+        const response = await axios.get('http://localhost:4000/clients');
+        setClients(response.data);
+    }
     const getDepartaments = async (id) => {
-        console.log(id);
         const formData = new FormData();
         formData.append('countryId', id);
         await axios.post('https://labs.patio.com.bo/pais/', formData)
             .then(response => {
-                console.log(response.data);
                 setDepartaments(response.data);
             })
             .catch(error => {
@@ -68,7 +79,8 @@ export const ChargesCreate = () => {
             })
     }
     useEffect(() => {
-        getCountries()
+        getCountries();
+        getClients();
     }, [])
     const handleChange = (e, index) => {
         const detailInput = details.map((i) => {
@@ -80,11 +92,50 @@ export const ChargesCreate = () => {
         setDetails(detailInput);
     }
     const addDetail = () => {
-        setDetails([...details, { id: uuidv4(), detail: '', quantity: '', amount: '' }]);
+        setDetails([
+            ...details,
+            {
+                id: uuidv4(),
+                detail: '',
+                quantity: '',
+                amount: ''
+            }]);
     }
-    const handleSubmit = (e) => {
+    const getImageUrl = async (file) => {
+        const formData = new FormData();
+        formData.append('popup', file);
+        return await axios({
+            method: 'POST',
+            url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+    }
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(charge);
+        const { invoice } = charge;
+        const urlImage = await getImageUrl(invoice).then(res => res.data.link);
+        const data = {
+            ...charge,
+            invoice: urlImage,
+            details: details.map(i => ({
+                detail: i.detail,
+                quantity: i.quantity,
+                unitprice: i.unitprice,
+                amount: i.amount,
+            }))
+        }
+        console.log(data);
+    }
+    const handleSearch = (e) => {
+        let matches = [];
+        if (e.target.value !== '') {
+            matches = clients.filter(client => client.name.toLowerCase().includes(e.target.value.toLowerCase()));
+        }
+        setSuggestions(matches);
+        setSearch(e.target.value);
     }
     return (
         <>
@@ -96,17 +147,59 @@ export const ChargesCreate = () => {
                             <h3>Nuevo Cobro</h3>
                             <hr />
                             <div className="row">
-                                <div className="col-12 col-md-10">
+                                <div className="col-11">
                                     <div className="form-group">
                                         <input
                                             type="text"
                                             name='search'
+                                            value={search}
+                                            onChange={handleSearch}
                                             className="form-control border-0"
                                             placeholder="Buscar Cliente"
                                         />
+                                        {
+                                            suggestions.length > 0 && (
+                                                suggestions.map((client, index) => (
+                                                    <div key={index} className="suggestion">
+                                                        <button className='w-100' type='button' onClick={
+                                                            () => {
+                                                                setSearch(client.name);
+                                                                setCharge({
+                                                                    ...charge,
+                                                                    name: client.name,
+                                                                    lastname: client.lastname,
+                                                                    document: client.document,
+                                                                    document_number: client.document_number,
+                                                                    business_name: client.business_name,
+                                                                    nit: client.nit,
+                                                                    phone: client.phone,
+                                                                    email: client.email,
+                                                                    country: client.country,
+                                                                    departament: client.departament,
+                                                                    city: client.city,
+                                                                    address: client.address,
+                                                                    lat: client.lat,
+                                                                    lng: client.lng,
+                                                                    commission: client.commission,
+                                                                    sms: client.sms,
+                                                                    whatsapp: client.whatsapp,
+                                                                    sendemail: client.sendemail,
+                                                                    invoice: client.invoice,
+                                                                })
+                                                                setSuggestions([]);
+                                                            }
+                                                        }>
+                                                            {
+                                                                client.name
+                                                            }
+                                                        </button>
+                                                    </div>
+                                                ))
+                                            )
+                                        }
                                     </div>
                                 </div>
-                                <div className="col-12 col-md-2">
+                                <div className="col-1 d-flex justify-content-end">
                                     <button className='btn btn-dark' type='button'>
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </button>
@@ -193,8 +286,22 @@ export const ChargesCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 col-md-6">
-                                    <input type="hidden" className='form-control' />
-                                    <input type="hidden" className='form-control' />
+                                    <input
+                                        type="hidden"
+                                        id="lat"
+                                        name='lat'
+                                        value={charge.lat}
+                                        onChange={(e) => setCharge({ ...charge, lat: e.target.value })}
+                                        onClick={(e) => setMarker({ ...marker, lat: e.target.value })}
+                                    />
+                                    <input
+                                        type="hidden"
+                                        id="lng"
+                                        name='lng'
+                                        value={charge.lng}
+                                        onChange={(e) => setCharge({ ...charge, lng: e.target.value })}
+                                        onClick={(e) => setMarker({ ...marker, lng: e.target.value })}
+                                    />
                                     <input
                                         type="text"
                                         name='phone'
@@ -216,9 +323,9 @@ export const ChargesCreate = () => {
                                     </select>
                                     <input
                                         type="text"
-                                        name='businessname'
-                                        value={charge.businessname}
-                                        onChange={(e) => setCharge({ ...charge, businessname: e.target.value })}
+                                        name='business_name'
+                                        value={charge.business_name}
+                                        onChange={(e) => setCharge({ ...charge, business_name: e.target.value })}
                                         className="form-control border-0 mt-3"
                                         placeholder="Razon Social"
                                     />
@@ -234,9 +341,9 @@ export const ChargesCreate = () => {
                                     />
                                     <input
                                         type="text"
-                                        name='ci'
-                                        value={charge.ci}
-                                        onChange={(e) => setCharge({ ...charge, ci: e.target.value })}
+                                        name='document_number'
+                                        value={charge.document_number}
+                                        onChange={(e) => setCharge({ ...charge, document_number: e.target.value })}
                                         className="form-control border-0 mt-3"
                                         placeholder="CI"
                                     />
@@ -256,30 +363,67 @@ export const ChargesCreate = () => {
                             <hr />
                             <input type="text" className="form-control border-0" placeholder="Monto Total" />
                             <div className="form-check mt-3">
-                                <input className="form-check-input border-0" type="checkbox" value="" id="comision" />
+                                <input
+                                    className="form-check-input border-0"
+                                    type="checkbox"
+                                    name="commission"
+                                    value={charge.commission}
+                                    id="commission"
+                                    onChange={(e) => setCharge({ ...charge, commission: e.target.checked })}
+                                />
                                 <label className="form-check-label" htmlFor="comision">Incluir Comision</label>
                             </div>
                             <p>La comision que cobra Patio Pay el del 3.5%, se incluira en el detalle del cobro</p>
                             <div className="form-check mt-2">
-                                <input className="form-check-input border-0" type="checkbox" value="" id="sms" />
+                                <input
+                                    className="form-check-input border-0"
+                                    type="checkbox"
+                                    name="sms"
+                                    value={charge.sms}
+                                    id="sms"
+                                    onChange={(e) => setCharge({ ...charge, sms: e.target.checked })}
+                                />
                                 <label className="form-check-label" htmlFor="sms">Enviar por SMS (+0.20 ctvs)</label>
                             </div>
                             <div className="form-check mt-2">
-                                <input className="form-check-input border-0" type="checkbox" value="" id="whatsapp" />
+                                <input
+                                    className="form-check-input border-0"
+                                    type="checkbox"
+                                    name="whatsapp"
+                                    value={charge.whatsapp}
+                                    id="whatsapp"
+                                    onChange={(e) => setCharge({ ...charge, whatsapp: e.target.checked })}
+                                />
                                 <label className="form-check-label" htmlFor="whatsapp">Enviar por Whatsapp</label>
                             </div>
                             <div className="form-check mt-2">
-                                <input className="form-check-input border-0" type="checkbox" value="" id="email" />
+                                <input
+                                    className="form-check-input border-0"
+                                    type="checkbox"
+                                    name="sendemail"
+                                    value={charge.sendemail}
+                                    id="sendemail"
+                                    onChange={(e) => setCharge({ ...charge, sendemail: e.target.checked })}
+                                />
                                 <label className="form-check-label" htmlFor="email">Enviar por Email</label>
                             </div>
                             <h4 className="mt-3">Factura Recibo (Opcional)</h4>
                             <p>La factura o recibo cargada se adjuntara el mensaje de cobro enviado para su descarga</p>
-                            <div className="bg-secondary p-2">
-                                imagen previa
+                            <div className="mb-3">
+                                <img src={defaultImage} alt="" className="img-thumbnail" width={100} height={100} />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="formFile" className="form-label">Default file input example</label>
-                                <input className="form-control " type="file" id="formFile" />
+                                <input
+                                    className="form-control "
+                                    type="file"
+                                    id="invoice"
+                                    name="invoice"
+                                    accept="image/*"
+                                    onChange={
+                                        (e) => {
+                                            setCharge({ ...charge, invoice: e.target.files[0] });
+                                        }}
+                                />
                             </div>
                         </div>
                     </div>

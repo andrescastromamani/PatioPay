@@ -13,6 +13,10 @@ export const Map = ({ marker, setMarker }) => {
         console.log(lat, lng);
         setMarker({ lat, lng });
     }
+    const saveLocation = async () => {
+        await document.querySelector('#lat').click();
+        await document.querySelector('#lng').click();
+    }
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
@@ -32,7 +36,7 @@ export const Map = ({ marker, setMarker }) => {
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Map</h5>
+                        <h5 className="modal-title" id="modal-title">Map</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -59,7 +63,7 @@ export const Map = ({ marker, setMarker }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" className="btn btn-primary" onClick={saveLocation}>Save changes</button>
                     </div>
                 </div>
             </div>

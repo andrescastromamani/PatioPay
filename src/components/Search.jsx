@@ -48,6 +48,9 @@ export const Search = ({ panTo, marker, setMarker }) => {
                         console.log(error);
                     }
                 }}
+                onClick={() => {
+                    console.log('onClick');
+                }}
             >
                 <ComboboxInput
                     className="form-control"
@@ -60,7 +63,10 @@ export const Search = ({ panTo, marker, setMarker }) => {
                     <ComboboxList className="merchantSearch">
                         {
                             status === "OK" && data.map(({ place_id, description }) => (
-                                <ComboboxOption key={place_id} value={description} />
+                                <ComboboxOption
+                                    key={place_id}
+                                    value={description}
+                                />
                             ))
                         }
                     </ComboboxList>

@@ -4,6 +4,7 @@ import { Widget } from '../components/Widget';
 import { Table } from '../components/Table';
 import { data } from '../data/data';
 export const Home = () => {
+    localStorage.setItem('data', JSON.stringify(data));
     return (
         <>
             <Navbar />

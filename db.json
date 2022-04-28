@@ -1,0 +1,72 @@
+{
+    "clients": [
+        {
+            "id": 1,
+            "name": "Andres",
+            "lastname": "Castro",
+            "country": "BO",
+            "departament": "S",
+            "city": "Santa Cruz",
+            "address": "Kiev, Shevchenka st. 1",
+            "lat": "7432",
+            "lng": "-1234",
+            "phone": "+7 (921) 123-45-67",
+            "email": "andres@gmail.com",
+            "document": "ci",
+            "document_number": "123456789",
+            "business_name": "umss",
+            "nit": "123456789"
+        },
+        {
+            "id": 2,
+            "name": "Mike",
+            "lastname": "Posner",
+            "country": "BO",
+            "departament": "Bogota",
+            "city": "Bogota",
+            "address": "Kiev, Shevchenka st. 1",
+            "lat": "321565",
+            "lng": "-1234",
+            "phone": "+7 (921) 123-45-67",
+            "email": "mike@gmail.com",
+            "document": "ci",
+            "document_number": "123456789",
+            "business_name": "umss",
+            "nit": "123456789"
+        },
+        {
+            "id": 3,
+            "name": "Adrian",
+            "lastname": "Trone",
+            "country": "BO",
+            "departament": "Bogota",
+            "city": "Bogota",
+            "address": "Kiev, Shevchenka st. 1",
+            "lat": "321565",
+            "lng": "-1234",
+            "phone": "+7 (921) 123-45-67",
+            "email": "mike@gmail.com",
+            "document": "ci",
+            "document_number": "123456789",
+            "business_name": "umss",
+            "nit": "123456789"
+        }
+    ],
+    "charges": [
+        {
+            "id_cobro": "1",
+            "monto": "57",
+            "nombre": "cliente",
+            "direccion": "calle dario pérez 1144, segundo piso of 12",
+            "telefono": "59171045100",
+            "latitud": "-17.3223432",
+            "longitud": "-64.5656747",
+            "estado": "pendiente",
+            "fecha_cobro": "2022-04-11 11:00",
+            "metodo_pago": ""
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}
