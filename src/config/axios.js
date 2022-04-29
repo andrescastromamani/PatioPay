@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: "https://labs.patio.com.bo/",
+    baseURL: "http://localhost:4000/",
 });
 export default axiosClient;

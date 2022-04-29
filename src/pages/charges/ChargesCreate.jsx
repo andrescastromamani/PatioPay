@@ -2,15 +2,18 @@ import axios from 'axios';
 import Geocode from "react-geocode";
 import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Navbar } from '../../components/Navbar';
 import { Map } from '../../components/Map';
+import { addCharge } from '../../redux/actions/chargesActions';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 
 export const ChargesCreate = () => {
+    const dispatch = useDispatch();
     const [search, setSearch] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [clients, setClients] = useState([]);
@@ -38,6 +41,7 @@ export const ChargesCreate = () => {
         document_number: '',
         business_name: '',
         nit: '',
+        mount: '',
         commission: false,
         sms: false,
         whatsapp: false,
@@ -46,6 +50,7 @@ export const ChargesCreate = () => {
     })
     const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
     const [addressFormated, setAddressFormated] = useState('');
+    console.log(addressFormated);
     const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { lat, lng } = marker;
     Geocode.fromLatLng(lat, lng)
@@ -118,6 +123,7 @@ export const ChargesCreate = () => {
         const { invoice } = charge;
         const urlImage = await getImageUrl(invoice).then(res => res.data.link);
         const data = {
+            id: uuidv4(),
             ...charge,
             invoice: urlImage,
             details: details.map(i => ({
@@ -127,6 +133,7 @@ export const ChargesCreate = () => {
                 amount: i.amount,
             }))
         }
+        dispatch(addCharge(data));
         console.log(data);
     }
     const handleSearch = (e) => {
@@ -152,6 +159,7 @@ export const ChargesCreate = () => {
                                         <input
                                             type="text"
                                             name='search'
+                                            autoComplete='off'
                                             value={search}
                                             onChange={handleSearch}
                                             className="form-control border-0"
@@ -361,7 +369,14 @@ export const ChargesCreate = () => {
                         <div className="col-12 col-md-4">
                             <h3>Datos</h3>
                             <hr />
-                            <input type="text" className="form-control border-0" placeholder="Monto Total" />
+                            <input
+                                type="text"
+                                name='mount'
+                                value={charge.mount}
+                                onChange={(e) => setCharge({ ...charge, mount: e.target.value })}
+                                className="form-control border-0"
+                                placeholder="Monto Total"
+                            />
                             <div className="form-check mt-3">
                                 <input
                                     className="form-check-input border-0"

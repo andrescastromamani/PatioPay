@@ -4,27 +4,27 @@ import DataTable from 'react-data-table-component';
 const columns = [
     {
         name: 'Nombre',
-        selector: row => row.nombre,
+        selector: row => row.name,
         sortable: true,
     },
     {
         name: 'Cantidad',
-        selector: row => row.monto,
+        selector: row => row.mount,
         sortable: true,
     },
     {
         name: 'Telefono',
-        selector: row => row.telefono,
+        selector: row => row.phone,
         sortable: true,
     },
     {
         name: 'Ubicacion',
-        selector: row => row.direccion,
+        selector: row => row.address,
         sortable: true,
     },
     {
         name: 'Estado',
-        selector: row => row.estado,
+        selector: row => row.state,
         sortable: true,
     },
     {

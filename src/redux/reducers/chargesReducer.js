@@ -1,6 +1,11 @@
 import { types } from "../types/types";
 
-export const chargesReducer = (state = {}, action) => {
+const initialState = {
+    loading: false,
+    error: null,
+    charges: []
+}
+export const chargesReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.getCharges:
             return {
@@ -16,6 +21,25 @@ export const chargesReducer = (state = {}, action) => {
                 charges: action.payload
             }
         case types.getChargesFailure:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case types.createCharge:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case types.createChargeSuccess:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                charges: [...state.charges, action.payload]
+            }
+        case types.createChargeFailure:
             return {
                 ...state,
                 loading: false,
