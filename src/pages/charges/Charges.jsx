@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { Table } from '../../components/Table'
 import { Navbar } from '../../components/Navbar'
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCharges } from '../../redux/actions/chargesActions';
 
 export const Charges = () => {

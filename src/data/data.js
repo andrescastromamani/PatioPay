@@ -59,7 +59,7 @@ export const data = {
             "fecha_evento": "2022-04-11 11:00"
         },
         {
-            "id_cobro": "234",
+            "id_cobro": "235",
             "detalle": "nuevas condiciones del servicio",
             "fecha_evento": "2022-04-11 11:00"
         }

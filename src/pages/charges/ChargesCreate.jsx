@@ -1,12 +1,14 @@
-import axios from 'axios';
-import Geocode from "react-geocode";
 import { v4 as uuidv4 } from 'uuid';
-import React, { useState, useEffect } from 'react';
+import Geocode from "react-geocode";
 import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 
 import { Navbar } from '../../components/Navbar';
 import { Map } from '../../components/Map';
 import { addCharge } from '../../redux/actions/chargesActions';
+import { useCharges } from '../../hooks/useCharges';
+import { useClients } from '../../hooks/useClientes';
+import { fileUpload } from '../../helpers/fileHelper';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
@@ -14,11 +16,10 @@ Geocode.setRegion("es");
 
 export const ChargesCreate = () => {
     const dispatch = useDispatch();
-    const [search, setSearch] = useState('');
-    const [suggestions, setSuggestions] = useState([]);
-    const [clients, setClients] = useState([]);
-    const [countries, setCountries] = useState();
-    const [departaments, setDepartaments] = useState();
+    const { countries, departaments, getCountries, getDepartaments } = useCharges();
+    const { search, suggestions, searchClients, getClients, selectClient } = useClients();
+    const [addressFormated, setAddressFormated] = useState('');
+    const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const [details, setDetails] = useState([{
         id: uuidv4(),
         detail: '',
@@ -49,9 +50,6 @@ export const ChargesCreate = () => {
         invoice: '',
     })
     const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
-    const [addressFormated, setAddressFormated] = useState('');
-    console.log(addressFormated);
-    const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { lat, lng } = marker;
     Geocode.fromLatLng(lat, lng)
         .then(
@@ -60,33 +58,6 @@ export const ChargesCreate = () => {
                 setAddressFormated(address);
             }
         )
-    const getClients = async () => {
-        const response = await axios.get('http://localhost:4000/clients');
-        setClients(response.data);
-    }
-    const getDepartaments = async (id) => {
-        const formData = new FormData();
-        formData.append('countryId', id);
-        await axios.post('https://labs.patio.com.bo/pais/', formData)
-            .then(response => {
-                setDepartaments(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
-    const getCountries = async () => {
-        await axios.get('https://labs.patio.com.bo/pais/')
-            .then(response => {
-                setCountries(response.data)
-            }).catch(error => {
-                console.log(error);
-            })
-    }
-    useEffect(() => {
-        getCountries();
-        getClients();
-    }, [])
     const handleChange = (e, index) => {
         const detailInput = details.map((i) => {
             if (i.id === index) {
@@ -106,26 +77,19 @@ export const ChargesCreate = () => {
                 amount: ''
             }]);
     }
-    const getImageUrl = async (file) => {
-        const formData = new FormData();
-        formData.append('popup', file);
-        return await axios({
-            method: 'POST',
-            url: 'http://patioserviceonline.com/api/v2/?route=app_cliente&type=subir_popup',
-            data: formData,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { invoice } = charge;
-        const urlImage = await getImageUrl(invoice).then(res => res.data.link);
+        let imageUrl = '';
+        if (typeof invoice === 'string') {
+            imageUrl = invoice;
+        } else {
+            imageUrl = await fileUpload(invoice).then(res => res.data.link);
+        }
         const data = {
             id: uuidv4(),
             ...charge,
-            invoice: urlImage,
+            invoice: imageUrl,
             details: details.map(i => ({
                 detail: i.detail,
                 quantity: i.quantity,
@@ -133,17 +97,13 @@ export const ChargesCreate = () => {
                 amount: i.amount,
             }))
         }
-        dispatch(addCharge(data));
         console.log(data);
+        dispatch(addCharge(data));
     }
-    const handleSearch = (e) => {
-        let matches = [];
-        if (e.target.value !== '') {
-            matches = clients.filter(client => client.name.toLowerCase().includes(e.target.value.toLowerCase()));
-        }
-        setSuggestions(matches);
-        setSearch(e.target.value);
-    }
+    useEffect(() => {
+        getCountries();
+        getClients();
+    }, [])
     return (
         <>
             <Navbar />
@@ -161,7 +121,7 @@ export const ChargesCreate = () => {
                                             name='search'
                                             autoComplete='off'
                                             value={search}
-                                            onChange={handleSearch}
+                                            onChange={searchClients}
                                             className="form-control border-0"
                                             placeholder="Buscar Cliente"
                                         />
@@ -171,7 +131,6 @@ export const ChargesCreate = () => {
                                                     <div key={index} className="suggestion">
                                                         <button className='w-100' type='button' onClick={
                                                             () => {
-                                                                setSearch(client.name);
                                                                 setCharge({
                                                                     ...charge,
                                                                     name: client.name,
@@ -194,11 +153,11 @@ export const ChargesCreate = () => {
                                                                     sendemail: client.sendemail,
                                                                     invoice: client.invoice,
                                                                 })
-                                                                setSuggestions([]);
+                                                                selectClient(client);
                                                             }
                                                         }>
                                                             {
-                                                                client.name
+                                                                `${client.name} ${client.lastname}`
                                                             }
                                                         </button>
                                                     </div>

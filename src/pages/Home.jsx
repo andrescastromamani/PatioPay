@@ -1,10 +1,18 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import { Navbar } from '../components/Navbar';
 import { Widget } from '../components/Widget';
 import { Table } from '../components/Table';
+import { getCharges } from '../redux/actions/chargesActions';
 import { data } from '../data/data';
 export const Home = () => {
-    localStorage.setItem('data', JSON.stringify(data));
+    const dispatch = useDispatch();
+    const charges = useSelector(state => state.charges.charges);
+    useEffect(() => {
+        dispatch(getCharges());
+    }, [dispatch]);
     return (
         <>
             <Navbar />
@@ -44,7 +52,7 @@ export const Home = () => {
                     </div>
                     <div className="mt-3 shadow-sm p-3 mb-5 bg-body rounded">
                         <Table
-                            data={data.cobros}
+                            data={charges}
                         />
                     </div>
                 </div>
