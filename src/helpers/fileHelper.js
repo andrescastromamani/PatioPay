@@ -1,11 +1,8 @@
 import axios from "axios";
 import Resizer from 'react-image-file-resizer';
-export const imagePreview = (image) => {
-    document.getElementById('imagepreview').src = image;
-}
-
 
 const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
+
 export const fileUpload = async (file) => {
     const formData = new FormData();
     formData.append('popup', file);

@@ -21,7 +21,7 @@ export const useClients = () => {
         setSearch(e.target.value);
     }
     const selectClient = (client) => {
-        setSearch(client.name);
+        setSearch(`${client.name} ${client.lastname}`);
         setSuggestions([]);
     }
     return {

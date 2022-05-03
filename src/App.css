@@ -222,3 +222,17 @@ li {
 .timeline-item:last-child::before {
     background: #fff;
 }
+
+.combobox {
+    position: absolute;
+    z-index: 100;
+}
+
+.suggestion-item {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #d5d5d5;
+}

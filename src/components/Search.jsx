@@ -48,9 +48,6 @@ export const Search = ({ panTo, marker, setMarker }) => {
                         console.log(error);
                     }
                 }}
-                onClick={() => {
-                    console.log('onClick');
-                }}
             >
                 <ComboboxInput
                     className="form-control"

@@ -54,96 +54,6 @@
   ],
   "charges": [
     {
-      "id": "12399aa5-8b9e-4f8a-b1da-4678a4072ae0",
-      "name": "Andres",
-      "lastname": "Castro",
-      "country": "BO",
-      "departament": "S",
-      "city": "Santa Cruz",
-      "address": "Kiev, Shevchenka st. 1",
-      "lat": "7432",
-      "lng": "-1234",
-      "phone": "+7 (921) 123-45-67",
-      "email": "andres@gmail.com",
-      "document": "ci",
-      "document_number": "123456789",
-      "business_name": "umss",
-      "nit": "123456789",
-      "commission": true,
-      "sms": true,
-      "whatsapp": true,
-      "sendemail": true,
-      "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1651238559-WhatsApp Image 2022-04-18 at 3.47.51 PM.jpeg",
-      "details": [
-        {
-          "detail": "detalles de cobro",
-          "quantity": "20",
-          "unitprice": "10",
-          "amount": "2000"
-        }
-      ]
-    },
-    {
-      "id": "d6c524de-2aae-4070-a236-a29b57eb14bd",
-      "name": "Adrian",
-      "lastname": "Trone",
-      "country": "BO",
-      "departament": "Bogota",
-      "city": "Bogota",
-      "address": "Kiev, Shevchenka st. 1",
-      "lat": "321565",
-      "lng": "-1234",
-      "phone": "+7 (921) 123-45-67",
-      "email": "mike@gmail.com",
-      "document": "ci",
-      "document_number": "123456789",
-      "business_name": "umss",
-      "nit": "123456789",
-      "commission": true,
-      "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1651238849-movano.png",
-      "details": [
-        {
-          "detail": "Detalle del cobro ",
-          "quantity": "10",
-          "unitprice": "10",
-          "amount": "200"
-        },
-        {
-          "detail": "otro detalles del cobro",
-          "quantity": "10",
-          "unitprice": "10",
-          "amount": "100"
-        }
-      ]
-    },
-    {
-      "id": "bce551c3-28ea-49de-ad7c-211806bfdc4f",
-      "name": "Mike",
-      "lastname": "Posner",
-      "country": "BO",
-      "departament": "Bogota",
-      "city": "Bogota",
-      "address": "Kiev, Shevchenka st. 1",
-      "lat": "321565",
-      "lng": "-1234",
-      "phone": "+7 (921) 123-45-67",
-      "email": "mike@gmail.com",
-      "document": "ci",
-      "document_number": "123456789",
-      "business_name": "umss",
-      "nit": "123456789",
-      "mount": "30000",
-      "commission": true,
-      "details": [
-        {
-          "detail": "detalles opcionales",
-          "quantity": "10",
-          "unitprice": "10",
-          "amount": "200"
-        }
-      ]
-    },
-    {
       "id": "bcc4f393-5ace-4d58-93f2-0864918e9245",
       "name": "jose daniel",
       "lastname": "Masternid",
@@ -174,64 +84,45 @@
       ]
     },
     {
-      "id": "a763071e-18d3-41ee-953e-306b40c39d1c",
-      "name": "",
-      "lastname": "",
-      "country": "",
-      "departament": "",
-      "city": "",
-      "address": "",
+      "id": "1c86663e-818a-4498-8e04-67433c551276",
+      "name": "Marcia",
+      "lastname": "Marcias",
+      "country": "BO",
+      "departament": "T",
+      "city": "Tarija",
+      "address": "Av. Tarija",
       "lat": "",
       "lng": "",
-      "phone": "",
-      "email": "",
-      "document": "",
-      "document_number": "",
-      "business_name": "",
-      "nit": "",
-      "mount": "",
-      "commission": false,
-      "sms": false,
+      "phone": "74313235",
+      "email": "marcia@gmail.com",
+      "document": "dni",
+      "document_number": "123456",
+      "business_name": "umss",
+      "nit": "123456789",
+      "mount": "4000",
+      "commission": true,
+      "sms": true,
       "whatsapp": false,
-      "sendemail": false,
+      "sendemail": true,
       "invoice": "",
       "details": [
         {
-          "detail": "",
-          "quantity": "",
-          "unitprice": "",
-          "amount": ""
-        }
-      ]
-    },
-    {
-      "id": "372ac513-6a14-4e17-9ed6-3f33a578a3f2",
-      "name": "",
-      "lastname": "",
-      "country": "",
-      "departament": "",
-      "city": "",
-      "address": "",
-      "lat": "",
-      "lng": "",
-      "phone": "",
-      "email": "",
-      "document": "",
-      "document_number": "",
-      "business_name": "",
-      "nit": "",
-      "mount": "",
-      "commission": false,
-      "sms": false,
-      "whatsapp": false,
-      "sendemail": false,
-      "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1651245776-umss.png",
-      "details": [
+          "detail": "Detalles del cobro",
+          "quantity": "10",
+          "unitprice": "10",
+          "amount": "100"
+        },
         {
-          "detail": "",
-          "quantity": "",
-          "unitprice": "",
-          "amount": ""
+          "detail": "Otro detalle del cobro ",
+          "quantity": "20",
+          "unitprice": "20",
+          "amount": "400"
+        },
+        {
+          "detail": "Detail of the charge",
+          "quantity": "5",
+          "unitprice": "10",
+          "amount": "50"
         }
       ]
     }
