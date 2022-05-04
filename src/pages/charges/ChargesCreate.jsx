@@ -11,7 +11,7 @@ import { Navbar } from '../../components/Navbar';
 import { useDetails } from '../../hooks/useDetails';
 import { useCharges } from '../../hooks/useCharges';
 import { useClients } from '../../hooks/useClientes';
-import { fileUpload } from '../../helpers/fileHelper';
+import { fileUpload, previewImage } from '../../helpers/fileHelper';
 import { addCharge } from '../../redux/actions/chargesActions';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
@@ -60,7 +60,6 @@ export const ChargesCreate = () => {
             }
         )
     const submit = async (values) => {
-        console.log(values);
         const { invoice } = values;
         let imageUrl = '';
         if (typeof invoice === 'string') {
@@ -465,7 +464,7 @@ export const ChargesCreate = () => {
                                     <h4 className="mt-3">Factura Recibo (Opcional)</h4>
                                     <p>La factura o recibo cargada se adjuntara el mensaje de cobro enviado para su descarga</p>
                                     <div className="mb-3">
-                                        <img src={defaultImage} alt="" className="img-thumbnail" width={100} height={100} />
+                                        <img src={defaultImage} alt="image preview" id="previewImage" className="img-thumbnail" width={100} height={100} />
                                     </div>
                                     <div className="mb-3">
                                         <input
@@ -474,7 +473,12 @@ export const ChargesCreate = () => {
                                             id="invoice"
                                             name="invoice"
                                             accept="image/*"
-                                            onChange={handleChange}
+                                            onChange={
+                                                (e) => {
+                                                    previewImage(e.target.files[0]);
+                                                    setFieldValue('invoice', e.target.files[0] ? e.target.files[0] : null);
+                                                }
+                                            }
                                             onBlur={handleBlur}
                                         />
                                     </div>
