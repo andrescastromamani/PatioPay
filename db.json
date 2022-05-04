@@ -125,6 +125,105 @@
           "amount": "50"
         }
       ]
+    },
+    {
+      "id": "6ce497ce-d242-4c84-88b7-f0bf8b9e7e25",
+      "name": "Andres",
+      "lastname": "Castro",
+      "country": "BO",
+      "departament": "S",
+      "city": "Santa Cruz",
+      "address": "Kiev, Shevchenka st. 1",
+      "lat": "",
+      "lng": "",
+      "phone": "+7 (921) 123-45-67",
+      "email": "andres@gmail.com",
+      "document": "ci",
+      "document_number": "123456789",
+      "business_name": "umss",
+      "nit": "123456789",
+      "mount": "2000",
+      "commission": true,
+      "sms": true,
+      "whatsapp": true,
+      "sendemail": true,
+      "invoice": "C:\\fakepath\\movano.png",
+      "details": [
+        {
+          "detail": "Deatalle 1 del cobro",
+          "quantity": "100",
+          "unitprice": "10",
+          "amount": "1000"
+        },
+        {
+          "detail": "Detalle 2 del cobro",
+          "quantity": "200",
+          "unitprice": "10",
+          "amount": "2000"
+        }
+      ]
+    },
+    {
+      "id": "faa4eaee-656d-4f0c-a030-c13c1d8ca8b3",
+      "name": "Mia",
+      "lastname": "Guzman",
+      "country": "BO",
+      "departament": "C",
+      "city": "Cochabamba",
+      "address": "Av Villazon",
+      "lat": -17.400217412726285,
+      "lng": -66.17416296091307,
+      "phone": "67425949",
+      "email": "mia@gmail.com",
+      "document": "ci",
+      "document_number": "123456",
+      "business_name": "umss",
+      "nit": "987654321",
+      "mount": "300",
+      "commission": true,
+      "sms": true,
+      "whatsapp": true,
+      "sendemail": true,
+      "invoice": "",
+      "details": [
+        {
+          "detail": "Algun detalles opcional",
+          "quantity": "10",
+          "unitprice": "10",
+          "amount": "100"
+        }
+      ]
+    },
+    {
+      "id": "81a7160c-369b-4868-b87d-aaa15c7c47b3",
+      "name": "a",
+      "lastname": "castro",
+      "country": "BO",
+      "departament": "L",
+      "city": "CBBA",
+      "address": "Calle Capitan Mariano Arrien Condominio Jardín Sur Piso 9, Santa Cruz de la Sierra, Bolivia",
+      "lat": -17.7937432963489,
+      "lng": -63.16904573395996,
+      "email": "castroandresrm@gmail.com",
+      "document": "ci",
+      "document_number": "12618853",
+      "business_name": "umss",
+      "nit": "12346162",
+      "mount": "200",
+      "commission": true,
+      "sms": true,
+      "whatsapp": true,
+      "sendemail": true,
+      "invoice": "C:\\fakepath\\umss.png",
+      "phone": "+59167425949",
+      "details": [
+        {
+          "detail": "detalle",
+          "quantity": "10",
+          "unitprice": "200",
+          "amount": "2000"
+        }
+      ]
     }
   ],
   "profile": {

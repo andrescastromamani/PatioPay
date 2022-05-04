@@ -1,7 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
+import { v4 as uuidv4 } from 'uuid';
 import Geocode from "react-geocode";
 import { useDispatch } from 'react-redux';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import React, { useState, useEffect } from 'react';
 
 import { Map } from '../../components/Map';
@@ -159,26 +161,37 @@ export const ChargesCreate = () => {
                                                     className="form-control"
                                                     placeholder="Buscar Cliente"
                                                 />
-                                            </div>
-                                            {
-                                                suggestions.length > 0 && (
-                                                    <div className="bg-white combobox">
-                                                        {suggestions.map((client, index) => (
-                                                            <p
-                                                                key={index}
-                                                                className="m-0 suggestion-item"
-                                                                onClick={() => {
-                                                                    selectClient(client);
-                                                                    setFieldValue('search', client.name);
-                                                                }}
-                                                            >
-                                                                {client.name} {client.lastname}
-                                                            </p>
-                                                        ))}
-                                                    </div>
+                                                {
+                                                    suggestions.length > 0 && (
+                                                        <div className="bg-white combobox suggestion">
+                                                            {suggestions.map((client, index) => (
+                                                                <p
+                                                                    key={index}
+                                                                    className="m-0 suggestion-item"
+                                                                    onClick={() => {
+                                                                        selectClient(client);
+                                                                        setFieldValue('name', client.name);
+                                                                        setFieldValue('lastname', client.lastname);
+                                                                        setFieldValue('country', client.country);
+                                                                        setFieldValue('departament', client.departament);
+                                                                        setFieldValue('city', client.city);
+                                                                        setFieldValue('address', client.address);
+                                                                        setFieldValue('phone', client.phone);
+                                                                        setFieldValue('email', client.email);
+                                                                        setFieldValue('document', client.document);
+                                                                        setFieldValue('document_number', client.document_number);
+                                                                        setFieldValue('business_name', client.business_name);
+                                                                        setFieldValue('nit', client.nit);
+                                                                    }}
+                                                                >
+                                                                    {client.name} {client.lastname}
+                                                                </p>
+                                                            ))}
+                                                        </div>
 
-                                                )
-                                            }
+                                                    )
+                                                }
+                                            </div>
                                         </div>
                                         <div className="col-1 d-flex justify-content-end">
                                             <button className='btn btn-dark' type='button'>
@@ -192,11 +205,11 @@ export const ChargesCreate = () => {
                                                 type="text"
                                                 name='name'
                                                 autoComplete='off'
+                                                placeholder="Nombre"
+                                                className={`form-control mt-3 ${errors.name && 'is-invalid'}`}
                                                 value={values.name}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                className={`form-control mt-3 ${errors.name && 'is-invalid'}`}
-                                                placeholder="Nombre"
                                             />
                                             {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
                                             <select
@@ -236,11 +249,11 @@ export const ChargesCreate = () => {
                                             <input
                                                 type="text"
                                                 name='lastname'
+                                                placeholder="Apellido"
+                                                className={`form-control mt-3 ${errors.lastname && 'is-invalid'}`}
                                                 value={values.lastname}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                className={`form-control mt-3 ${errors.lastname && 'is-invalid'}`}
-                                                placeholder="Apellido"
                                             />
                                             {errors.lastname && touched.lastname && <span className='text-danger'>{errors.lastname}</span>}
                                             <select
@@ -263,19 +276,22 @@ export const ChargesCreate = () => {
                                             <input
                                                 type="text"
                                                 name='address'
+                                                id='address'
                                                 value={values.address}
                                                 onChange={handleChange}
-                                                onBlur={handleBlur}
+                                                onClick={(e) => {
+                                                    setFieldValue('address', addressFormated);
+                                                }}
                                                 className={`form-control mt-3 ${errors.address && 'is-invalid'}`}
                                                 placeholder="Direccion"
                                             />
                                             {errors.address && touched.address && <span className='text-danger'>{errors.address}</span>}
                                         </div>
                                         <div className="col-12">
-                                            <button type="button" className="btn mt-3" data-bs-toggle="modal" data-bs-target="#map" style={
+                                            <button type="button" className="btn mt-3 border" data-bs-toggle="modal" data-bs-target="#map" style={
                                                 {
 
-                                                    backgroundImage: `url('https://i.pinimg.com/originals/87/6d/45/876d45398f2b9a76c3a0890bcf042579.png')`,
+                                                    backgroundImage: `url('https://i.blogs.es/0a0517/google-maps-detalles-nivel-calle/1366_2000.jpg')`,
                                                     width: '100%',
                                                     height: '80px',
                                                     border: 'none',
@@ -285,7 +301,7 @@ export const ChargesCreate = () => {
                                                     backgroundSize: 'cover',
                                                 }
                                             }>
-                                                <i className="fa-solid fa-location-dot fs-2"></i>
+                                                <i className="fa-solid fa-location-dot fs-2 text-danger"></i>
                                             </button>
                                             <Map marker={marker} setMarker={setMarker} />
                                         </div>
@@ -296,6 +312,11 @@ export const ChargesCreate = () => {
                                                 name='lat'
                                                 value={values.lat}
                                                 onChange={handleChange}
+                                                onClick={
+                                                    (e) => {
+                                                        setFieldValue('lat', marker.lat);
+                                                    }
+                                                }
                                             />
                                             <input
                                                 type="hidden"
@@ -303,14 +324,23 @@ export const ChargesCreate = () => {
                                                 name='lng'
                                                 value={values.lng}
                                                 onChange={handleChange}
+                                                onClick={
+                                                    (e) => {
+                                                        setFieldValue('lng', marker.lng);
+                                                    }
+                                                }
                                             />
-                                            <input
-                                                type="text"
-                                                name='phone'
-                                                className={`form-control mt-3 ${errors.phone && 'is-invalid'}`}
-                                                placeholder="Telefono"
+                                            <PhoneInput
+                                                className={`form-control custom-input-tel mt-3 ${errors.phone && 'is-invalid'}`}
+                                                id="phone"
+                                                name="phone"
+                                                autoComplete="off"
                                                 value={values.phone}
-                                                onChange={handleChange}
+                                                onChange={
+                                                    (phone) => {
+                                                        setFieldValue('phone', phone);
+                                                    }
+                                                }
                                                 onBlur={handleBlur}
                                             />
                                             {errors.phone && touched.phone && <span className='text-danger'>{errors.phone}</span>}

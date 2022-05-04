@@ -16,6 +16,7 @@ export const Map = ({ marker, setMarker }) => {
     const saveLocation = async () => {
         await document.querySelector('#lat').click();
         await document.querySelector('#lng').click();
+        await document.querySelector('#address').click();
     }
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
