@@ -15,4 +15,16 @@ export const types = {
     createChargeSuccess: '[Charges] Create Charge Success',
     createChargeFailure: '[Charges] Create Charge Failure',
 
+    getClients: '[Clients] Get Clients',
+    getClientsSuccess: '[Clients] Get Clients Success',
+    getClientsFailure: '[Clients] Get Clients Failure',
+
+    getClient: '[Clients] Get Client',
+    getClientSuccess: '[Clients] Get Client Success',
+    getClientFailure: '[Clients] Get Client Failure',
+
+    createClient: '[Clients] Create Client',
+    createClientSuccess: '[Clients] Create Client Success',
+    createClientFailure: '[Clients] Create Client Failure',
+
 }

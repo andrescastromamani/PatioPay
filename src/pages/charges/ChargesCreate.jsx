@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import React, { useState, useEffect } from 'react';
+import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
+import "@reach/combobox/styles.css";
 
 import { Map } from '../../components/Map';
 import { Navbar } from '../../components/Navbar';
@@ -13,6 +15,7 @@ import { useCharges } from '../../hooks/useCharges';
 import { useClients } from '../../hooks/useClientes';
 import { fileUpload, previewImage } from '../../helpers/fileHelper';
 import { addCharge } from '../../redux/actions/chargesActions';
+import { addClient } from '../../redux/actions/clientActions';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setLanguage("en");
@@ -23,6 +26,7 @@ export const ChargesCreate = () => {
     useEffect(() => {
         getCountries();
         getClients();
+        // eslint-disable-next-line
     }, []);
     const charge = {
         name: '',
@@ -50,7 +54,7 @@ export const ChargesCreate = () => {
     const { addDetail, details, handleChangeDetails } = useDetails();
     const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { countries, departaments, getCountries, getDepartaments } = useCharges();
-    const { search, suggestions, searchClients, getClients, selectClient } = useClients();
+    const { search, suggestions, searchClients, getClients } = useClients();
     const defaultImage = 'https://patioserviceonline.com/uploads/ventrega/popup/1647351931-default-merchant.jpg';
     Geocode.fromLatLng(marker.lat, marker.lng)
         .then(
@@ -67,6 +71,23 @@ export const ChargesCreate = () => {
         } else {
             imageUrl = await fileUpload(invoice).then(res => res.data.link);
         }
+        const client = {
+            id: uuidv4(),
+            name: values.name,
+            lastname: values.lastname,
+            country: values.country,
+            departament: values.departament,
+            city: values.city,
+            address: values.address,
+            lat: marker.lat,
+            lng: marker.lng,
+            phone: values.phone,
+            email: values.email,
+            document: values.document,
+            document_number: values.document_number,
+            business_name: values.business_name,
+            nit: values.nit,
+        }
         const data = {
             id: uuidv4(),
             ...values,
@@ -78,7 +99,9 @@ export const ChargesCreate = () => {
                 amount: i.amount,
             }))
         }
+        console.log(client);
         console.log(data);
+        dispatch(addClient(client));
         dispatch(addCharge(data));
     }
     return (
@@ -150,47 +173,55 @@ export const ChargesCreate = () => {
                                     <hr />
                                     <div className="row">
                                         <div className="col-11">
-                                            <div className="form-group">
-                                                <input
-                                                    type="text"
-                                                    name='search'
+                                            <Combobox aria-labelledby="demo">
+                                                <ComboboxInput
+                                                    name="search"
+                                                    className="form-control"
                                                     autoComplete='off'
+                                                    placeholder="Buscar cliente"
                                                     value={search}
                                                     onChange={searchClients}
-                                                    className="form-control"
-                                                    placeholder="Buscar Cliente"
                                                 />
                                                 {
-                                                    suggestions.length > 0 && (
-                                                        <div className="bg-white combobox suggestion">
-                                                            {suggestions.map((client, index) => (
-                                                                <p
-                                                                    key={index}
-                                                                    className="m-0 suggestion-item"
-                                                                    onClick={() => {
-                                                                        selectClient(client);
-                                                                        setFieldValue('name', client.name);
-                                                                        setFieldValue('lastname', client.lastname);
-                                                                        setFieldValue('country', client.country);
-                                                                        setFieldValue('departament', client.departament);
-                                                                        setFieldValue('city', client.city);
-                                                                        setFieldValue('address', client.address);
-                                                                        setFieldValue('phone', client.phone);
-                                                                        setFieldValue('email', client.email);
-                                                                        setFieldValue('document', client.document);
-                                                                        setFieldValue('document_number', client.document_number);
-                                                                        setFieldValue('business_name', client.business_name);
-                                                                        setFieldValue('nit', client.nit);
-                                                                    }}
-                                                                >
-                                                                    {client.name} {client.lastname}
-                                                                </p>
-                                                            ))}
-                                                        </div>
-
+                                                    suggestions && (
+                                                        <ComboboxPopover>
+                                                            {
+                                                                suggestions.length > 0 ? (
+                                                                    <ComboboxList>
+                                                                        {
+                                                                            suggestions.map((suggestion, index) => (
+                                                                                <ComboboxOption
+                                                                                    key={index}
+                                                                                    value={suggestion.name + ' ' + suggestion.lastname}
+                                                                                    onClick={() => {
+                                                                                        setFieldValue('name', suggestion.name);
+                                                                                        setFieldValue('lastname', suggestion.lastname);
+                                                                                        setFieldValue('country', suggestion.country);
+                                                                                        setFieldValue('departament', suggestion.departament);
+                                                                                        setFieldValue('city', suggestion.city);
+                                                                                        setFieldValue('address', suggestion.address);
+                                                                                        setFieldValue('phone', suggestion.phone);
+                                                                                        setFieldValue('email', suggestion.email);
+                                                                                        setFieldValue('document', suggestion.document);
+                                                                                        setFieldValue('document_number', suggestion.document_number);
+                                                                                        setFieldValue('business_name', suggestion.business_name);
+                                                                                        setFieldValue('nit', suggestion.nit);
+                                                                                    }}
+                                                                                />
+                                                                            ))
+                                                                        }
+                                                                    </ComboboxList>
+                                                                ) : (
+                                                                    <span style={{ display: "block", margin: 8 }}>
+                                                                        No results found
+                                                                    </span>
+                                                                )
+                                                            }
+                                                        </ComboboxPopover>
                                                     )
                                                 }
-                                            </div>
+                                            </Combobox>
+
                                         </div>
                                         <div className="col-1 d-flex justify-content-end">
                                             <button className='btn btn-dark' type='button'>
@@ -538,7 +569,7 @@ export const ChargesCreate = () => {
                             <hr />
                             <div className="mb-5 d-flex">
                                 <button type='submit' className="btn btn-dark me-3 ps-5 pe-5">Guardar y Previsualizar Cobro</button>
-                                <button className="btn btn-danger ps-5 pe-5">Cancelar</button>
+                                <a href="/cobros" className='btn btn-danger'>Cancelar</a>
                             </div>
                         </form>
                     )}

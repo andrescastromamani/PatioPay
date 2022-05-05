@@ -4,5 +4,5 @@ import { chargesReducer } from './chargesReducer';
 
 export default combineReducers({
     auth: authReducer,
-    charges: chargesReducer
+    charges: chargesReducer,
 });
