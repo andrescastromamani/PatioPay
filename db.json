@@ -67,6 +67,23 @@
       "document_number": "123456789",
       "business_name": "Patio service",
       "nit": "987654321"
+    },
+    {
+      "id": "c67b5fba-a111-4ae7-bf84-f32ff57b43f3",
+      "name": "Marcelo",
+      "lastname": "Bonneto",
+      "country": "AR",
+      "departament": "B",
+      "city": "Cochabamba",
+      "address": "Av. San Aurelio 2, Santa Cruz de la Sierra, Bolivia",
+      "lat": -17.80698222065168,
+      "lng": -63.16381006196289,
+      "phone": "+546435151",
+      "email": "marcelo@gmail.com",
+      "document": "ci",
+      "document_number": "123456789",
+      "business_name": "umsass",
+      "nit": "98765432"
     }
   ],
   "charges": [
@@ -326,6 +343,30 @@
       "sendemail": false,
       "invoice": "",
       "phone": "+55116636345611",
+      "details": []
+    },
+    {
+      "id": "66176741-8660-439b-ba3f-7380ba517cee",
+      "name": "Marcelo",
+      "lastname": "Bonneto",
+      "country": "AR",
+      "departament": "B",
+      "city": "Cochabamba",
+      "address": "Av. San Aurelio 2, Santa Cruz de la Sierra, Bolivia",
+      "lat": -17.80698222065168,
+      "lng": -63.16381006196289,
+      "email": "marcelo@gmail.com",
+      "document": "ci",
+      "document_number": "123456789",
+      "business_name": "umsass",
+      "nit": "98765432",
+      "mount": "50000",
+      "commission": true,
+      "sms": true,
+      "whatsapp": true,
+      "sendemail": true,
+      "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1652278651-patio service online (1).png",
+      "phone": "+546435151",
       "details": []
     }
   ],

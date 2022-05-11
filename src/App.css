@@ -243,3 +243,59 @@ li {
 .suggestion-item:hover {
     background-color: #d5d5d5;
 }
+
+/*Invoice */
+.bg-invoice {
+    position: relative;
+    background: linear-gradient(136deg, #4c4c4c, #000);
+}
+
+.bg-resume {
+    position: relative;
+    background: linear-gradient(136deg, #04acb4, #000);
+}
+
+.custom-shape {
+    position: absolute;
+    padding: 0;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 50px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape .shape-fill {
+    fill: #ffffff;
+}
+
+.custom-shape-divider-top-1652277184 {
+    position: absolute;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1652277184 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 50px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1652277184 .shape-fill {
+    fill: #FFFFFF;
+}

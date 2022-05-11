@@ -7,6 +7,7 @@ import { NotFound } from '../pages/NotFound';
 import { Charges } from '../pages/charges/Charges';
 import { ChargesCreate } from '../pages/charges/ChargesCreate';
 import { Analytics } from '../pages/Analytics';
+import { Invoice } from '../pages/Invoice';
 
 export const Index = () => {
   return (
@@ -26,11 +27,14 @@ export const Index = () => {
       <Route path='/cobros/crear' element={
         <ProtectedRoutes>
           <ChargesCreate />
-        </ProtectedRoutes>
-      } />
+        </ProtectedRoutes>} />
       <Route path='/analiticas' element={
         <ProtectedRoutes>
           <Analytics />
+        </ProtectedRoutes>} />
+      <Route path='/recibo' element={
+        <ProtectedRoutes>
+          <Invoice />
         </ProtectedRoutes>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
