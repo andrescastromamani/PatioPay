@@ -84,6 +84,23 @@
       "document_number": "123456789",
       "business_name": "umsass",
       "nit": "98765432"
+    },
+    {
+      "id": "2d888363-f03e-4a34-8816-9e2d4060aa8f",
+      "name": "Mariana ",
+      "lastname": "Martinez",
+      "country": "AR",
+      "departament": "B",
+      "city": "Buenos Aires",
+      "address": "1140584381, C1009 CABA, Argentina",
+      "lat": -34.6036844,
+      "lng": -58.3815591,
+      "phone": "+5461321656",
+      "email": "mariana@gmail.com",
+      "document": "dni",
+      "document_number": "1234565489",
+      "business_name": "Patio service",
+      "nit": "987654321"
     }
   ],
   "charges": [
@@ -368,6 +385,37 @@
       "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1652278651-patio service online (1).png",
       "phone": "+546435151",
       "details": []
+    },
+    {
+      "id": "43752b9b-f54e-424e-8b28-0ab25142f983",
+      "name": "Mariana ",
+      "lastname": "Martinez",
+      "country": "AR",
+      "departament": "B",
+      "city": "Buenos Aires",
+      "address": "1140584381, C1009 CABA, Argentina",
+      "lat": -34.6036844,
+      "lng": -58.3815591,
+      "email": "mariana@gmail.com",
+      "document": "dni",
+      "document_number": "1234565489",
+      "business_name": "Patio service",
+      "nit": "987654321",
+      "mount": "20000",
+      "commission": true,
+      "sms": true,
+      "whatsapp": true,
+      "sendemail": true,
+      "invoice": "https://patioserviceonline.com/uploads/ventrega/popup/1652465864-cryptomonedas.png",
+      "phone": "+5461321656",
+      "details": [
+        {
+          "detail": "Nuevo detalle ",
+          "quantity": "10",
+          "unitprice": "200",
+          "amount": "2000"
+        }
+      ]
     }
   ],
   "profile": {

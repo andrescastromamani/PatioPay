@@ -51,7 +51,7 @@ export const ChargesCreate = () => {
         invoice: '',
     }
     const [addressFormated, setAddressFormated] = useState('');
-    const { addDetail, details, handleChangeDetails } = useDetails();
+    const { addDetail, removeDetail, details, detailErrors, handleChangeDetails, handleBlurDetails, validateDetails } = useDetails();
     const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { countries, departaments, getCountries, getDepartaments } = useCharges();
     const { search, suggestions, searchClients, getClients } = useClients();
@@ -221,7 +221,6 @@ export const ChargesCreate = () => {
                                                     )
                                                 }
                                             </Combobox>
-
                                         </div>
                                         <div className="col-1 d-flex justify-content-end">
                                             <button className='btn btn-dark' type='button'>
@@ -526,37 +525,52 @@ export const ChargesCreate = () => {
                                                     <input
                                                         type="text"
                                                         name='detail'
-                                                        value={detail.detail}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
                                                         className="form-control border-0"
                                                         placeholder="Detalle"
+                                                        value={detail.detail}
+                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
+                                                        onBlur={
+                                                            (e) => {
+                                                                handleBlurDetails(e, detail.id);
+                                                            }
+                                                        }
                                                     />
                                                 </div>
                                                 <div className="col-12 col-md-6 d-flex">
                                                     <input
                                                         type="text"
                                                         name='quantity'
+                                                        placeholder="Cantidad"
+                                                        className="form-control border-0 me-2"
                                                         value={detail.quantity}
                                                         onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                        className="form-control border-0 me-2"
-                                                        placeholder="Cantidad"
+                                                        onBlur={
+                                                            (e) => {
+                                                                handleBlurDetails(e, detail.id);
+                                                            }
+                                                        }
                                                     />
                                                     <input
                                                         type="text"
                                                         name='unitprice'
+                                                        placeholder="Precio Unitario"
+                                                        className="form-control border-0 me-2"
                                                         value={detail.unitprice}
                                                         onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                        className="form-control border-0 me-2"
-                                                        placeholder="Precio Unitario"
                                                     />
                                                     <input
                                                         type="text"
                                                         name='amount'
-                                                        value={detail.amount}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
                                                         className="form-control border-0 ms-2"
                                                         placeholder="Monto"
+                                                        value={detail.amount}
+                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
                                                     />
+                                                    <button
+                                                        type='button'
+                                                        className="btn btn-danger ms-2"
+                                                        onClick={() => { removeDetail(detail.id) }}
+                                                    ><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </div>
                                         )
