@@ -51,7 +51,7 @@ export const ChargesCreate = () => {
         invoice: '',
     }
     const [addressFormated, setAddressFormated] = useState('');
-    const { addDetail, removeDetail, details, detailErrors, handleChangeDetails, handleBlurDetails, validateDetails } = useDetails();
+    const { details, addDetail, removeDetail, handleChangeDetails, validateDetails, detailErrors } = useDetails();
     const [marker, setMarker] = useState({ lat: -17.8145819, lng: -63.1560853 });
     const { countries, departaments, getCountries, getDepartaments } = useCharges();
     const { search, suggestions, searchClients, getClients } = useClients();
@@ -71,6 +71,7 @@ export const ChargesCreate = () => {
         } else {
             imageUrl = await fileUpload(invoice).then(res => res.data.link);
         }
+
         const client = {
             id: uuidv4(),
             name: values.name,
@@ -99,10 +100,9 @@ export const ChargesCreate = () => {
                 amount: i.amount,
             }))
         }
-        console.log(client);
-        console.log(data);
+        /*
         dispatch(addClient(client));
-        dispatch(addCharge(data));
+        dispatch(addCharge(data));*/
     }
     return (
         <>
@@ -110,57 +110,56 @@ export const ChargesCreate = () => {
             <div className="container mt-4">
                 <Formik
                     initialValues={charge}
-                    validate={
-                        (values) => {
-                            const errors = {};
-                            if (!values.name) {
-                                errors.name = 'El nombre es requerido';
-                            } else if (!/^[a-zA-Z0-9 ]+$/.test(values.name)) {
-                                errors.name = 'Only alphabets, Numbers and spaces are allowed';
-                            }
-                            if (!values.lastname) {
-                                errors.lastname = 'El apellido es requerido';
-                            } else if (!/^[a-zA-Z0-9 ]+$/.test(values.lastname)) {
-                                errors.lastname = 'Only alphabets, Numbers and spaces are allowed';
-                            }
-                            if (!values.country) {
-                                errors.country = 'El país es requerido';
-                            }
-                            if (!values.departament) {
-                                errors.departament = 'El departamento es requerido';
-                            }
-                            if (!values.city) {
-                                errors.city = 'La ciudad es requerida';
-                            }
-                            if (!values.address) {
-                                errors.address = 'La dirección es requerida';
-                            }
-                            if (!values.phone) {
-                                errors.phone = 'El teléfono es requerido';
-                            }
-                            if (!values.email) {
-                                errors.email = 'El correo es requerido';
-                            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                                errors.email = 'Invalid email address';
-                            }
-                            if (!values.document) {
-                                errors.document = 'El tipo de documento es requerido';
-                            }
-                            if (!values.document_number) {
-                                errors.document_number = 'El número de documento es requerido';
-                            }
-                            if (!values.business_name) {
-                                errors.business_name = 'El nombre de la empresa es requerido';
-                            }
-                            if (!values.nit) {
-                                errors.nit = 'El NIT es requerido';
-                            }
-                            if (!values.mount) {
-                                errors.mount = 'El monto es requerido';
-                            }
-                            return errors;
+                    validate={(values) => {
+                        const errors = {};
+                        if (!values.name) {
+                            errors.name = 'El nombre es requerido';
+                        } else if (!/^[a-zA-Z0-9 ]+$/.test(values.name)) {
+                            errors.name = 'Only alphabets, Numbers and spaces are allowed';
                         }
-                    }
+                        if (!values.lastname) {
+                            errors.lastname = 'El apellido es requerido';
+                        } else if (!/^[a-zA-Z0-9 ]+$/.test(values.lastname)) {
+                            errors.lastname = 'Only alphabets, Numbers and spaces are allowed';
+                        }
+                        if (!values.country) {
+                            errors.country = 'El país es requerido';
+                        }
+                        if (!values.departament) {
+                            errors.departament = 'El departamento es requerido';
+                        }
+                        if (!values.city) {
+                            errors.city = 'La ciudad es requerida';
+                        }
+                        if (!values.address) {
+                            errors.address = 'La dirección es requerida';
+                        }
+                        if (!values.phone) {
+                            errors.phone = 'El teléfono es requerido';
+                        }
+                        if (!values.email) {
+                            errors.email = 'El correo es requerido';
+                        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                            errors.email = 'Invalid email address';
+                        }
+                        if (!values.document) {
+                            errors.document = 'El tipo de documento es requerido';
+                        }
+                        if (!values.document_number) {
+                            errors.document_number = 'El número de documento es requerido';
+                        }
+                        if (!values.business_name) {
+                            errors.business_name = 'El nombre de la empresa es requerido';
+                        }
+                        if (!values.nit) {
+                            errors.nit = 'El NIT es requerido';
+                        }
+                        if (!values.mount) {
+                            errors.mount = 'El monto es requerido';
+                        }
+                        validateDetails();
+                        return errors;
+                    }}
                     onSubmit={(values) => {
                         submit(values);
                     }}
@@ -235,7 +234,7 @@ export const ChargesCreate = () => {
                                                 name='name'
                                                 autoComplete='off'
                                                 placeholder="Nombre"
-                                                className={`form-control mt-3 ${errors.name && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 value={values.name}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -251,7 +250,7 @@ export const ChargesCreate = () => {
                                                     }
                                                 }
                                                 onBlur={handleBlur}
-                                                className={`form-select mt-3 ${errors.country && 'is-invalid'}`}
+                                                className={`form-select mt-3`}
                                             >
                                                 <option value="">Pais</option>
                                                 {
@@ -269,7 +268,7 @@ export const ChargesCreate = () => {
                                                 value={values.city}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                className={`form-control mt-3 ${errors.city && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 placeholder="Ciudad"
                                             />
                                             {errors.city && touched.city && <span className='text-danger'>{errors.city}</span>}
@@ -279,7 +278,7 @@ export const ChargesCreate = () => {
                                                 type="text"
                                                 name='lastname'
                                                 placeholder="Apellido"
-                                                className={`form-control mt-3 ${errors.lastname && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 value={values.lastname}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -290,7 +289,7 @@ export const ChargesCreate = () => {
                                                 value={values.departament}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                className={`form-select mt-3 ${errors.departament && 'is-invalid'}`}
+                                                className={`form-select mt-3`}
                                             >
                                                 <option value="">Departamento/Estado</option>
                                                 {
@@ -311,7 +310,7 @@ export const ChargesCreate = () => {
                                                 onClick={(e) => {
                                                     setFieldValue('address', addressFormated);
                                                 }}
-                                                className={`form-control mt-3 ${errors.address && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 placeholder="Direccion"
                                             />
                                             {errors.address && touched.address && <span className='text-danger'>{errors.address}</span>}
@@ -360,7 +359,7 @@ export const ChargesCreate = () => {
                                                 }
                                             />
                                             <PhoneInput
-                                                className={`form-control custom-input-tel mt-3 ${errors.phone && 'is-invalid'}`}
+                                                className={`form-control custom-input-tel mt-3`}
                                                 id="phone"
                                                 name="phone"
                                                 autoComplete="off"
@@ -375,7 +374,7 @@ export const ChargesCreate = () => {
                                             {errors.phone && touched.phone && <span className='text-danger'>{errors.phone}</span>}
                                             <select
                                                 name='document'
-                                                className={`form-select mt-3 ${errors.document && 'is-invalid'}`}
+                                                className={`form-select mt-3`}
                                                 value={values.document}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -388,7 +387,7 @@ export const ChargesCreate = () => {
                                             <input
                                                 type="text"
                                                 name='business_name'
-                                                className={`form-control mt-3 ${errors.business_name && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 placeholder="Razon Social"
                                                 value={values.business_name}
                                                 onChange={handleChange}
@@ -400,7 +399,7 @@ export const ChargesCreate = () => {
                                             <input
                                                 type="text"
                                                 name='email'
-                                                className={`form-control mt-3 ${errors.email && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 placeholder="Email"
                                                 value={values.email}
                                                 onChange={handleChange}
@@ -420,7 +419,7 @@ export const ChargesCreate = () => {
                                             <input
                                                 type="text"
                                                 name='nit'
-                                                className={`form-control mt-3 ${errors.nit && 'is-invalid'}`}
+                                                className={`form-control mt-3`}
                                                 placeholder="NIT"
                                                 value={values.nit}
                                                 onChange={handleChange}
@@ -442,6 +441,7 @@ export const ChargesCreate = () => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                     />
+                                    {errors.mount && touched.mount && <span className='text-danger'>{errors.mount}</span>}
                                     <div className="form-check mt-3">
                                         <input
                                             className="form-check-input border-0"
@@ -494,7 +494,7 @@ export const ChargesCreate = () => {
                                     <h4 className="mt-3">Factura Recibo (Opcional)</h4>
                                     <p>La factura o recibo cargada se adjuntara el mensaje de cobro enviado para su descarga</p>
                                     <div className="mb-3">
-                                        <img src={defaultImage} alt="image preview" id="previewImage" className="img-thumbnail" width={100} height={100} />
+                                        <img src={defaultImage} alt="preview" id="previewImage" className="img-thumbnail" width={100} height={100} />
                                     </div>
                                     <div className="mb-3">
                                         <input
@@ -518,63 +518,59 @@ export const ChargesCreate = () => {
                                 <h4>Detalles (Opcional)</h4>
                                 <hr />
                                 {
-                                    details.map((detail) => {
-                                        return (
-                                            <div className='row mt-3' key={detail.id}>
-                                                <div className="col-12 col-md-6">
-                                                    <input
-                                                        type="text"
-                                                        name='detail'
-                                                        className="form-control border-0"
-                                                        placeholder="Detalle"
-                                                        value={detail.detail}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                        onBlur={
-                                                            (e) => {
-                                                                handleBlurDetails(e, detail.id);
-                                                            }
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="col-12 col-md-6 d-flex">
-                                                    <input
-                                                        type="text"
-                                                        name='quantity'
-                                                        placeholder="Cantidad"
-                                                        className="form-control border-0 me-2"
-                                                        value={detail.quantity}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                        onBlur={
-                                                            (e) => {
-                                                                handleBlurDetails(e, detail.id);
-                                                            }
-                                                        }
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        name='unitprice'
-                                                        placeholder="Precio Unitario"
-                                                        className="form-control border-0 me-2"
-                                                        value={detail.unitprice}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        name='amount'
-                                                        className="form-control border-0 ms-2"
-                                                        placeholder="Monto"
-                                                        value={detail.amount}
-                                                        onChange={(e) => { handleChangeDetails(e, detail.id) }}
-                                                    />
-                                                    <button
-                                                        type='button'
-                                                        className="btn btn-danger ms-2"
-                                                        onClick={() => { removeDetail(detail.id) }}
-                                                    ><i className="fa-solid fa-trash"></i></button>
-                                                </div>
+                                    detailErrors.length > 0 ? (
+                                        <div className="alert alert-danger">
+                                            Todos los campos son requeridos
+                                        </div>
+                                    ) : null
+                                }
+                                {
+                                    details.map((detail) => (
+
+                                        <div className='row mt-3' key={detail.id}>
+                                            <div className="col-12 col-md-6">
+                                                <input
+                                                    type="text"
+                                                    name='detail'
+                                                    className="form-control border-0"
+                                                    placeholder="Detalle"
+                                                    value={detail.detail}
+                                                    onChange={(e) => { handleChangeDetails(e, detail.id) }}
+                                                />
                                             </div>
-                                        )
-                                    })
+                                            <div className="col-12 col-md-6 d-flex">
+                                                <input
+                                                    type="number"
+                                                    name='quantity'
+                                                    placeholder="Cantidad"
+                                                    className="form-control border-0 me-2"
+                                                    value={detail.quantity}
+                                                    onChange={(e) => { handleChangeDetails(e, detail.id) }}
+                                                />
+                                                <input
+                                                    type="number"
+                                                    name='unitprice'
+                                                    placeholder="Precio Unitario"
+                                                    className="form-control border-0 me-2"
+                                                    value={detail.unitprice}
+                                                    onChange={(e) => { handleChangeDetails(e, detail.id) }}
+                                                />
+                                                <input
+                                                    type="number"
+                                                    name='amount'
+                                                    className="form-control border-0 ms-2"
+                                                    placeholder="Monto"
+                                                    value={detail.amount}
+                                                    onChange={(e) => { handleChangeDetails(e, detail.id) }}
+                                                />
+                                                <button
+                                                    type='button'
+                                                    className="btn btn-danger ms-2"
+                                                    onClick={() => { removeDetail(detail.id) }}
+                                                ><i className="fa-solid fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                    ))
                                 }
                                 <div className="col-12 mt-3 d-flex justify-content-end">
                                     <button className="btn btn-dark" type="button" onClick={addDetail}>Agregar Detalle</button>

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 export const useDetails = () => {
-    const [detailErrors, setDetailErrors] = useState([]);
     const [details, setDetails] = useState([]);
+    const [detailErrors, setDetailErrors] = useState([]);
     const addDetail = () => {
         setDetails([
             ...details,
@@ -11,6 +11,7 @@ export const useDetails = () => {
                 id: uuidv4(),
                 detail: '',
                 quantity: '',
+                unitprice: '',
                 amount: ''
             }]);
     }
@@ -27,6 +28,7 @@ export const useDetails = () => {
         setDetails(detailInput);
     }
     const handleBlurDetails = (e, index) => {
+        console.log(index);
         console.log(e.target.value);
         const detailInput = details.map((i) => {
             if (i.id === index) {
@@ -36,19 +38,36 @@ export const useDetails = () => {
         })
         setDetails(detailInput);
     }
-    const validateDetails = (details) => {
-        const errors = {};
-        details.forEach(detail => {
-            if (!detail.detail) {
-                errors.detail = 'Detail is required';
+    const validateDetails = () => {
+        const errors = [];
+        details.map((detail) => {
+            if (detail.detail === '') {
+                errors.push({
+                    id: detail.id,
+                    error: 'Detail is required'
+                });
             }
-            if (!detail.quantity) {
-                errors.quantity = 'Quantity is required';
+            if (detail.quantity === '') {
+                errors.push({
+                    id: detail.id,
+                    error: 'Quantity is required'
+                });
             }
-            if (!detail.amount) {
-                errors.amount = 'Amount is required';
+            if (detail.unitprice === '') {
+                errors.push({
+                    id: detail.id,
+                    error: 'Unit price is required'
+                });
+            }
+            if (detail.amount === '') {
+                errors.push({
+                    id: detail.id,
+                    error: 'Amount is required'
+                });
             }
         })
+        console.log(errors);
+        setDetailErrors(errors);
     }
     return {
         details,
